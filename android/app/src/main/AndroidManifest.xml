@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="allam_challenge"
+        android:label="تطبيق خليل"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
