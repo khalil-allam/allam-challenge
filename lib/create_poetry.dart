@@ -4,6 +4,8 @@ import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 
+import 'generate_poetry.dart';
+
 int activeStep = 0;
 Widget mainContainer = Container();
 
@@ -60,6 +62,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
                    SizedBox(
                     height: 120,
                      child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
                        child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
@@ -138,7 +141,34 @@ class _CreatePoetryState extends State<CreatePoetry> {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                                      ),
-                      onPressed: (){}, 
+                      onPressed: (){
+                        setState(() {
+                       if(activeStep == 0){
+                        
+                          mainContainer = EventStep();
+                          activeStep = 1;
+                     
+                        }
+                        else if(activeStep == 1){
+                        
+                          mainContainer = EmotionsStep();
+                          activeStep = 2;
+                   
+                        }
+                        else if(activeStep == 2){
+                          
+                          mainContainer = EmotionsStep();
+                          activeStep = 3;
+                        }
+                        else if(activeStep == 3){
+                          Navigator.push(
+                            context, 
+                            MaterialPageRoute(builder: (context) => GeneratePoetry()));
+                          activeStep = 0;
+                        }
+                        });
+                      
+                      }, 
                       child: Text("التالي",
                       textAlign: TextAlign.center,
                               style: TextStyle(
@@ -378,7 +408,8 @@ Widget iconsWidget(
       padding: EdgeInsets.all(7),
       decoration: BoxDecoration(
         color: whiteColor,
-        borderRadius: BorderRadius.circular(22)
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: secondGreenColor, width: 3)
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

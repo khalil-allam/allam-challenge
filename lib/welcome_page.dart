@@ -1,5 +1,6 @@
 import 'package:allam_challenge/color_pallete.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import 'services_page.dart';
 

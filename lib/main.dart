@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: mainGreenColor),
         useMaterial3: true,
       ),
-      home: CreatePoetry(),
+      home: SplashPage(),
     );
   }
 }

@@ -39,6 +39,7 @@ dependencies:
   shared_preferences: ^2.3.2
   easy_stepper: ^0.8.5+1
   flutter_carousel_widget: ^3.0.1
+  lottie:
 
 
 dev_dependencies:

@@ -1,6 +1,8 @@
 import 'package:allam_challenge/color_pallete.dart';
 import 'package:flutter/material.dart';
 
+import 'create_poetry.dart';
+
 
 class ServicesPage extends StatefulWidget {
   const ServicesPage({super.key});
@@ -45,7 +47,7 @@ class _ServicesPageState extends State<ServicesPage> {
                       "تأليف الشعر", 
                       "كتابة الشعر العربي بإستخدام الذكاء الإصطناعي.", 
                       "poetry_2", 
-                      ServicesPage()),
+                      CreatePoetry()),
                     servicesBtn(
                       "تحليل الشعر", 
                       "ضع الشعر لتحليله وتقييمه من قبل الذكاء الإصطناعي", 
