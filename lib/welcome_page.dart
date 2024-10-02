@@ -41,7 +41,7 @@ class WelcomePage extends StatelessWidget {
             ),
             Container(
               height: 58,
-              width: 256,
+              width: 320,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: mainBegiColor,
@@ -51,14 +51,14 @@ class WelcomePage extends StatelessWidget {
                 ),
                 onPressed: (){
                  Navigator.push(context, 
-                 MaterialPageRoute(builder: (context)=>ServicesPage()));
+                 MaterialPageRoute(builder: (context) => ServicesPage()));
                 }, 
                 child: Text("الدخول",
-              style: TextStyle(
-                color: mainGreenColor,
-                fontFamily: "Cairo",
-                fontWeight: FontWeight.w700,
-                fontSize: 26,
+                          style: TextStyle(
+                          color: mainGreenColor,
+                          fontFamily: "Cairo",
+                          fontWeight: FontWeight.w700,
+                          fontSize: 26,
                         ),),
                 ),
             )

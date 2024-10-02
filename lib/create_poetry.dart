@@ -8,6 +8,7 @@ import 'generate_poetry.dart';
 
 int activeStep = 0;
 Widget mainContainer = Container();
+int textNumber = 1;
 
 class CreatePoetry extends StatefulWidget {
   const CreatePoetry({super.key});
@@ -19,6 +20,22 @@ class CreatePoetry extends StatefulWidget {
 class _CreatePoetryState extends State<CreatePoetry> {
 
   TextEditingController _eventController = TextEditingController();
+
+  void plusNumber(){
+    setState(() {
+      mainContainer = TextNumberStep();
+      activeStep = 3;
+      textNumber ++;
+    });
+  }
+
+ void minusNumber(){
+    setState(() {
+      mainContainer = TextNumberStep();
+      activeStep = 3;
+      textNumber --;
+    });
+  }
   
   @override
   void initState() {
@@ -95,7 +112,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
                                                 mainContainer = EmotionsStep();
                                               }
                                               else if(activeStep == 3){
-                                                mainContainer = PoetryStep();
+                                                mainContainer = TextNumberStep();
                                               }
                                             });
                                             },
@@ -131,67 +148,140 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   //Stepper Pages
                   mainContainer,
 
-                   Container(
-                     height: 58,
-                     width: 256,
-                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                      backgroundColor: mainBegiColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                                     ),
-                      onPressed: (){
-                        setState(() {
-                       if(activeStep == 0){
+                  //  Container(
+                  //    height: 58,
+                  //    width: 320,
+                  //    child: ElevatedButton(
+                  //     style: ElevatedButton.styleFrom(
+                  //     backgroundColor: mainBegiColor,
+                  //     shape: RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.circular(20.0),
+                  //     ),
+                  //                    ),
+                  //     onPressed: (){
+                  //       setState(() {
+                  //      if(activeStep == 0){
                         
-                          mainContainer = EventStep();
-                          activeStep = 1;
+                  //         mainContainer = EventStep();
+                  //         activeStep = 1;
                      
-                        }
-                        else if(activeStep == 1){
+                  //       }
+                  //       else if(activeStep == 1){
                         
-                          mainContainer = EmotionsStep();
-                          activeStep = 2;
+                  //         mainContainer = EmotionsStep();
+                  //         activeStep = 2;
                    
-                        }
-                        else if(activeStep == 2){
+                  //       }
+                  //       else if(activeStep == 2){
                           
-                          mainContainer = EmotionsStep();
-                          activeStep = 3;
-                        }
-                        else if(activeStep == 3){
-                          Navigator.push(
-                            context, 
-                            MaterialPageRoute(builder: (context) => GeneratePoetry()));
-                          activeStep = 0;
-                        }
-                        });
+                  //         mainContainer = TextNumberStep();
+                  //         activeStep = 3;
+                  //       }
+                  //       else if(activeStep == 3){
+                  //         Navigator.push(
+                  //           context, 
+                  //           MaterialPageRoute(builder: (context) => GeneratePoetry()));
+                  //         activeStep = 0;
+                  //       }
+                  //       });
                       
-                      }, 
-                      child: Text("التالي",
-                      textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: mainGreenColor,
-                                fontFamily: "Cairo",
-                                fontWeight: FontWeight.w800,
-                                fontSize: 26,
-                                ),)),
-                   ),
-                   SizedBox(height: 7,),
-                   Text("عودة",
-                      textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: whiteColor,
-                                fontFamily: "Cairo",
-                                fontWeight: FontWeight.w700,
-                                fontSize: 15,
-                                ),),  
-                    SizedBox(height: 10,),          
+                  //     }, 
+                  //     child: Text("التالي",
+                  //     textAlign: TextAlign.center,
+                  //             style: TextStyle(
+                  //               color: mainGreenColor,
+                  //               fontFamily: "Cairo",
+                  //               fontWeight: FontWeight.w800,
+                  //               fontSize: 26,
+                  //               ),)),
+                  //  ),
+                  //  SizedBox(height: 7,),
+                  //  TextButton(
+                  //   onPressed: (){
+                  //     Navigator.pop(context);
+                  //   },
+                  //    child: Text("إلغاء",
+                  //       textAlign: TextAlign.center,
+                  //               style: TextStyle(
+                  //                 color: whiteColor,
+                  //                 fontFamily: "Cairo",
+                  //                 fontWeight: FontWeight.w700,
+                  //                 fontSize: 15,
+                  //                 ),),
+                  //  ),  
+                        
                  ],
                ),
              ),
-    
+             bottomNavigationBar: BottomAppBar(
+              height: 125,
+              color: Colors.transparent,
+             child: Column(
+                children: [
+                  Container(
+                         height: 58,
+                         width: 320,
+                         child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                          backgroundColor: mainBegiColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                                         ),
+                          onPressed: (){
+                            setState(() {
+                           if(activeStep == 0){
+                            
+                              mainContainer = EventStep();
+                              activeStep = 1;
+                         
+                            }
+                            else if(activeStep == 1){
+                            
+                              mainContainer = EmotionsStep();
+                              activeStep = 2;
+                       
+                            }
+                            else if(activeStep == 2){
+                              
+                              mainContainer = TextNumberStep();
+                              activeStep = 3;
+                            }
+                            else if(activeStep == 3){
+                              Navigator.push(
+                                context, 
+                                MaterialPageRoute(builder: (context) => GeneratePoetry()));
+                              activeStep = 0;
+                            }
+                            });
+                          
+                          }, 
+                          child: Text("التالي",
+                          textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: mainGreenColor,
+                                    fontFamily: "Cairo",
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 26,
+                                    ),)),
+                       ),
+                       SizedBox(height: 7,),
+                       TextButton(
+                        onPressed: (){
+                          Navigator.pop(context);
+                        },
+                         child: Text("إلغاء",
+                            textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: whiteColor,
+                                      fontFamily: "Cairo",
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 15,
+                                      ),),
+                       ),
+                ],
+              )
+             ),
       ),
     );
   }
@@ -388,6 +478,104 @@ Widget EmotionsStep(){
                               "غضب",(){}),
                           ],
                            ),
+                         ),
+                       ],
+                     ),
+       );
+}
+
+Widget TextNumberStep(){
+  return  Container(
+                     child: Column(
+                       children: [
+                         Container(
+                          width: 324,
+                          height: 50,
+                           child: Text("حدد عدد الأبيات التي تريد تأليفها",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: whiteColor,
+                                    fontFamily: "Cairo",
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 15,
+                                    ),),
+                         ),
+                         SizedBox(height: 50,),
+                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                           children: [
+                             Container(
+                              height: 96,
+                              padding: EdgeInsets.only(left: 25, right: 25),
+                              decoration: BoxDecoration(
+                                    color: secondGreenColor,
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(22),
+                                      bottomRight: Radius.circular(22),),
+                                ),
+                               child: Center(
+                                 child: TextButton(
+                                  onPressed: (){
+                                    plusNumber();
+                                  },
+                                   child: Text("+",
+                                   textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                            color: blackColor,
+                                            fontFamily: "Cairo",
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 42,
+                                            ),
+                                   ),
+                                 ),
+                               ),
+                             ),
+                             SizedBox(height: 10,),    
+                             Container(
+                              height: 96,
+                              padding: EdgeInsets.only(left: 25, right: 25),
+                              decoration: BoxDecoration(
+                                    color: whiteColor,
+                                ),
+                               child: Center(
+                                 child: Text(textNumber.toString(),
+                                 textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                          color: blackColor,
+                                          fontFamily: "Cairo",
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 42,
+                                          ),
+                                 ),
+                               ),
+                             ),
+                             Container(
+                              height: 96,
+                              padding: EdgeInsets.only(left: 25, right: 25),
+                              decoration: BoxDecoration(
+                                    color: secondGreenColor,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(22),
+                                      bottomLeft: Radius.circular(22),),
+                                ),
+                               child: Center(
+                                 child: TextButton(
+                                  onPressed: (){
+                                    minusNumber();
+                                  },
+                                   child: Text("-",
+                                   textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                            color: blackColor,
+                                            fontFamily: "Cairo",
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 42,
+                                            ),
+                                   ),
+                                 ),
+                               ),
+                             ),
+                           ],
                          ),
                        ],
                      ),

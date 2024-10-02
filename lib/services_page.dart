@@ -1,4 +1,6 @@
+import 'package:allam_challenge/analyis_poetry.dart';
 import 'package:allam_challenge/color_pallete.dart';
+import 'package:allam_challenge/currect_poetry.dart';
 import 'package:flutter/material.dart';
 
 import 'create_poetry.dart';
@@ -52,12 +54,12 @@ class _ServicesPageState extends State<ServicesPage> {
                       "تحليل الشعر", 
                       "ضع الشعر لتحليله وتقييمه من قبل الذكاء الإصطناعي", 
                       "poetry_1", 
-                      ServicesPage()),
+                      AnalyisPoetry()),
                     servicesBtn(
                       "تصحيح الشعر", 
                       "ضع الشعر ليتم تصحيح الشعر من الجوانب اللغوية والبلاغية", 
                       "revision", 
-                      ServicesPage())
+                      CurrectPoetry())
                   ],
                 ),
               ],
