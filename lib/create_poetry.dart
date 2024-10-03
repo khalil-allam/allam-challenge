@@ -2,13 +2,20 @@ import 'package:allam_challenge/color_pallete.dart';
 import 'package:allam_challenge/stepper.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 
 import 'generate_poetry.dart';
 
 int activeStep = 0;
 Widget mainContainer = Container();
 int textNumber = 1;
+int index = 0;
+
+List<String> poetryText = [
+  "مهتم نوّاس بالأدب العربي ويستخدم في كتابة الأشعار أسلوب الشعر الحديث ويتميز بأشعاره الغزلية والوطنية .",
+  "مهتم نوّاس بالأدب العربي ويستخدم في كتابة الأشعار أسلوب الشعر الحديث ويتميز بأشعاره الغزلية والوطنية .2",
+  "مهتم نوّاس بالأدب العربي ويستخدم في كتابة الأشعار أسلوب الشعر الحديث ويتميز بأشعاره الغزلية والوطنية .3",
+  "مهتم نوّاس بالأدب العربي ويستخدم في كتابة الأشعار أسلوب الشعر الحديث ويتميز بأشعاره الغزلية والوطنية .4"
+];
 
 class CreatePoetry extends StatefulWidget {
   const CreatePoetry({super.key});
@@ -23,17 +30,17 @@ class _CreatePoetryState extends State<CreatePoetry> {
 
   void plusNumber(){
     setState(() {
-      mainContainer = TextNumberStep();
-      activeStep = 3;
       textNumber ++;
+      activeStep = 3;
+      mainContainer = TextNumberStep();
     });
   }
 
  void minusNumber(){
     setState(() {
-      mainContainer = TextNumberStep();
-      activeStep = 3;
       textNumber --;
+      activeStep = 3;
+      mainContainer = TextNumberStep();
     });
   }
   
@@ -47,37 +54,41 @@ class _CreatePoetryState extends State<CreatePoetry> {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        backgroundColor: mainGreenColor,
-        body:
-             SingleChildScrollView(
-               child: Column(
+    return SafeArea(
+      child: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Scaffold(
+          backgroundColor: mainGreenColor,
+          body:
+               Column(
                  children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 25.0,
-                      bottom: 20.0,
-                      right: 35.0),
-                    child: Row(
-                      children: [
-                        Image(
-                          image: AssetImage("assets/images/poetry_2.png"),
-                          width: 83, ),
-                        SizedBox(width: 5,),
-                        Text("تأليف الشعر",
-                          style: TextStyle(
-                            color: whiteColor,
-                            fontFamily: "Cairo",
-                            fontWeight: FontWeight.w700,
-                            fontSize: 24,
-                            ),),
-                      ],
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 25.0,
+                        bottom: 20.0,
+                        right: 35.0),
+                      child: Row(
+                        children: [
+                          Image(
+                            image: AssetImage("assets/images/poetry_2.png"),
+                            width: 83, ),
+                          SizedBox(width: 5,),
+                          Text("تأليف الشعر",
+                            style: TextStyle(
+                              color: whiteColor,
+                              fontFamily: "Cairo",
+                              fontWeight: FontWeight.w700,
+                              fontSize: 24,
+                              ),),
+                        ],
+                      ),
                     ),
                   ),
+
                    SizedBox(
-                    height: 120,
+                    height: 100,
                      child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                        child: Row(
@@ -103,7 +114,9 @@ class _CreatePoetryState extends State<CreatePoetry> {
                                             setState(() => activeStep = index);
                                             setState(() {
                                               if(activeStep == 0){
-                                                mainContainer = PoetryStep();
+                                                setState(() {
+                                                  mainContainer = PoetryStep();
+                                                });
                                               }
                                               else if(activeStep == 1){
                                                 mainContainer = EventStep();
@@ -143,253 +156,143 @@ class _CreatePoetryState extends State<CreatePoetry> {
                              ),
                      ),
                    ),
-                   SizedBox(height: 7,),
-
-                  //Stepper Pages
-                  mainContainer,
-
-                  //  Container(
-                  //    height: 58,
-                  //    width: 320,
-                  //    child: ElevatedButton(
-                  //     style: ElevatedButton.styleFrom(
-                  //     backgroundColor: mainBegiColor,
-                  //     shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(20.0),
-                  //     ),
-                  //                    ),
-                  //     onPressed: (){
-                  //       setState(() {
-                  //      if(activeStep == 0){
-                        
-                  //         mainContainer = EventStep();
-                  //         activeStep = 1;
+                   SizedBox(height: 20,),
                      
-                  //       }
-                  //       else if(activeStep == 1){
-                        
-                  //         mainContainer = EmotionsStep();
-                  //         activeStep = 2;
-                   
-                  //       }
-                  //       else if(activeStep == 2){
+                  //Stepper Pages
+                  Expanded(
+                    flex: 4,
+                    child: mainContainer
+                    ),
+                     
+                   Container(
+                     height: 58,
+                     width: 320,
+                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                      backgroundColor: mainBegiColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                                     ),
+                      onPressed: (){
+                        setState(() {
+                       if(activeStep == 0){
+                        setState(() {
                           
-                  //         mainContainer = TextNumberStep();
-                  //         activeStep = 3;
-                  //       }
-                  //       else if(activeStep == 3){
-                  //         Navigator.push(
-                  //           context, 
-                  //           MaterialPageRoute(builder: (context) => GeneratePoetry()));
-                  //         activeStep = 0;
-                  //       }
-                  //       });
-                      
-                  //     }, 
-                  //     child: Text("التالي",
-                  //     textAlign: TextAlign.center,
-                  //             style: TextStyle(
-                  //               color: mainGreenColor,
-                  //               fontFamily: "Cairo",
-                  //               fontWeight: FontWeight.w800,
-                  //               fontSize: 26,
-                  //               ),)),
-                  //  ),
-                  //  SizedBox(height: 7,),
-                  //  TextButton(
-                  //   onPressed: (){
-                  //     Navigator.pop(context);
-                  //   },
-                  //    child: Text("إلغاء",
-                  //       textAlign: TextAlign.center,
-                  //               style: TextStyle(
-                  //                 color: whiteColor,
-                  //                 fontFamily: "Cairo",
-                  //                 fontWeight: FontWeight.w700,
-                  //                 fontSize: 15,
-                  //                 ),),
-                  //  ),  
+                          mainContainer = EventStep();
+                          activeStep = 1;
+                        });
+                     
+                        }
+                        else if(activeStep == 1){
                         
+                          mainContainer = EmotionsStep();
+                          activeStep = 2;
+                   
+                        }
+                        else if(activeStep == 2){
+                          
+                          mainContainer = TextNumberStep();
+                          activeStep = 3;
+                        }
+                        else if(activeStep == 3){
+                          Navigator.push(
+                            context, 
+                            MaterialPageRoute(builder: (context) => GeneratePoetry()));
+                          activeStep = 0;
+                        }
+                        });
+                      
+                      }, 
+                      child: Text("التالي",
+                      textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: mainGreenColor,
+                                fontFamily: "Cairo",
+                                fontWeight: FontWeight.w800,
+                                fontSize: 26,
+                                ),)),
+                   ),
+
+                   TextButton(
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                     child: Text("إلغاء",
+                        textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: whiteColor,
+                                  fontFamily: "Cairo",
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 15,
+                                  ),),
+                   ),    
                  ],
                ),
-             ),
-             bottomNavigationBar: BottomAppBar(
-              height: 125,
-              color: Colors.transparent,
-             child: Column(
-                children: [
-                  Container(
-                         height: 58,
-                         width: 320,
-                         child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                          backgroundColor: mainBegiColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                                         ),
-                          onPressed: (){
-                            setState(() {
-                           if(activeStep == 0){
-                            
-                              mainContainer = EventStep();
-                              activeStep = 1;
-                         
-                            }
-                            else if(activeStep == 1){
-                            
-                              mainContainer = EmotionsStep();
-                              activeStep = 2;
-                       
-                            }
-                            else if(activeStep == 2){
-                              
-                              mainContainer = TextNumberStep();
-                              activeStep = 3;
-                            }
-                            else if(activeStep == 3){
-                              Navigator.push(
-                                context, 
-                                MaterialPageRoute(builder: (context) => GeneratePoetry()));
-                              activeStep = 0;
-                            }
-                            });
-                          
-                          }, 
-                          child: Text("التالي",
-                          textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: mainGreenColor,
-                                    fontFamily: "Cairo",
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 26,
-                                    ),)),
-                       ),
-                       SizedBox(height: 7,),
-                       TextButton(
-                        onPressed: (){
-                          Navigator.pop(context);
-                        },
-                         child: Text("إلغاء",
-                            textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: whiteColor,
-                                      fontFamily: "Cairo",
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 15,
-                                      ),),
-                       ),
-                ],
-              )
-             ),
+        ),
       ),
     );
   }
 
 Widget PoetryStep(){
-  return  Container(
+  return  Column(
+    children: [
+      Container(
+       width: 324,
+      //  height: 84,
+        child: Text("لدينا عدد من الشعراء الإفتراضيين ، لكل واحد منهم أسلوبه الخاص في كتابة الشعر ، أختر الشاعر الذي يتناسب مع الشعر الذي تريد أن يتم تأليفه ",
+               textAlign: TextAlign.center,
+               style: TextStyle(
+                 color: whiteColor,
+                 fontFamily: "Cairo",
+                 fontWeight: FontWeight.w700,
+                 fontSize: 15,
+                 ),),
+      ),
+      Container(
+        height: 250.0,
+        child: CarouselView(
+          backgroundColor: Colors.transparent,
+          itemExtent: 350,
+           children: [0,1,2,3].map((i) {
+             return Builder(
+               builder: (BuildContext context) {
+                 return Container(
+                   height: 50,
+                   width: MediaQuery.of(context).size.width,
+                   margin: EdgeInsets.symmetric(horizontal: 5.0),
+                   child: Container(
+                     margin: EdgeInsets.all(5),
                      child: Column(
                        children: [
-                         Container(
-                          width: 324,
-                          height: 84,
-                           child: Text("لدينا عدد من الشعراء الإفتراضيين ، لكل واحد منهم أسلوبه الخاص في كتابة الشعر ، أختر الشاعر الذي يتناسب مع الشعر الذي تريد أن يتم تأليفه ",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: whiteColor,
-                                    fontFamily: "Cairo",
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 15,
-                                    ),),
-                         ),
-                         Container(
-                          height: 151,
-                           child: FlutterCarousel(
-                              options: FlutterCarouselOptions(
-                                height: 400.0,
-                                floatingIndicator: false,
-                                showIndicator: false,
-                                // showIndicator: true,
-                                // slideIndicator: SequentialFillIndicator(),
-                              ),
-                              items: [1,2,3,].map((i) {
-                                return Builder(
-                                  builder: (BuildContext context) {
-                                    return Container(
-                                      height: 151,
-                                      width: MediaQuery.of(context).size.width,
-                                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                                      child: Stack(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.all(5),
-                                            child: Image(
-                                              image: AssetImage("assets/images/poyteriest_1.png"),
-                                              ),
-                                          ),
-                                          Visibility(
-                                            visible: i == 1 ? false : true,
-                                            child: Positioned(
-                                              top: 70.5,
-                                              child: Container(
-                                                height: 32,
-                                                width: 32,
-                                                color: mainBegiColor,
-                                                child: GestureDetector(
-                                                  onTap: (){},
-                                                  child: Center(
-                                                    child: Icon(Icons.arrow_back_ios_new, 
-                                                    color: blackColor,
-                                                    ),
-                                                  ),)
-                                              ),
-                                            ),
-                                          ),
-                                          Visibility(
-                                            visible: i == 3 ? false : true,
-                                            child: Positioned(
-                                              left: 13,
-                                              top: 70.5,
-                                              child: Container(
-                                                height: 32,
-                                                width: 32,
-                                                color: mainBegiColor,
-                                                child: GestureDetector(
-                                                  onTap: (){},
-                                                  child: Center(
-                                                    child: Icon(Icons.arrow_forward_ios_outlined, 
-                                                    color: blackColor,
-                                                    ),
-                                                  ),)
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                      // Text('text $i', style: TextStyle(fontSize: 16.0)
-                                      // ,)
-                                    );
-                                  },
-                                );
-                              }).toList(),
-                            ),
-                         ),
-                         SizedBox(height: 15,),
-                         Container(
-                          width: 324,
-                          height: 84,
-                           child: Text("مهتم نوّاس بالأدب العربي ويستخدم في كتابة الأشعار أسلوب الشعر الحديث ويتميز بأشعاره الغزلية والوطنية .",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: whiteColor,
-                                    fontFamily: "Cairo",
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 15,
-                                    ),),
-                         ),
+                         Image(
+                           image: AssetImage("assets/images/poyteriest_1.png"),
+                           ),
+                           SizedBox(height: 15,),
+                           Container(
+                             width: 324,
+                             child: Text(poetryText[index],
+                                     textAlign: TextAlign.center,
+                                     style: TextStyle(
+                                       color: whiteColor,
+                                       fontFamily: "Cairo",
+                                       fontWeight: FontWeight.w700,
+                                       fontSize: 15,
+                                       ),),
+                           ),
                        ],
                      ),
-       );
+                   )
+                   // Text('text $i', style: TextStyle(fontSize: 16.0)
+                   // ,)
+                 );
+               },
+             );
+           }).toList(),
+         ),
+      ),
+    ],
+  );
 }
 
 Widget EventStep(){
@@ -436,6 +339,16 @@ Widget EventStep(){
        );
 }
 
+bool isSelectedEmo1 = false;
+bool isSelectedEmo2 = false;
+bool isSelectedEmo3 = false;
+bool isSelectedEmo4 = false;
+bool isSelectedEmo5 = false;
+bool isSelectedEmo6 = false;
+bool isSelectedEmo7 = false;
+bool isSelectedEmo8 = false;
+bool isSelectedEmo9 = false;
+
 Widget EmotionsStep(){
   return  Container(
                      child: Column(
@@ -459,23 +372,147 @@ Widget EmotionsStep(){
                             crossAxisCount: 3,
                             children: [
                               iconsWidget("_smiling_face_with_heart_shaped_eyes"
-                              ,"حب",(){}),
+                              ,"حب", isSelectedEmo1, (){
+                                setState(() {
+                                isSelectedEmo1 = true;
+                                isSelectedEmo2 = false;
+                                isSelectedEmo3 = false;
+                                isSelectedEmo4 = false;
+                                isSelectedEmo5 = false;
+                                isSelectedEmo6 = false;
+                                isSelectedEmo7 = false;
+                                isSelectedEmo8 = false;
+                                isSelectedEmo9= false;
+                                mainContainer = EmotionsStep();
+                                activeStep = 2;
+                                });
+                              }),
                               iconsWidget("_confused",
-                              "حيرة",(){}),
+                              "حيرة", isSelectedEmo2, (){setState(() {
+                                isSelectedEmo1 = false;
+                                isSelectedEmo2 = true;
+                                isSelectedEmo3 = false;
+                                isSelectedEmo4 = false;
+                                isSelectedEmo5 = false;
+                                isSelectedEmo6 = false;
+                                isSelectedEmo7 = false;
+                                isSelectedEmo8 = false;
+                                isSelectedEmo9= false;
+                                mainContainer = EmotionsStep();
+                                activeStep = 2;
+                                });}),
                               iconsWidget("_white_smiling",
-                              "تفاؤل",(){}),
+                              "تفاؤل", isSelectedEmo3, (){
+                                setState(() {
+                                isSelectedEmo1 = false;
+                                isSelectedEmo2 = false;
+                                isSelectedEmo3 = true;
+                                isSelectedEmo4 = false;
+                                isSelectedEmo5 = false;
+                                isSelectedEmo6 = false;
+                                isSelectedEmo7 = false;
+                                isSelectedEmo8 = false;
+                                isSelectedEmo9= false;
+                                mainContainer = EmotionsStep();
+                                activeStep = 2;
+                                });
+                              }),
                               iconsWidget("face_with_open_mouth",
-                              "إنبهار",(){}),
+                              "إنبهار", isSelectedEmo4,(){
+                                setState(() {
+                                isSelectedEmo1 = false;
+                                isSelectedEmo2 = false;
+                                isSelectedEmo3 = false;
+                                isSelectedEmo4 = true;
+                                isSelectedEmo5 = false;
+                                isSelectedEmo6 = false;
+                                isSelectedEmo7 = false;
+                                isSelectedEmo8 = false;
+                                isSelectedEmo9= false;
+                                mainContainer = EmotionsStep();
+                                activeStep = 2;
+                                });
+                              }),
                               iconsWidget("_disappointed",
-                              "إحباط",(){}),
+                              "إحباط", isSelectedEmo5, (){
+                                setState(() {
+                                isSelectedEmo1 = false;
+                                isSelectedEmo2 = false;
+                                isSelectedEmo3 = false;
+                                isSelectedEmo4 = false;
+                                isSelectedEmo5 = true;
+                                isSelectedEmo6 = false;
+                                isSelectedEmo7 = false;
+                                isSelectedEmo8 = false;
+                                isSelectedEmo9= false;
+                                mainContainer = EmotionsStep();
+                                activeStep = 2;
+                                });
+                              }),
                               iconsWidget("_loudly_crying",
-                              "حزن",(){}),
+                              "حزن", isSelectedEmo6, (){
+                                setState(() {
+                                isSelectedEmo1 = false;
+                                isSelectedEmo2 = false;
+                                isSelectedEmo3 = false;
+                                isSelectedEmo4 = false;
+                                isSelectedEmo5 = false;
+                                isSelectedEmo6 = true;
+                                isSelectedEmo7 = false;
+                                isSelectedEmo8 = false;
+                                isSelectedEmo9= false;
+                                mainContainer = EmotionsStep();
+                                activeStep = 2;
+                                });
+                              }),
                               iconsWidget("_smiling_face_with_open_mouth",
-                              "سعادة",(){}),
+                              "سعادة", isSelectedEmo7, (){
+                                setState(() {
+                                isSelectedEmo1 = false;
+                                isSelectedEmo2 = false;
+                                isSelectedEmo3 = false;
+                                isSelectedEmo4 = false;
+                                isSelectedEmo5 = false;
+                                isSelectedEmo6 = false;
+                                isSelectedEmo7 = true;
+                                isSelectedEmo8 = false;
+                                isSelectedEmo9= false;
+                                mainContainer = EmotionsStep();
+                                activeStep = 2;
+                                });
+                              }),
                               iconsWidget("_neutral",
-                              "تبلد",(){}),
+                              "تبلد",isSelectedEmo8, (){
+                                setState(() {
+                                isSelectedEmo1 = false;
+                                isSelectedEmo2 = false;
+                                isSelectedEmo3 = false;
+                                isSelectedEmo4 = false;
+                                isSelectedEmo5 = false;
+                                isSelectedEmo6 = false;
+                                isSelectedEmo7 = false;
+                                isSelectedEmo8 = true;
+                                isSelectedEmo9= false;
+                                mainContainer = EmotionsStep();
+                                activeStep = 2;
+                                });
+                              }),
                               iconsWidget("_pouting",
-                              "غضب",(){}),
+                              "غضب", isSelectedEmo9 ,(){
+                                setState(() {
+                                isSelectedEmo1 = false;
+                                isSelectedEmo2 = false;
+                                isSelectedEmo3 = false;
+                                isSelectedEmo4 = false;
+                                isSelectedEmo5 = false;
+                                isSelectedEmo6 = false;
+                                isSelectedEmo7 = false;
+                                isSelectedEmo8 = false;
+                                isSelectedEmo9= true;
+                                mainContainer = EmotionsStep();
+                                activeStep = 2;
+                                });
+                              }),
                           ],
                            ),
                          ),
@@ -516,7 +553,10 @@ Widget TextNumberStep(){
                                child: Center(
                                  child: TextButton(
                                   onPressed: (){
-                                    plusNumber();
+                                    if(textNumber >= 10){
+
+                                    }
+                                    else plusNumber();
                                   },
                                    child: Text("+",
                                    textAlign: TextAlign.center,
@@ -561,7 +601,10 @@ Widget TextNumberStep(){
                                child: Center(
                                  child: TextButton(
                                   onPressed: (){
-                                    minusNumber();
+                                    if(textNumber <= 1){
+
+                                    }
+                                    else minusNumber();
                                   },
                                    child: Text("-",
                                    textAlign: TextAlign.center,
@@ -585,6 +628,7 @@ Widget TextNumberStep(){
 Widget iconsWidget(
   String icn,
   String txt,
+  bool isSelectedEmo,
   Function() fun
 ){
   return  GestureDetector(
@@ -597,7 +641,9 @@ Widget iconsWidget(
       decoration: BoxDecoration(
         color: whiteColor,
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: secondGreenColor, width: 3)
+        border: isSelectedEmo == true ? 
+        Border.all(color: secondGreenColor, width: 3) :
+        Border.all()
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
