@@ -1,11 +1,13 @@
 import 'package:allam_challenge/color_pallete.dart';
 import 'package:allam_challenge/home_screen.dart';
 import 'package:allam_challenge/sharedpref/shared_pref.dart';
+import 'package:allam_challenge/test.dart';
 import 'package:flutter/material.dart';
 
 import 'analyis_poetry.dart';
 import 'create_poetry.dart';
 import 'currect_poetry.dart';
+import 'services_page.dart';
 import 'splash_page.dart';
 
 Future<void> main() async {
@@ -41,7 +43,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: mainGreenColor),
         useMaterial3: true,
       ),
-      home: SplashPage(),
+      home:
+      //  StepperApp()
+      SplashPage(),
     );
   }
 }

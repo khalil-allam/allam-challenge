@@ -78,56 +78,54 @@ Widget servicesBtn(
 ){
   return          Stack(
                     children: [
-                      Expanded(
-                        child: Container(
-                        // height: 126,
-                        width: 331,
-                        margin: EdgeInsets.all(20),
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                            backgroundColor: secondBegiColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                      Container(
+                      // height: 126,
+                      width: 331,
+                      margin: EdgeInsets.all(20),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                          backgroundColor: secondBegiColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        ),
+                                      onPressed: (){
+                                       Navigator.push(context, 
+                                       MaterialPageRoute(builder: (context)=> pageName));
+                                      }, 
+                                            child: Container(
+                      padding: EdgeInsets.only(top: 5, bottom: 5),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 83,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(title,
+                                      style: TextStyle(
+                                        color: mainGreenColor,
+                                        fontFamily: "Cairo",
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 24,
+                                                ),),
+                                
+                                Text(subtitle,
+                                      style: TextStyle(
+                                        color: mainGreenColor,
+                                        fontFamily: "Cairo",
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 16,
+                                                ),),
+                              ],
                             ),
                           ),
-                                        onPressed: (){
-                                         Navigator.push(context, 
-                                         MaterialPageRoute(builder: (context)=> pageName));
-                                        }, 
-                      child: Container(
-                        padding: EdgeInsets.only(top: 5, bottom: 5),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 83,
+                        ],),
+                                            ),
                             ),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(title,
-                                        style: TextStyle(
-                                          color: mainGreenColor,
-                                          fontFamily: "Cairo",
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 24,
-                                                  ),),
-                                  
-                                  Text(subtitle,
-                                        style: TextStyle(
-                                          color: mainGreenColor,
-                                          fontFamily: "Cairo",
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16,
-                                                  ),),
-                                ],
-                              ),
-                            ),
-                          ],),
-                      ),
-                              ),
-                          ),
-                      ),
+                        ),
 
                          Positioned(
                           right: 15,

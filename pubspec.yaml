@@ -40,6 +40,7 @@ dependencies:
   easy_stepper: ^0.8.5+1
   flutter_carousel_widget: ^3.0.1
   lottie:
+  cupertino_stepper: ^0.2.1
 
 
 dev_dependencies:
