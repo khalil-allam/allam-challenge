@@ -24,6 +24,7 @@ class _ServicesPageState extends State<ServicesPage> {
           child: Center(
             child: Column(
               children: [
+                SizedBox(height: 25,),
                 Image(
                   image: AssetImage(
                     "assets/images/khalil_logo.png",),

@@ -9,6 +9,8 @@ int activeStep = 0;
 Widget mainContainer = Container();
 int textNumber = 1;
 int index = 0;
+String _selectedEmoji = "";
+List<String> poetryTest = [];
 
 List<String> poetryText = [
   "مهتم نوّاس بالأدب العربي ويستخدم في كتابة الأشعار أسلوب الشعر الحديث ويتميز بأشعاره الغزلية والوطنية .",
@@ -48,193 +50,196 @@ class _CreatePoetryState extends State<CreatePoetry> {
   void initState() {
     // TODO: implement initState
     mainContainer = PoetryStep();
+    poetryTest.clear();
     super.initState();
   }
 
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Scaffold(
-          backgroundColor: mainGreenColor,
-          body:
-               Column(
-                 children: [
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: 25.0,
-                        bottom: 20.0,
-                        right: 35.0),
-                      child: Row(
-                        children: [
-                          Image(
-                            image: AssetImage("assets/images/poetry_2.png"),
-                            width: 83, ),
-                          SizedBox(width: 5,),
-                          Text("تأليف الشعر",
-                            style: TextStyle(
-                              color: whiteColor,
-                              fontFamily: "Cairo",
-                              fontWeight: FontWeight.w700,
-                              fontSize: 24,
-                              ),),
-                        ],
-                      ),
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        backgroundColor: mainGreenColor,
+        body:
+             Column(
+               children: [
+                SizedBox(height: 25,),
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 25.0,
+                      bottom: 20.0,
+                      right: 35.0),
+                    child: Row(
+                      children: [
+                        Image(
+                          image: AssetImage("assets/images/poetry_2.png"),
+                          width: 83, ),
+                        SizedBox(width: 5,),
+                        Text("تأليف الشعر",
+                          style: TextStyle(
+                            color: whiteColor,
+                            fontFamily: "Cairo",
+                            fontWeight: FontWeight.w700,
+                            fontSize: 24,
+                            ),),
+                      ],
                     ),
                   ),
-
-                   SizedBox(
-                    height: 100,
-                     child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                       child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                 EasyStepper(
-                                        lineStyle: const LineStyle(
-                                          lineType: LineType.normal,
-                                          unreachedLineType: LineType.dashed,
-                                        ),
-                                        activeStep: activeStep,
-                                        direction: Axis.horizontal,
-                                        activeStepTextColor: Colors.white,
-                                        unreachedStepTextColor:  Colors.white,
-                                        finishedStepIconColor: Colors.white,
-                                        finishedStepTextColor:  Colors.white,
-                                        unreachedStepIconColor: Colors.white,
-                                        unreachedStepBorderColor: Colors.transparent,
-                                        finishedStepBackgroundColor: mainBegiColor,
-                                        unreachedStepBackgroundColor: mainBegiColor,
-                                        showTitle: true,
-                                        onStepReached: (index) {
-                                            setState(() => activeStep = index);
-                                            setState(() {
-                                              if(activeStep == 0){
-                                                setState(() {
-                                                  mainContainer = PoetryStep();
-                                                });
-                                              }
-                                              else if(activeStep == 1){
-                                                mainContainer = EventStep();
-                                              }
-                                              else if(activeStep == 2){
-                                                mainContainer = EmotionsStep();
-                                              }
-                                              else if(activeStep == 3){
-                                                mainContainer = TextNumberStep();
-                                              }
-                                            });
-                                            },
-                                        steps: const [
-                                          EasyStep(
-                                            icon: Icon(Icons.person),
-                                            title: 'الشاعر',
-                                            activeIcon: Icon(Icons.person),
-                                          ),
-                                          EasyStep(
-                                            icon: Icon(Icons.celebration),
-                                            activeIcon: Icon(Icons.celebration),
-                                            title: 'المناسبة',
-                                          ),
-                                          EasyStep(
-                                            icon: Icon(Icons.emoji_emotions_outlined),
-                                            activeIcon: Icon(Icons.emoji_emotions_outlined),
-                                            title: 'المشاعر',
-                                          ),
-                                           EasyStep(
-                                            icon: Icon(Icons.line_style_outlined),
-                                            activeIcon: Icon(Icons.line_style_outlined),
-                                            title: 'الأبيات',
-                                          ),
-                                        ],
+                ),
+    
+                 SizedBox(
+                  height: 100,
+                   child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                     child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                               EasyStepper(
+                                      lineStyle: const LineStyle(
+                                        lineType: LineType.normal,
+                                        unreachedLineType: LineType.dashed,
                                       ),
-                               ],
-                             ),
-                     ),
+                                      activeStep: activeStep,
+                                      direction: Axis.horizontal,
+                                      activeStepTextColor: Colors.white,
+                                      unreachedStepTextColor:  Colors.white,
+                                      finishedStepIconColor: Colors.white,
+                                      finishedStepTextColor:  Colors.white,
+                                      unreachedStepIconColor: Colors.white,
+                                      unreachedStepBorderColor: Colors.transparent,
+                                      finishedStepBackgroundColor: mainBegiColor,
+                                      unreachedStepBackgroundColor: mainBegiColor,
+                                      showTitle: true,
+                                      onStepReached: (index) {
+                                          setState(() => activeStep = index);
+                                          // setState(() {
+                                          //   if(activeStep == 0){
+                                          //     setState(() {
+                                          //       mainContainer = PoetryStep();
+                                          //     });
+                                          //   }
+                                          //   else if(activeStep == 1){
+                                          //     mainContainer = EventStep();
+                                          //   }
+                                          //   else if(activeStep == 2){
+                                          //     mainContainer = EmotionsStep();
+                                          //   }
+                                          //   else if(activeStep == 3){
+                                          //     mainContainer = TextNumberStep();
+                                          //   }
+                                          // });
+                                          },
+                                      steps: const [
+                                        EasyStep(
+                                          icon: Icon(Icons.person),
+                                          title: 'الشاعر',
+                                          activeIcon: Icon(Icons.person),
+                                        ),
+                                        EasyStep(
+                                          icon: Icon(Icons.celebration),
+                                          activeIcon: Icon(Icons.celebration),
+                                          title: 'المناسبة',
+                                        ),
+                                        EasyStep(
+                                          icon: Icon(Icons.emoji_emotions_outlined),
+                                          activeIcon: Icon(Icons.emoji_emotions_outlined),
+                                          title: 'المشاعر',
+                                        ),
+                                         EasyStep(
+                                          icon: Icon(Icons.line_style_outlined),
+                                          activeIcon: Icon(Icons.line_style_outlined),
+                                          title: 'الأبيات',
+                                        ),
+                                      ],
+                                    ),
+                             ],
+                           ),
                    ),
-                   SizedBox(height: 20,),
-                     
-                  //Stepper Pages
-                  Expanded(
-                    flex: 4,
+                 ),
+                 SizedBox(height: 20,),
+                   
+                //Stepper Pages
+                Expanded(
+                  flex: 4,
+                  child: SingleChildScrollView(
                     child: mainContainer
                     ),
-                     
-                   Container(
-                     height: 58,
-                     width: 320,
-                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                      backgroundColor: mainBegiColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                                     ),
-                      onPressed: (){
-                        setState(() {
-                       if(activeStep == 0){
-                        setState(() {
-                          
-                          mainContainer = EventStep();
-                          activeStep = 1;
-                        });
-                     
-                        }
-                        else if(activeStep == 1){
-                        
-                          mainContainer = EmotionsStep();
-                          activeStep = 2;
+                  ),
                    
-                        }
-                        else if(activeStep == 2){
-                          
-                          mainContainer = TextNumberStep();
-                          activeStep = 3;
-                        }
-                        else if(activeStep == 3){
-                          Navigator.push(
-                            context, 
-                            MaterialPageRoute(builder: (context) => GeneratePoetry()));
-                          activeStep = 0;
-                        }
-                        });
-                      
-                      }, 
-                      child: Text("التالي",
+                 Container(
+                   height: 58,
+                   width: 320,
+                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                    backgroundColor: mainBegiColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                                   ),
+                    onPressed: (){
+                      setState(() {
+                     if(activeStep == 0){
+                      setState(() {
+                        poetryTest.add("أكتب لي شعر ${"يتميز بالاسلوب الحديث والأساليب الغزلية والوطنية"} ");
+                        mainContainer = EventStep();
+                        activeStep = 1;
+                      });
+                   
+                      }
+                      else if(activeStep == 1){
+                        poetryTest.add("بمناسبة ${_eventController.text} ");
+                        mainContainer = EmotionsStep();
+                        activeStep = 2;
+                      }
+                      else if(activeStep == 2){
+                        poetryTest.add("فيه مشاعر ${_selectedEmoji} ");
+                        mainContainer = TextNumberStep();
+                        activeStep = 3;
+                      }
+                      else if(activeStep == 3){
+                        poetryTest.add("ويتكون من أبيات عددها ${textNumber.toString()} .");
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context) => GeneratePoetry()));
+                        activeStep = 0;
+                      }
+                      });
+                    
+                    }, 
+                    child: Text("التالي",
+                    textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: mainGreenColor,
+                              fontFamily: "Cairo",
+                              fontWeight: FontWeight.w800,
+                              fontSize: 26,
+                              ),)),
+                 ),
+    
+                 TextButton(
+                  onPressed: (){
+                    Navigator.pop(context);
+                    setState(() {
+                    activeStep = 0;
+                    });
+                  },
+                   child: Text("إلغاء",
                       textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: mainGreenColor,
+                                color: whiteColor,
                                 fontFamily: "Cairo",
-                                fontWeight: FontWeight.w800,
-                                fontSize: 26,
-                                ),)),
-                   ),
-
-                   TextButton(
-                    onPressed: (){
-                      Navigator.pop(context);
-                    },
-                     child: Text("إلغاء",
-                        textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: whiteColor,
-                                  fontFamily: "Cairo",
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 15,
-                                  ),),
-                   ),    
-                 ],
-               ),
-        ),
+                                fontWeight: FontWeight.w700,
+                                fontSize: 15,
+                                ),),
+                 ),    
+               ],
+             ),
       ),
     );
   }
-
-//https://pub.dev/packages/stepper_page_view
 
 Widget PoetryStep(){
   return  Column(
@@ -256,6 +261,7 @@ Widget PoetryStep(){
         child: CarouselView(
           backgroundColor: Colors.transparent,
           itemExtent: 350,
+          shrinkExtent: 350,
            children: [0,1,2,3].map((i) {
              return Builder(
                builder: (BuildContext context) {
@@ -376,6 +382,7 @@ Widget EmotionsStep(){
                               iconsWidget("_smiling_face_with_heart_shaped_eyes"
                               ,"حب", isSelectedEmo1, (){
                                 setState(() {
+                                _selectedEmoji = "حب";
                                 isSelectedEmo1 = true;
                                 isSelectedEmo2 = false;
                                 isSelectedEmo3 = false;
@@ -390,7 +397,9 @@ Widget EmotionsStep(){
                                 });
                               }),
                               iconsWidget("_confused",
-                              "حيرة", isSelectedEmo2, (){setState(() {
+                              "حيرة", isSelectedEmo2, (){
+                                setState(() {
+                                _selectedEmoji = "حيرة";
                                 isSelectedEmo1 = false;
                                 isSelectedEmo2 = true;
                                 isSelectedEmo3 = false;
@@ -406,6 +415,7 @@ Widget EmotionsStep(){
                               iconsWidget("_white_smiling",
                               "تفاؤل", isSelectedEmo3, (){
                                 setState(() {
+                                _selectedEmoji = "تفاؤل";
                                 isSelectedEmo1 = false;
                                 isSelectedEmo2 = false;
                                 isSelectedEmo3 = true;
@@ -422,6 +432,7 @@ Widget EmotionsStep(){
                               iconsWidget("face_with_open_mouth",
                               "إنبهار", isSelectedEmo4,(){
                                 setState(() {
+                                _selectedEmoji = "إنبهار";
                                 isSelectedEmo1 = false;
                                 isSelectedEmo2 = false;
                                 isSelectedEmo3 = false;
@@ -438,6 +449,7 @@ Widget EmotionsStep(){
                               iconsWidget("_disappointed",
                               "إحباط", isSelectedEmo5, (){
                                 setState(() {
+                                _selectedEmoji = "إحباط";
                                 isSelectedEmo1 = false;
                                 isSelectedEmo2 = false;
                                 isSelectedEmo3 = false;
@@ -454,6 +466,7 @@ Widget EmotionsStep(){
                               iconsWidget("_loudly_crying",
                               "حزن", isSelectedEmo6, (){
                                 setState(() {
+                                _selectedEmoji = "حزن";
                                 isSelectedEmo1 = false;
                                 isSelectedEmo2 = false;
                                 isSelectedEmo3 = false;
@@ -470,6 +483,7 @@ Widget EmotionsStep(){
                               iconsWidget("_smiling_face_with_open_mouth",
                               "سعادة", isSelectedEmo7, (){
                                 setState(() {
+                                _selectedEmoji = "سعادة";
                                 isSelectedEmo1 = false;
                                 isSelectedEmo2 = false;
                                 isSelectedEmo3 = false;
@@ -486,6 +500,7 @@ Widget EmotionsStep(){
                               iconsWidget("_neutral",
                               "تبلد",isSelectedEmo8, (){
                                 setState(() {
+                                _selectedEmoji = "تبلد";
                                 isSelectedEmo1 = false;
                                 isSelectedEmo2 = false;
                                 isSelectedEmo3 = false;
@@ -502,6 +517,7 @@ Widget EmotionsStep(){
                               iconsWidget("_pouting",
                               "غضب", isSelectedEmo9 ,(){
                                 setState(() {
+                                _selectedEmoji = "غضب";
                                 isSelectedEmo1 = false;
                                 isSelectedEmo2 = false;
                                 isSelectedEmo3 = false;
