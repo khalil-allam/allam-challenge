@@ -22,6 +22,10 @@ class _OutputPageState extends State<OutputPage> {
         backgroundColor: mainGreenColor,
         appBar: AppBar(
           backgroundColor: mainGreenColor,
+          leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () { Navigator.pop(context); Navigator.pop(context);}
+        ),
           iconTheme: IconThemeData(color: whiteColor),
         ),
         body: Center(
@@ -30,17 +34,6 @@ class _OutputPageState extends State<OutputPage> {
                            children: [
                             SizedBox(
                               height: 25,),
-                            //  Container(
-                            //   width: 324,
-                            //   height: 84,
-                            //    child: Text("الشعر المخرج من علّام",
-                            //           style: TextStyle(
-                            //             color: whiteColor,
-                            //             fontFamily: "Cairo",
-                            //             fontWeight: FontWeight.w700,
-                            //             fontSize: 18,
-                            //             ),),
-                            //  ),
                              Expanded(
                               flex: 9,
                                child: Container(

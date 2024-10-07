@@ -7,7 +7,8 @@ import 'output_page.dart';
 
 
 class GeneratePoetry extends StatefulWidget {
-  const GeneratePoetry({super.key});
+  final String generatedText;
+  const GeneratePoetry({super.key, required this.generatedText});
 
   @override
   State<GeneratePoetry> createState() => _GeneratePoetryState();
@@ -27,10 +28,11 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
     Future.delayed(Duration(seconds: 3), (){
       Navigator.push(
         context, MaterialPageRoute(builder: (context) => OutputPage(
-          output_text: poetryTest.toString(),
+          output_text: widget.generatedText,
         )
        ),
       );
+      print(widget.generatedText);
     });
     return Scaffold(
       backgroundColor: mainGreenColor,

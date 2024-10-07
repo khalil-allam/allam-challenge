@@ -19,6 +19,9 @@ List<String> poetryText = [
   "مهتم نوّاس بالأدب العربي ويستخدم في كتابة الأشعار أسلوب الشعر الحديث ويتميز بأشعاره الغزلية والوطنية .4"
 ];
 
+bool previuosBtn = false;
+bool nextBtn = false;
+
 class CreatePoetry extends StatefulWidget {
   const CreatePoetry({super.key});
 
@@ -115,22 +118,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
                                       showTitle: true,
                                       onStepReached: (index) {
                                           setState(() => activeStep = index);
-                                          // setState(() {
-                                          //   if(activeStep == 0){
-                                          //     setState(() {
-                                          //       mainContainer = PoetryStep();
-                                          //     });
-                                          //   }
-                                          //   else if(activeStep == 1){
-                                          //     mainContainer = EventStep();
-                                          //   }
-                                          //   else if(activeStep == 2){
-                                          //     mainContainer = EmotionsStep();
-                                          //   }
-                                          //   else if(activeStep == 3){
-                                          //     mainContainer = TextNumberStep();
-                                          //   }
-                                          // });
                                           },
                                       steps: const [
                                         EasyStep(
@@ -168,56 +155,121 @@ class _CreatePoetryState extends State<CreatePoetry> {
                     child: mainContainer
                     ),
                   ),
-                   
-                 Container(
-                   height: 58,
-                   width: 320,
-                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                    backgroundColor: mainBegiColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                                   ),
-                    onPressed: (){
-                      setState(() {
-                     if(activeStep == 0){
-                      setState(() {
-                        poetryTest.add("أكتب لي شعر ${"يتميز بالاسلوب الحديث والأساليب الغزلية والوطنية"} ");
-                        mainContainer = EventStep();
-                        activeStep = 1;
-                      });
-                   
-                      }
-                      else if(activeStep == 1){
-                        poetryTest.add("بمناسبة ${_eventController.text} ");
-                        mainContainer = EmotionsStep();
-                        activeStep = 2;
-                      }
-                      else if(activeStep == 2){
-                        poetryTest.add("فيه مشاعر ${_selectedEmoji} ");
-                        mainContainer = TextNumberStep();
-                        activeStep = 3;
-                      }
-                      else if(activeStep == 3){
-                        poetryTest.add("ويتكون من أبيات عددها ${textNumber.toString()} .");
-                        Navigator.push(
-                          context, 
-                          MaterialPageRoute(builder: (context) => GeneratePoetry()));
-                        activeStep = 0;
-                      }
-                      });
-                    
-                    }, 
-                    child: Text("التالي",
-                    textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: mainGreenColor,
-                              fontFamily: "Cairo",
-                              fontWeight: FontWeight.w800,
-                              fontSize: 26,
-                              ),)),
-                 ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: Visibility(
+                          visible: activeStep == 0 ? previuosBtn = false : previuosBtn = true,
+                          child: Container(
+                           height: 45,
+                           width: 200,
+                           margin: EdgeInsets.only(right: 20),
+                           child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                            backgroundColor: mainBegiColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                                           ),
+                            onPressed: (){
+                              setState(() {
+                            //  if(activeStep == 0){
+                            //   setState(() {
+                            //     poetryTest.add("أكتب لي شعر ${"يتميز بالاسلوب الحديث والأساليب الغزلية والوطنية"} ");
+                            //     mainContainer = EventStep();
+                            //     activeStep = 1;
+                            //   });
+                           
+                            //   }
+                              if(activeStep == 1){
+                                poetryTest.removeAt(0);
+                                mainContainer = PoetryStep();
+                                activeStep = 0;
+                              }
+                              else if(activeStep == 2){
+                                poetryTest.removeAt(1);
+                                mainContainer = EventStep();
+                                activeStep = 1;
+                              }
+                              else if(activeStep == 3){
+                                poetryTest.removeAt(2);
+                                mainContainer = EmotionsStep();
+                                activeStep = 2;
+                              }
+                              });
+                            
+                            }, 
+                            child: Text("السابق",
+                            textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: mainGreenColor,
+                                      fontFamily: "Cairo",
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 20,
+                                      ),)),
+                                           ),
+                        ),
+                      ),
+
+                      SizedBox(width: 35,),
+
+                      Expanded(
+                        child: Container(
+                         height: 45,
+                         width: 320,
+                         margin: EdgeInsets.only(left: 20),
+                         child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                          backgroundColor: mainBegiColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                                         ),
+                          onPressed: (){
+                            setState(() {
+                           if(activeStep == 0){
+                            setState(() {
+                              poetryTest.add("أكتب لي شعر ${"يتميز بالاسلوب الحديث والأساليب الغزلية والوطنية"} ");
+                              mainContainer = EventStep();
+                              activeStep = 1;
+                            });
+                         
+                            }
+                            else if(activeStep == 1){
+                              poetryTest.add("بمناسبة ${_eventController.text} ");
+                              mainContainer = EmotionsStep();
+                              activeStep = 2;
+                            }
+                            else if(activeStep == 2){
+                              poetryTest.add("فيه مشاعر ${_selectedEmoji} ");
+                              mainContainer = TextNumberStep();
+                              activeStep = 3;
+                            }
+                            else if(activeStep == 3){
+                              poetryTest.add("ويتكون من أبيات عددها ${textNumber.toString()} .");
+                              Navigator.push(
+                                context, 
+                                MaterialPageRoute(builder: (context) => GeneratePoetry(
+                                  generatedText: poetryText.toString(),
+                                )));
+                              // activeStep = 0;
+                            }
+                            });
+                          
+                          }, 
+                          child: Text(activeStep == 3 ? "إنشاء" : "التالي",
+                          textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: mainGreenColor,
+                                    fontFamily: "Cairo",
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 20,
+                                    ),)),
+                                         ),
+                      ),
+                    ],
+                  ),
     
                  TextButton(
                   onPressed: (){

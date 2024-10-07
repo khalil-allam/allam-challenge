@@ -1,3 +1,4 @@
+import 'package:allam_challenge/create_poetry.dart';
 import 'package:allam_challenge/generate_poetry.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,9 @@ class AnalyisPoetry extends StatefulWidget {
   @override
   State<AnalyisPoetry> createState() => _AnalyisPoetryState();
 }
+
+bool allBtn = true, summaryBtn = false, meaningBtn = false, detailsBtn = false, furtherMeaningBtn = false;
+String catText = "";
 
 class _AnalyisPoetryState extends State<AnalyisPoetry> {
   TextEditingController _textController = TextEditingController();
@@ -107,9 +111,45 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        tagsBtn("الكل", mainGreenColor, mainBegiColor, (){}),
-                        tagsBtn("الخلاصة", whiteColor, mainGreenColor, (){}),
-                        tagsBtn("المعنى العام", whiteColor, mainGreenColor, (){}),
+                        tagsBtn("الكل", 
+                        allBtn ? mainGreenColor : whiteColor, 
+                        allBtn ? mainBegiColor : mainGreenColor, 
+                        (){
+                          setState(() {
+                            allBtn = true; 
+                            summaryBtn = false;
+                            meaningBtn = false;
+                            detailsBtn = false;
+                            furtherMeaningBtn = false;
+                            catText = "بشكل عام";
+                          });
+                        }),
+                        tagsBtn("الخلاصة",
+                        summaryBtn ? mainGreenColor : whiteColor, 
+                        summaryBtn ? mainBegiColor : mainGreenColor, 
+                        (){
+                           setState(() {
+                            allBtn = false; 
+                            summaryBtn = true;
+                            meaningBtn = false;
+                            detailsBtn = false;
+                            furtherMeaningBtn = false;
+                            catText =  "بالخلاصة الشعرية";
+                          });
+                        }),
+                        tagsBtn("المعنى العام",
+                        meaningBtn ? mainGreenColor : whiteColor, 
+                        meaningBtn ? mainBegiColor : mainGreenColor, 
+                        (){
+                           setState(() {
+                            allBtn = false; 
+                            summaryBtn = false;
+                            meaningBtn = true;
+                            detailsBtn = false;
+                            furtherMeaningBtn = false;
+                            catText = "بالمعنى العام";
+                          });
+                        }),
                       ],
                     ),
                   ),
@@ -119,8 +159,32 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        tagsBtn("التفاصيل الدلالية", whiteColor, mainGreenColor, (){}),
-                        tagsBtn("الأبعاد البلاغية", whiteColor, mainGreenColor, (){}),
+                        tagsBtn("التفاصيل الدلالية",
+                        detailsBtn ? mainGreenColor : whiteColor, 
+                        detailsBtn ? mainBegiColor : mainGreenColor, 
+                        (){
+                           setState(() {
+                            allBtn = false; 
+                            summaryBtn = false;
+                            meaningBtn = false;
+                            detailsBtn = true;
+                            furtherMeaningBtn = false;
+                            catText = "بالتفاصيل الدلالية";
+                          });
+                        }),
+                        tagsBtn("الأبعاد البلاغية",
+                        furtherMeaningBtn ? mainGreenColor : whiteColor, 
+                        furtherMeaningBtn ? mainBegiColor : mainGreenColor, 
+                        (){
+                           setState(() {
+                            allBtn = false; 
+                            summaryBtn = false;
+                            meaningBtn = false;
+                            detailsBtn = false;
+                            furtherMeaningBtn = true;
+                            catText = "بالأبعاد البلاغية";
+                          });
+                        }),
                       ],
                     ),
                   ),
@@ -137,7 +201,9 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                 ),
                 onPressed: (){
                  Navigator.push(context, 
-                 MaterialPageRoute(builder: (context) => GeneratePoetry()));
+                 MaterialPageRoute(builder: (context) => GeneratePoetry(
+                  generatedText: "حلل لي النص الشعري ${_textController.text} بمعايير التحليل $catText",
+                 )));
                 }, 
                 child: Text("تحليل",
                 style: TextStyle(
@@ -187,7 +253,7 @@ Widget tagsBtn(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                                     ),
+                    ),
                       onPressed: fun, 
                       child: Text(title,
                       textAlign: TextAlign.center,

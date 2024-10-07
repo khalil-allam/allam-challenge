@@ -1,3 +1,4 @@
+import 'package:allam_challenge/create_poetry.dart';
 import 'package:allam_challenge/generate_poetry.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,8 @@ class CurrectPoetry extends StatefulWidget {
   @override
   State<CurrectPoetry> createState() => _CurrectPoetryState();
 }
+bool allBtn = true, linguisticallyBtn = false, grammaticallyBtn = false, rhymeBtn = false;
+String catText = "";
 
 class _CurrectPoetryState extends State<CurrectPoetry> {
   TextEditingController _textController = TextEditingController();
@@ -107,10 +110,54 @@ class _CurrectPoetryState extends State<CurrectPoetry> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        tagsBtn("الكل", mainGreenColor, mainBegiColor, (){}),
-                        tagsBtn("لغوياً", whiteColor, mainGreenColor, (){}),
-                        tagsBtn("نحوياً", whiteColor, mainGreenColor, (){}),
-                        tagsBtn("قـافية", whiteColor, mainGreenColor, (){}),
+                        tagsBtn("الكل",
+                        allBtn ? mainGreenColor : whiteColor, 
+                        allBtn ? mainBegiColor : mainGreenColor,
+                        (){
+                           setState(() {
+                            allBtn = true; 
+                            linguisticallyBtn = false;
+                            grammaticallyBtn = false;
+                            rhymeBtn = false;
+                            catText = "الشعر كاملاُ";
+                          });
+                        }),
+                        tagsBtn("لغوياً",
+                        linguisticallyBtn ? mainGreenColor : whiteColor, 
+                        linguisticallyBtn ? mainBegiColor : mainGreenColor,
+                        (){
+                            setState(() {
+                            allBtn = false; 
+                            linguisticallyBtn = true;
+                            grammaticallyBtn = false;
+                            rhymeBtn = false;
+                            catText = "لغوياً";
+                          });
+                        }),
+                        tagsBtn("نحوياً",
+                        grammaticallyBtn ? mainGreenColor : whiteColor, 
+                        grammaticallyBtn ? mainBegiColor : mainGreenColor,
+                        (){
+                            setState(() {
+                            allBtn = false; 
+                            linguisticallyBtn = false;
+                            grammaticallyBtn = true;
+                            rhymeBtn = false;
+                            catText = "نحوياً";
+                          });
+                        }),
+                        tagsBtn("قـافية",
+                        rhymeBtn ? mainGreenColor : whiteColor, 
+                        rhymeBtn ? mainBegiColor : mainGreenColor,
+                        (){
+                            setState(() {
+                            allBtn = false; 
+                            linguisticallyBtn = false;
+                            grammaticallyBtn = false;
+                            rhymeBtn = true;
+                            catText = "قـافية";
+                          });
+                        }),
                         SizedBox(width: 5,),
                       ],
                     ),
@@ -128,7 +175,9 @@ class _CurrectPoetryState extends State<CurrectPoetry> {
                 ),
                 onPressed: (){
                  Navigator.push(context, 
-                 MaterialPageRoute(builder: (context) => GeneratePoetry()));
+                 MaterialPageRoute(builder: (context) => GeneratePoetry(
+                  generatedText: "صحح لي النص الشعري ${_textController.text} بمعايير التصحيح $catText",
+                 )));
                 }, 
                 child: Text("تصحيح",
                 style: TextStyle(
