@@ -1,7 +1,8 @@
-import 'package:allam_challenge/color_pallete.dart';
-import 'package:allam_challenge/sharedpref/shared_pref.dart';
+import 'package:allam_challenge/coding_files/color_pallete.dart';
+import 'package:allam_challenge/coding_files/shared_pref.dart';
 import 'package:flutter/material.dart';
 
+import 'coding_files/allam_monder_page.dart';
 import 'splash_page.dart';
 
 Future<void> main() async {
@@ -38,7 +39,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home:
-      //  StepperApp()
+//       HomeScreen(
+//         inputText: """صحح لي النص الشعري ذهبت الى البيت ووجدت امي سعيدة
+// وابي وجدته بانتظاري وكذلك جميع العائلة
+
+// يالها من لحظة مشرقة
+// الحمد لله دائماً وابداً وكل يوم بمعايير التصحيح قـافية""",
+//       )
       SplashPage(),
     );
   }

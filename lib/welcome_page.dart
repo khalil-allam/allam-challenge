@@ -1,8 +1,8 @@
-import 'package:allam_challenge/color_pallete.dart';
+import 'package:allam_challenge/coding_files/color_pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import 'services_page.dart';
+import 'poetry_generation_pages/services_page.dart';
 
 
 class WelcomePage extends StatelessWidget {

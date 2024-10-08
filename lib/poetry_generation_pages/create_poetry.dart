@@ -1,5 +1,5 @@
-import 'package:allam_challenge/color_pallete.dart';
-import 'package:allam_challenge/stepper.dart';
+import 'package:allam_challenge/coding_files/color_pallete.dart';
+import 'package:allam_challenge/coding_files/stepper.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 
@@ -230,7 +230,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
                             setState(() {
                            if(activeStep == 0){
                             setState(() {
-                              poetryTest.add("أكتب لي شعر ${"يتميز بالاسلوب الحديث والأساليب الغزلية والوطنية"} ");
+                              poetryTest.add("أكتب لي شعر ${poetryText[0]} ");
                               mainContainer = EventStep();
                               activeStep = 1;
                             });
@@ -248,12 +248,27 @@ class _CreatePoetryState extends State<CreatePoetry> {
                             }
                             else if(activeStep == 3){
                               poetryTest.add("ويتكون من أبيات عددها ${textNumber.toString()} .");
-                              Navigator.push(
+                              if(_eventController.text.isEmpty 
+                              || _eventController.text.isEmpty
+                              || _selectedEmoji == ""){
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("الرجاء تعبئة جميع الحقول السابقة", 
+                                                        textAlign: TextAlign.right,
+                                                              style: TextStyle(
+                                                              color: whiteColor,
+                                                              fontFamily: "Cairo",
+                                                              fontWeight: FontWeight.w600,
+                                                              fontSize: 15,
+                                                              ),)));
+                                  }
+                                  else{
+                                Navigator.push(
                                 context, 
                                 MaterialPageRoute(builder: (context) => GeneratePoetry(
                                   generatedText: poetryText.toString(),
                                 )));
-                              // activeStep = 0;
+                                }
                             }
                             });
                           

@@ -1,6 +1,6 @@
-import 'package:allam_challenge/analyis_poetry.dart';
-import 'package:allam_challenge/color_pallete.dart';
-import 'package:allam_challenge/currect_poetry.dart';
+import 'package:allam_challenge/poetry_generation_pages/analyis_poetry.dart';
+import 'package:allam_challenge/coding_files/color_pallete.dart';
+import 'package:allam_challenge/poetry_generation_pages/currect_poetry.dart';
 import 'package:flutter/material.dart';
 
 import 'create_poetry.dart';

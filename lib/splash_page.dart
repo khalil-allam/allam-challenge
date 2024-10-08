@@ -1,4 +1,4 @@
-import 'package:allam_challenge/color_pallete.dart';
+import 'package:allam_challenge/coding_files/color_pallete.dart';
 import 'package:allam_challenge/welcome_page.dart';
 import 'package:flutter/material.dart';
 

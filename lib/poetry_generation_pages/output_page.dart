@@ -1,4 +1,4 @@
-import 'package:allam_challenge/color_pallete.dart';
+import 'package:allam_challenge/coding_files/color_pallete.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
@@ -85,7 +85,7 @@ class _OutputPageState extends State<OutputPage> {
                                               fontFamily: "Cairo",
                                               fontWeight: FontWeight.w600,
                                               fontSize: 15,
-                                              ),))));
+                                              ),))),);
                 }, icon: Icon(Icons.copy_outlined, color: mainBegiColor,)),
                IconButton(
                 onPressed: (){
