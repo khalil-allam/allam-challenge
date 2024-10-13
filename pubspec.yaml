@@ -41,8 +41,8 @@ dependencies:
   lottie:
   clipboard: ^0.1.3
   share_plus: ^10.0.2
-
-
+  flutter_dotenv: ^5.1.0
+  flutter_svg:
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -68,6 +68,8 @@ flutter:
   assets:
     - assets/images/
     - assets/images/emojis/
+    - assets/.env
+    - assets/svg/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -90,7 +92,7 @@ flutter:
         - asset: fonts/Cairo-SemiBold.ttf
         - asset: fonts/Cairo-ExtraLight.ttf
         - asset: fonts/Cairo-Light.ttf
-  #         style: italic
+    #         style: italic
 
     - family: ReemKufi
       fonts:

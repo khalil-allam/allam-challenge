@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 
 class MyStepperWidget extends StatefulWidget {
@@ -17,12 +18,13 @@ class MyStepperWidget extends StatefulWidget {
     this.lineThickness = 1,
     required this.icons,
     required this.lineColor,
+    this.textColor,
   }) : assert(numOfSteps == texts.length);
   final int currentStep;
   final int numOfSteps;
   final double circleWidth;
   final List<String> texts;
-  final List<IconData> icons;
+  final List<String> icons;
   final Color unSelectedColor;
   final Color selectedColor;
   final double horizontalPadding;
@@ -31,6 +33,7 @@ class MyStepperWidget extends StatefulWidget {
   final bool isDashedLine;
   final double lineThickness;
   final Color lineColor;
+  final Color? textColor;
 
   @override
   State<MyStepperWidget> createState() => _MyStepperWidgetState();
@@ -128,7 +131,7 @@ class _MyStepperWidgetState extends State<MyStepperWidget> {
       required int stepsNum,
       required int currentStep,
       required double circleWidth,
-      required IconData icon}) {
+      required String icon}) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -144,19 +147,13 @@ class _MyStepperWidgetState extends State<MyStepperWidget> {
             // color: index + 1 <= currentStep ? widget.mainColor : Colors.white,
           ),
           child: Center(
-            child: SizedBox(
-              width: 25,
-              height: 25,
-              child: Icon(
-                icon,
-              )
-              // SvgPicture.asset(
-              //   icon,
-              //   // colorFilter: ColorFilter.mode(
-              //   //     index + 1 == currentStep ? Colors.white : Colors.grey,
-              //   //     BlendMode.srcIn,
-              //   //     ),
-              // ),
+            child: SvgPicture.asset(
+              icon,
+              colorFilter: ColorFilter.mode(
+                // Colors.black,
+                index + 1 == currentStep ? Colors.white : Colors.black,
+                BlendMode.srcIn,
+              ),
             ),
           ),
         ),
@@ -168,15 +165,12 @@ class _MyStepperWidgetState extends State<MyStepperWidget> {
           child: Text(
             text,
             style: TextStyle(
-              color: widget.unSelectedColor,
+              color: widget.textColor ?? widget.unSelectedColor,
               fontWeight: FontWeight.bold,
               fontSize: 12,
             ),
             textAlign: TextAlign.center,
           ),
-        ),
-        const SizedBox(
-          height: 10,
         ),
       ],
     );

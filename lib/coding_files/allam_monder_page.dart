@@ -3,49 +3,45 @@ import 'dart:convert';
 import 'package:allam_challenge/coding_files/shared_pref.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   final String inputText;
-  HomeScreen({
-    super.key, 
-    required this.inputText});
+  HomeScreen({super.key, required this.inputText});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-  String API_TOKEN = "vPwSTdpHgbODDjNhsHTh0cCaGyD4XJQ3Z9yudFBaJbuO";
+String API_TOKEN = dotenv.env['apikey']!;
 
 class _HomeScreenState extends State<HomeScreen> {
   var input = TextEditingController();
   var output = TextEditingController();
 
-  void generateAllamText(
-    String inputData
-  ) async {
+  void generateAllamText(String inputData) async {
     {
-                  String inputText = inputData;
-                  var jwtToken = SharedPref.sharedPref.getString('jwt');
-                  print(jwtToken);
-                  if (jwtToken != null) {
-                    if (JwtDecoder.isExpired(jwtToken)) {
-                      var jwtToken = await getAccessToken(apikey: API_TOKEN);
-                      if (jwtToken != null) {
-                        await sendInput(
-                            accessToken: jwtToken, input: inputText);
-                      }
-                    } else {
-                      await sendInput(accessToken: jwtToken, input: inputText);
-                    }
-                  } else {
-                    var jwtToken = await getAccessToken(apikey: API_TOKEN);
-                    if (jwtToken != null) {
-                      await sendInput(accessToken: jwtToken, input: inputText);
-                    }
-                  }
-                }
+      String inputText = inputData;
+      var jwtToken = SharedPref.sharedPref.getString('jwt');
+      print(jwtToken);
+      if (jwtToken != null) {
+        if (JwtDecoder.isExpired(jwtToken)) {
+          var jwtToken = await getAccessToken(apikey: API_TOKEN);
+          if (jwtToken != null) {
+            await sendInput(accessToken: jwtToken, input: inputText);
+          }
+        } else {
+          await sendInput(accessToken: jwtToken, input: inputText);
+        }
+      } else {
+        var jwtToken = await getAccessToken(apikey: API_TOKEN);
+        if (jwtToken != null) {
+          await sendInput(accessToken: jwtToken, input: inputText);
+        }
+      }
+    }
   }
 
   @override
@@ -54,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     generateAllamText(widget.inputText);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -159,7 +156,8 @@ class _HomeScreenState extends State<HomeScreen> {
         "repetition_penalty": 1
       },
       "model_id": "sdaia/allam-1-13b-instruct",
-      "project_id": "93c51780-827a-4c8b-9887-4ec683746ef9" //93c51780-827a-4c8b-9887-4ec683746ef9
+      "project_id":
+          "93c51780-827a-4c8b-9887-4ec683746ef9" //93c51780-827a-4c8b-9887-4ec683746ef9
     };
 
     try {

@@ -1,13 +1,14 @@
 import 'package:allam_challenge/coding_files/color_pallete.dart';
 import 'package:allam_challenge/coding_files/shared_pref.dart';
+import 'package:allam_challenge/welcome_page.dart';
 import 'package:flutter/material.dart';
-
-import 'coding_files/allam_monder_page.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'splash_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.initSharedPref();
+  await dotenv.load(fileName: "assets/.env");
   runApp(const MyApp());
 }
 
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
 // يالها من لحظة مشرقة
 // الحمد لله دائماً وابداً وكل يوم بمعايير التصحيح قـافية""",
 //       )
-      SplashPage(),
+          const SplashPage(),
     );
   }
 }

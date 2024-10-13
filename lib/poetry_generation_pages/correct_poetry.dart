@@ -4,21 +4,20 @@ import 'package:flutter/material.dart';
 
 import '../coding_files/color_pallete.dart';
 
-class AnalyisPoetry extends StatefulWidget {
-  const AnalyisPoetry({super.key});
+class CorrectPoetry extends StatefulWidget {
+  const CorrectPoetry({super.key});
 
   @override
-  State<AnalyisPoetry> createState() => _AnalyisPoetryState();
+  State<CorrectPoetry> createState() => _CorrectPoetryState();
 }
 
 bool allBtn = true,
-    summaryBtn = false,
-    meaningBtn = false,
-    detailsBtn = false,
-    furtherMeaningBtn = false;
+    linguisticallyBtn = false,
+    grammaticallyBtn = false,
+    rhymeBtn = false;
 String catText = "";
 
-class _AnalyisPoetryState extends State<AnalyisPoetry> {
+class _CorrectPoetryState extends State<CorrectPoetry> {
   TextEditingController _textController = TextEditingController();
 
   @override
@@ -36,17 +35,16 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                 children: [
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image(
-                        image: AssetImage("assets/images/poetry_1.png"),
+                        image: AssetImage("assets/images/revision.png"),
                         width: 83,
                       ),
                       SizedBox(
                         width: 15,
                       ),
                       Text(
-                        "تحليل الشعر",
+                        "تصحيح الشعر",
                         style: TextStyle(
                           color: whiteColor,
                           fontFamily: "Cairo",
@@ -56,13 +54,11 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   Column(
                     children: [
                       const Text(
-                        "قم بوضع الشعر الذي تريد تحليله وفهمه.",
+                        "قم بوضع الشعر الذي تريد تصحيح وإعادة كتابته.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: whiteColor,
@@ -83,7 +79,7 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                               filled: true,
                               fillColor: whiteColor,
                               hintText:
-                                  "مثال : قفا نبكِ من ذكرى حبيبٍ ومنزلِ بسقطِ اللوى بين الدخولِ فحوملِ"),
+                                  "مثال : أحببتُ السماء لأنها عاليةٌ وفيها النجوم تبدو ساطعةٌ والقمر يجلس وحيدًا فيها ويفكر في الأرض وهو متعبٌ"),
                           style: const TextStyle(
                             color: blackColor,
                             fontFamily: "Cairo",
@@ -95,7 +91,7 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                     ],
                   ),
                   const Text(
-                    "معايير التحليل",
+                    "تصحيح الأبيات",
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       color: whiteColor,
@@ -115,71 +111,52 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                           allBtn ? mainBegiColor : mainGreenColor, () {
                         setState(() {
                           allBtn = true;
-                          summaryBtn = false;
-                          meaningBtn = false;
-                          detailsBtn = false;
-                          furtherMeaningBtn = false;
-                          catText = "بشكل عام";
+                          linguisticallyBtn = false;
+                          grammaticallyBtn = false;
+                          rhymeBtn = false;
+                          catText = "الشعر كاملاُ";
                         });
                       }),
                       tagsBtn(
-                          "الخلاصة",
-                          summaryBtn ? mainGreenColor : whiteColor,
-                          summaryBtn ? mainBegiColor : mainGreenColor, () {
-                        setState(() {
-                          allBtn = false;
-                          summaryBtn = true;
-                          meaningBtn = false;
-                          detailsBtn = false;
-                          furtherMeaningBtn = false;
-                          catText = "بالخلاصة الشعرية";
-                        });
-                      }),
-                      tagsBtn(
-                          "المعنى العام",
-                          meaningBtn ? mainGreenColor : whiteColor,
-                          meaningBtn ? mainBegiColor : mainGreenColor, () {
-                        setState(() {
-                          allBtn = false;
-                          summaryBtn = false;
-                          meaningBtn = true;
-                          detailsBtn = false;
-                          furtherMeaningBtn = false;
-                          catText = "بالمعنى العام";
-                        });
-                      }),
-                      tagsBtn(
-                          "التفاصيل الدلالية",
-                          detailsBtn ? mainGreenColor : whiteColor,
-                          detailsBtn ? mainBegiColor : mainGreenColor, () {
-                        setState(() {
-                          allBtn = false;
-                          summaryBtn = false;
-                          meaningBtn = false;
-                          detailsBtn = true;
-                          furtherMeaningBtn = false;
-                          catText = "بالتفاصيل الدلالية";
-                        });
-                      }),
-                      tagsBtn(
-                          "الأبعاد البلاغية",
-                          furtherMeaningBtn ? mainGreenColor : whiteColor,
-                          // furtherMeaningBtn ? mainGreenColor : whiteColor,
-                          furtherMeaningBtn ? mainBegiColor : mainGreenColor,
+                          "لغوياً",
+                          linguisticallyBtn ? mainGreenColor : whiteColor,
+                          linguisticallyBtn ? mainBegiColor : mainGreenColor,
                           () {
                         setState(() {
                           allBtn = false;
-                          summaryBtn = false;
-                          meaningBtn = false;
-                          detailsBtn = false;
-                          furtherMeaningBtn = true;
-                          catText = "بالأبعاد البلاغية";
+                          linguisticallyBtn = true;
+                          grammaticallyBtn = false;
+                          rhymeBtn = false;
+                          catText = "لغوياً";
+                        });
+                      }),
+                      tagsBtn(
+                          "نحوياً",
+                          grammaticallyBtn ? mainGreenColor : whiteColor,
+                          grammaticallyBtn ? mainBegiColor : mainGreenColor,
+                          () {
+                        setState(() {
+                          allBtn = false;
+                          linguisticallyBtn = false;
+                          grammaticallyBtn = true;
+                          rhymeBtn = false;
+                          catText = "نحوياً";
+                        });
+                      }),
+                      tagsBtn("قـافية", rhymeBtn ? mainGreenColor : whiteColor,
+                          rhymeBtn ? mainBegiColor : mainGreenColor, () {
+                        setState(() {
+                          allBtn = false;
+                          linguisticallyBtn = false;
+                          grammaticallyBtn = false;
+                          rhymeBtn = true;
+                          catText = "قـافية";
                         });
                       }),
                     ],
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   SizedBox(
                     height: 58,
@@ -211,14 +188,14 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                             MaterialPageRoute(
                               builder: (context) => GeneratePoetry(
                                 generatedText:
-                                    "حلل لي النص الشعري ${_textController.text} بمعايير التحليل $catText",
+                                    "اعد صياغة النص الشعري ${_textController.text} بمعايير التصحيح $catText",
                               ),
                             ),
                           );
                         }
                       },
                       child: const Text(
-                        "تحليل",
+                        "تصحيح",
                         style: TextStyle(
                           color: mainGreenColor,
                           fontFamily: "Cairo",
@@ -245,9 +222,6 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
                   ),
                 ],
               ),
