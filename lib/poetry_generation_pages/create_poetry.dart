@@ -111,7 +111,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   itemsAlignment: MainAxisAlignment.spaceBetween,
                   isDashedLine: false,
                   lineThickness: 6,
-                  circleWidth: 40,
+                  circleWidth: 52,
                   textColor: Colors.white,
                 ),
                 const SizedBox(
@@ -310,7 +310,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
         ),
         const SizedBox(height: 10),
         SizedBox(
-          height: 250,
+          height: 300,
           child: CarouselView(
             backgroundColor: Colors.transparent,
             itemExtent: 350,
@@ -320,35 +320,78 @@ class _CreatePoetryState extends State<CreatePoetry> {
               return Builder(
                 builder: (BuildContext context) {
                   return SizedBox(
-                      height: 50,
+                      height: 300,
                       width: double.infinity,
                       // width: MediaQuery.of(context).size.width,
                       // margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      child: SizedBox(
-                        child: Column(
-                          children: [
-                            const Image(
-                              image:
-                                  AssetImage("assets/images/poyteriest_1.png"),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            SizedBox(
-                              width: 324,
-                              child: Text(
-                                poetryText[index],
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: whiteColor,
-                                  fontFamily: "Cairo",
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 15,
+                      child: Column(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            height: 50,
+                          ),
+                          Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              Container(
+                                // clipBehavior: Clip.antiAlias,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: const Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 180,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        'نواس',
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
+                              Positioned.directional(
+                                bottom: 0,
+                                textDirection: TextDirection.rtl,
+                                // start: 20,
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(20),
+                                    ),
+                                  ),
+                                  clipBehavior: Clip.antiAlias,
+                                  child: Image.asset(
+                                    'assets/images/poet2.png',
+                                    // height: 180,
+                                    width: 150,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            poetryText[index],
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: whiteColor,
+                              fontFamily: "Cairo",
+                              fontWeight: FontWeight.w700,
+                              fontSize: 15,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       )
                       // Text('text $i', style: TextStyle(fontSize: 16.0)
                       // ,)
