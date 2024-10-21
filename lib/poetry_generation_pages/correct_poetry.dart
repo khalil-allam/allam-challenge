@@ -1,5 +1,6 @@
 import 'package:allam_challenge/poetry_generation_pages/create_poetry.dart';
 import 'package:allam_challenge/poetry_generation_pages/generate_poetry.dart';
+import 'package:allam_challenge/prompts.dart';
 import 'package:flutter/material.dart';
 
 import '../coding_files/color_pallete.dart';
@@ -187,9 +188,11 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => GeneratePoetry(
-                                generatedText:
-                                    "اعد صياغة النص الشعري ${_textController.text} بمعايير التصحيح $catText",
-                              ),
+                                  generatedText:
+                                      // "اعد صياغة النص الشعري ${_textController.text} بمعايير التصحيح $catText",
+                                      Prompts.correctPoem(
+                                          text: _textController.text,
+                                          basedOn: catText)),
                             ),
                           );
                         }

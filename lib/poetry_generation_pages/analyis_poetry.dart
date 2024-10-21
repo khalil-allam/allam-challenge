@@ -1,5 +1,6 @@
 import 'package:allam_challenge/poetry_generation_pages/create_poetry.dart';
 import 'package:allam_challenge/poetry_generation_pages/generate_poetry.dart';
+import 'package:allam_challenge/prompts.dart';
 import 'package:flutter/material.dart';
 
 import '../coding_files/color_pallete.dart';
@@ -211,7 +212,10 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                             MaterialPageRoute(
                               builder: (context) => GeneratePoetry(
                                 generatedText:
-                                    "حلل لي النص الشعري ${_textController.text} بمعايير التحليل $catText",
+                                    // "حلل لي النص الشعري ${_textController.text} بمعايير التحليل $catText",
+                                    Prompts.analyzePoem(
+                                        text: _textController.text,
+                                        basedOn: catText),
                               ),
                             ),
                           );

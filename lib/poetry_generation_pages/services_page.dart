@@ -125,10 +125,16 @@ class _ServicesPageState extends State<ServicesPage> {
         ),
         Positioned(
           right: 15,
-          child: Image(
-            image: AssetImage("assets/images/$img.png"),
-            height: 75,
-            width: 83,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => pageName));
+            },
+            child: Image(
+              image: AssetImage("assets/images/$img.png"),
+              height: 75,
+              width: 83,
+            ),
           ),
         ),
       ],

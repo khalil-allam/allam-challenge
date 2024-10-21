@@ -1,4 +1,6 @@
 import 'package:allam_challenge/coding_files/color_pallete.dart';
+import 'package:allam_challenge/model/poet_model.dart';
+import 'package:allam_challenge/prompts.dart';
 import 'package:flutter/material.dart';
 
 import '../coding_files/stepper.dart';
@@ -150,15 +152,15 @@ class _CreatePoetryState extends State<CreatePoetry> {
 
                                 //   }
                                 if (activeStep == 1) {
-                                  poetryTest.removeAt(0);
+                                  // poetryTest.removeAt(0);
                                   mainContainer = poetryStep();
                                   activeStep = 0;
                                 } else if (activeStep == 2) {
-                                  poetryTest.removeAt(1);
+                                  // poetryTest.removeAt(1);
                                   mainContainer = eventStep();
                                   activeStep = 1;
                                 } else if (activeStep == 3) {
-                                  poetryTest.removeAt(2);
+                                  // poetryTest.removeAt(2);
                                   mainContainer = emotionsStep();
                                   activeStep = 2;
                                 }
@@ -201,24 +203,24 @@ class _CreatePoetryState extends State<CreatePoetry> {
                                 () {
                                   if (activeStep == 0) {
                                     setState(() {
-                                      poetryTest
-                                          .add("أكتب لي شعر ${poetryText[0]} ");
+                                      // poetryTest
+                                      //     .add("أكتب لي شعر ${poetryText[0]} ");
                                       mainContainer = eventStep();
                                       activeStep = 1;
                                     });
                                   } else if (activeStep == 1) {
-                                    poetryTest.add(
-                                        "بمناسبة ${_eventController.text} ");
+                                    // poetryTest.add(
+                                    //     "بمناسبة ${_eventController.text} ");
                                     mainContainer = emotionsStep();
                                     activeStep = 2;
                                   } else if (activeStep == 2) {
-                                    poetryTest
-                                        .add("فيه مشاعر ${_selectedEmoji} ");
+                                    // poetryTest
+                                    //     .add("فيه مشاعر ${_selectedEmoji} ");
                                     mainContainer = textNumberStep();
                                     activeStep = 3;
                                   } else if (activeStep == 3) {
-                                    poetryTest.add(
-                                        "ويتكون من أبيات عددها ${textNumber.toString()} .");
+                                    // poetryTest.add(
+                                    //     "ويتكون من أبيات عددها ${textNumber.toString()} .");
                                     if (_eventController.text.isEmpty ||
                                         _eventController.text.isEmpty ||
                                         _selectedEmoji == "") {
@@ -242,8 +244,12 @@ class _CreatePoetryState extends State<CreatePoetry> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => GeneratePoetry(
-                                            generatedText:
-                                                poetryText.toString(),
+                                            generatedText: Prompts.createPoem(
+                                                poet: poetryText[0],
+                                                occasion: _eventController.text,
+                                                feelings: _selectedEmoji,
+                                                length: textNumber),
+                                            // poetryText.toString(),
                                           ),
                                         ),
                                       );
@@ -291,6 +297,30 @@ class _CreatePoetryState extends State<CreatePoetry> {
     );
   }
 
+  List<PoetModel> poets = [
+    PoetModel(
+        name: 'نواس',
+        description:
+            'مهتم نواس بالادب العربي ويستخدم في كتابة الاشعار اسلوب الشعر الحديث',
+        width: 180),
+    PoetModel(
+        name: 'حاتم',
+        description:
+            'مهتم نواس بالادب العربي ويستخدم في كتابة الاشعار اسلوب الشعر الحديث',
+        width: 150),
+    PoetModel(
+        name: 'رقية',
+        description:
+            'مهتم نواس بالادب العربي ويستخدم في كتابة الاشعار اسلوب الشعر الحديث',
+        width: 150),
+    PoetModel(
+        name: 'شداد',
+        description:
+            'مهتم نواس بالادب العربي ويستخدم في كتابة الاشعار اسلوب الشعر الحديث',
+        width: 150),
+  ];
+  var pageController = PageController(keepPage: true, initialPage: 0);
+  int selectedPoet = 0;
   Widget poetryStep() {
     return Column(
       children: [
@@ -311,94 +341,100 @@ class _CreatePoetryState extends State<CreatePoetry> {
         const SizedBox(height: 10),
         SizedBox(
           height: 300,
-          child: CarouselView(
-            backgroundColor: Colors.transparent,
-            itemExtent: 350,
-            shrinkExtent: 350,
-            itemSnapping: true,
-            children: [0, 1, 2, 3, 4].map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return SizedBox(
-                      height: 300,
-                      width: double.infinity,
-                      // width: MediaQuery.of(context).size.width,
-                      // margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              Container(
-                                // clipBehavior: Clip.antiAlias,
-                                height: 150,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: const Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 180,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        'نواس',
-                                        style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        textAlign: TextAlign.center,
+          child: PageView(
+            // backgroundColor: Colors.transparent,
+            // itemExtent: 350,
+            // shrinkExtent: 350,
+            // itemSnapping: true,
+            controller: pageController,
+
+            onPageChanged: (index) {
+              selectedPoet = index;
+            },
+
+            children: List.generate(
+              poets.length,
+              (index) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: SizedBox(
+                    height: 300,
+                    width: double.infinity,
+                    // width: MediaQuery.of(context).size.width,
+                    // margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Container(
+                              // clipBehavior: Clip.antiAlias,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: poets[index].width.toDouble(),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      poets[index].name,
+                                      style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Positioned.directional(
-                                bottom: 0,
-                                textDirection: TextDirection.rtl,
-                                // start: 20,
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(20),
+                                      textAlign: TextAlign.center,
                                     ),
                                   ),
-                                  clipBehavior: Clip.antiAlias,
-                                  child: Image.asset(
-                                    'assets/images/poet2.png',
-                                    // height: 180,
-                                    width: 150,
-                                  ),
-                                ),
+                                ],
                               ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Text(
-                            poetryText[index],
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              color: whiteColor,
-                              fontFamily: "Cairo",
-                              fontWeight: FontWeight.w700,
-                              fontSize: 15,
                             ),
+                            Positioned.directional(
+                              bottom: 0,
+                              textDirection: TextDirection.rtl,
+                              // start: 20,
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(20),
+                                  ),
+                                ),
+                                clipBehavior: Clip.antiAlias,
+                                child: Image.asset(
+                                  'assets/images/poet${index + 1}.png',
+                                  // height: 180,
+                                  width: poets[index].width.toDouble(),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          poets[index].description,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: whiteColor,
+                            fontFamily: "Cairo",
+                            fontWeight: FontWeight.w700,
+                            fontSize: 15,
                           ),
-                        ],
-                      )
-                      // Text('text $i', style: TextStyle(fontSize: 16.0)
-                      // ,)
-                      );
-                },
-              );
-            }).toList(),
+                        ),
+                      ],
+                    )
+                    // Text('text $i', style: TextStyle(fontSize: 16.0)
+                    // ,)
+                    ),
+              ),
+            ),
           ),
         ),
       ],
