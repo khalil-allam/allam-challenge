@@ -8,6 +8,7 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'package:allam_challenge/coding_files/color_pallete.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 import 'package:webview_flutter_web/webview_flutter_web.dart';
@@ -35,6 +36,9 @@ class WebViewExampleState extends State<WebViewExample> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWiedth = MediaQuery.sizeOf(context).width;
+    double screenHeight = MediaQuery.sizeOf(context).height;
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -68,40 +72,45 @@ class WebViewExampleState extends State<WebViewExample> {
             height: 900,
             child: Stack(
               children: [
-                  Positioned(
+                 screenWiedth >= 950 ? Positioned(
                     bottom: 1,
                     right: 1,
                     left: 1,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                                height: 500,
+                                width: 900,
+                                margin: EdgeInsets.only(right: 5, left: 5),
+                                decoration: BoxDecoration(
+                                  color: secondGreenColor,
+                                  // borderRadius: BorderRadius.circular(800)
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(2500),
+                                    topLeft: Radius.circular(2500)
+                                  )
+                                ),
+                              ).animate().fade().scale(),
+                          ],
+                        ),
+                      ) :
+                    Positioned(
+                    left: 1,
                         child: Container(
-                            height: 500,
-                            width: 900,
-                            margin: EdgeInsets.only(right: 7),
+                            height: 400,
+                            width: 400,
+                            margin: EdgeInsets.all(7),
                             decoration: BoxDecoration(
                               color: secondGreenColor,
-                              // borderRadius: BorderRadius.circular(800)
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(2500),
-                                topLeft: Radius.circular(2500)
-                              )
+                              borderRadius: BorderRadius.circular(800)
+                              // borderRadius: BorderRadius.only(
+                              //   topRight: Radius.circular(350),
+                              //   topLeft: Radius.circular(350)
+                              // )
                             ),
                           ),
-                      ),
-                    // Positioned(
-                    // left: 1,
-                    //     child: Container(
-                    //         height: 400,
-                    //         width: 400,
-                    //         margin: EdgeInsets.all(7),
-                    //         decoration: BoxDecoration(
-                    //           color: secondGreenColor,
-                    //           borderRadius: BorderRadius.circular(800)
-                    //           // borderRadius: BorderRadius.only(
-                    //           //   topRight: Radius.circular(350),
-                    //           //   topLeft: Radius.circular(350)
-                    //           // )
-                    //         ),
-                    //       ),
-                    //   ),
+                      ).animate().fade().scale(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
