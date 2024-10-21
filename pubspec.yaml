@@ -43,6 +43,8 @@ dependencies:
   share_plus: ^10.0.2
   flutter_dotenv: ^5.1.0
   flutter_svg:
+  font_awesome_flutter: ^10.7.0
+  webview_flutter_web:
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -68,7 +70,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/emojis/
-    - assets/.env
+    # - assets/.env
     - assets/svg/
   #   - images/a_dot_ham.jpeg
 

@@ -4,11 +4,13 @@ import 'package:allam_challenge/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'splash_page.dart';
+import 'webview.dart';
+import 'webview_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.initSharedPref();
-  await dotenv.load(fileName: "assets/.env");
+  // await dotenv.load(fileName: "assets/.env");
   runApp(const MyApp());
 }
 
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'خليل',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -47,7 +50,7 @@ class MyApp extends StatelessWidget {
 // يالها من لحظة مشرقة
 // الحمد لله دائماً وابداً وكل يوم بمعايير التصحيح قـافية""",
 //       )
-          const SplashPage(),
+          const WebViewExample(),
     );
   }
 }
