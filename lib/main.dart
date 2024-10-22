@@ -51,7 +51,8 @@ class MyApp extends StatelessWidget {
 // يالها من لحظة مشرقة
 // الحمد لله دائماً وابداً وكل يوم بمعايير التصحيح قـافية""",
 //       )
-          const WebViewExample(),
+          const SplashPage(),
+      // const WebViewExample(),
     );
   }
 }
