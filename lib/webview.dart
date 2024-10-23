@@ -10,6 +10,7 @@ import 'package:allam_challenge/coding_files/color_pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 import 'package:webview_flutter_web/webview_flutter_web.dart';
 
@@ -30,9 +31,12 @@ class WebViewExampleState extends State<WebViewExample> {
     const PlatformWebViewControllerCreationParams(),
   )..loadRequest(
       LoadRequestParams(
-        uri: Uri.parse('https://flutter.dev'),
+        uri: Uri.parse('https://app.khalil-app.io'),
       ),
     );
+
+  final Uri _githubUrl = Uri.parse('https://github.com/khalil-allam');
+  final Uri _documentUrl = Uri.parse('https://drive.google.com/file/d/15MkfUDRlJjlffhWWzoTfvMwTJlI5_fge/view?usp=sharing');
 
   @override
   Widget build(BuildContext context) {
@@ -40,27 +44,43 @@ class WebViewExampleState extends State<WebViewExample> {
     double screenHeight = MediaQuery.sizeOf(context).height;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
       child: Scaffold(
         backgroundColor: mainGreenColor,
         appBar: AppBar(
           iconTheme: IconThemeData(color: whiteColor),
-          title: Text('خليل',
-                  style: TextStyle(
-                  color: whiteColor,
-                  fontFamily: "ReemKufi",
-                  fontWeight: FontWeight.w500,
-                  fontSize: 24,
-                ),),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('KHALIL',
+                      style: TextStyle(
+                      color: whiteColor,
+                      fontFamily: "ReemKufi",
+                      fontWeight: FontWeight.w500,
+                      fontSize: 24,
+                    ),),
+              Text('A SOLUTION FOR ALLAM CHALLENGE 2024',
+                      style: TextStyle(
+                      color: whiteColor,
+                      fontFamily: "ReemKufi",
+                      fontWeight: FontWeight.w200,
+                      fontSize: 11,
+                    ),),
+            ],
+          ),
           backgroundColor: Colors.transparent,
           actions: <Widget>[
             IconButton(
-              onPressed: (){}, 
+              onPressed: (){
+                launchUrl(_documentUrl);
+              }, 
               tooltip: "Khalil Document",
               icon: Icon(FontAwesomeIcons.download)
               ),
             IconButton(
-              onPressed: (){}, 
+              onPressed: (){
+                launchUrl(_githubUrl);
+              }, 
               tooltip: "Github Repo",
               icon: Icon(FontAwesomeIcons.github)
               ),
@@ -68,91 +88,137 @@ class WebViewExampleState extends State<WebViewExample> {
           ],
         ),
         body: SingleChildScrollView(
-          child: Container(
-            height: 900,
-            child: Stack(
-              children: [
-                 screenWiedth >= 950 ? Positioned(
-                    bottom: 1,
-                    right: 1,
-                    left: 1,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                height: 500,
-                                width: 900,
-                                margin: EdgeInsets.only(right: 5, left: 5),
+          child: Column(
+            children: [
+              Container(
+                height: 770,
+                child: Stack(
+                  children: [
+                     screenWiedth >= 950 ? 
+                     Positioned(
+                        bottom: 1,
+                        right: 1,
+                        left: 1,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                    height: 500,
+                                    width: 900,
+                                    margin: EdgeInsets.only(right: 5, left: 5),
+                                    decoration: BoxDecoration(
+                                      color: secondGreenColor,
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(2500),
+                                        topLeft: Radius.circular(2500)
+                                      )
+                                    ),
+                                  ).animate().fade().scale(duration: Duration(milliseconds: 500)),
+                              ],
+                            ),
+                          ) :
+                     Positioned(
+                        left: 1,
+                            child: Container(
+                                height: 400,
+                                width: 400,
+                                margin: EdgeInsets.all(7),
                                 decoration: BoxDecoration(
                                   color: secondGreenColor,
-                                  // borderRadius: BorderRadius.circular(800)
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(2500),
-                                    topLeft: Radius.circular(2500)
-                                  )
+                                  borderRadius: BorderRadius.circular(800)
                                 ),
-                              ).animate().fade().scale(duration: Duration(milliseconds: 500)),
-                          ],
+                              ),
+                          ).animate().fade().scale(duration: Duration(milliseconds: 500)),
+                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          height: 15,
+                          ),
+                        Container(
+                          height: 700,
+                          child: Stack(
+                            children: [
+                              Center(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(40),
+                                  child: Container(
+                                      width: 312,
+                                      height: 675,
+                                      padding: EdgeInsets.all(5),
+                                      color: mainGreenColor,
+                                    child: PlatformWebViewWidget(
+                                      PlatformWebViewWidgetCreationParams(controller: _controller),
+                                    ).build(context),
+                                  ),
+                                ),
+                              ),
+                                
+                              Center(
+                                child: Container(
+                                  width: 400,
+                                  height: 700,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage("assets/images/phone.png"),
+                                      fit: BoxFit.contain)
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ) :
-                    Positioned(
-                    left: 1,
-                        child: Container(
-                            height: 400,
-                            width: 400,
-                            margin: EdgeInsets.all(7),
-                            decoration: BoxDecoration(
-                              color: secondGreenColor,
-                              borderRadius: BorderRadius.circular(800)
-                            ),
-                          ),
-                      ).animate().fade().scale(duration: Duration(milliseconds: 500)),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      height: 15,
-                      ),
-                    Container(
-                      height: 700,
-                      child: Stack(
-                        children: [
-                          Center(
-                            child: Container(
-                              width: 260,
-                              height: 560,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(40),
-                                child: PlatformWebViewWidget(
-                                  PlatformWebViewWidgetCreationParams(controller: _controller),
-                                ).build(context),
-                              ),
-                            ),
-                          ),
-                            
-                          Center(
-                            child: Container(
-                              width: 280,
-                              height: 600,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage("assets/images/phone.png"),
-                                  fit: BoxFit.contain)
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                      ],
                     ),
+              
                   ],
+                ),
+              ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text("Sponsered By: ",
+                  style: TextStyle(
+                  color: whiteColor,
+                  fontFamily: "ReemKufi",
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                ),),
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                sponsors_logo('allam_logo'),
+                sponsors_logo('sadaia_logo'),
+                sponsors_logo('sfcpd_logo'),
+              ],
+            )
+            ],
           ),
         ),
       ),
     );
   }
+
+Widget sponsors_logo(
+  String imageAsset
+){
+  return  Expanded(
+    child: Center(
+                              child: Container(
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage("assets/images/$imageAsset.png"),
+                                    fit: BoxFit.scaleDown)
+                                ),
+                              ),
+                            ),
+  );
+}
 }
 
 enum _MenuOptions {
