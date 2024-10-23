@@ -91,7 +91,7 @@ class WebViewExampleState extends State<WebViewExample> {
                                     topLeft: Radius.circular(2500)
                                   )
                                 ),
-                              ).animate().fade().scale(),
+                              ).animate().fade().scale(duration: Duration(milliseconds: 500)),
                           ],
                         ),
                       ) :
@@ -104,13 +104,9 @@ class WebViewExampleState extends State<WebViewExample> {
                             decoration: BoxDecoration(
                               color: secondGreenColor,
                               borderRadius: BorderRadius.circular(800)
-                              // borderRadius: BorderRadius.only(
-                              //   topRight: Radius.circular(350),
-                              //   topLeft: Radius.circular(350)
-                              // )
                             ),
                           ),
-                      ).animate().fade().scale(),
+                      ).animate().fade().scale(duration: Duration(milliseconds: 500)),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
