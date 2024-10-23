@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: mainGreenColor),
         useMaterial3: true,
+        fontFamily: 'Cairo',
       ),
       home:
 //       HomeScreen(
@@ -49,7 +50,8 @@ class MyApp extends StatelessWidget {
 // يالها من لحظة مشرقة
 // الحمد لله دائماً وابداً وكل يوم بمعايير التصحيح قـافية""",
 //       )
-          const WebViewExample(),
+          const SplashPage(),
+      // const WebViewExample(),
     );
   }
 }
