@@ -4,162 +4,224 @@
 
 // // ignore_for_file: public_member_api_docs
 
-// import 'dart:async';
-// import 'dart:typed_data';
-// import 'package:allam_challenge/coding_files/color_pallete.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_animate/flutter_animate.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
-// import 'package:webview_flutter_web/webview_flutter_web.dart';
+import 'dart:async';
+import 'dart:typed_data';
+import 'package:allam_challenge/coding_files/color_pallete.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
+import 'package:webview_flutter_web/webview_flutter_web.dart';
 
 // void main() {
 //   WebViewPlatform.instance = WebWebViewPlatform();
 //   runApp(const MaterialApp(home: WebViewExample()));
 // }
 
-// class WebViewExample extends StatefulWidget {
-//   const WebViewExample();
+class WebViewExample extends StatefulWidget {
+  const WebViewExample();
 
-//   @override
-//   WebViewExampleState createState() => WebViewExampleState();
-// }
+  @override
+  WebViewExampleState createState() => WebViewExampleState();
+}
 
-// class WebViewExampleState extends State<WebViewExample> {
-//   final PlatformWebViewController _controller = PlatformWebViewController(
-//     const PlatformWebViewControllerCreationParams(),
-//   )..loadRequest(
-//       LoadRequestParams(
-//         uri: Uri.parse('https://app.khalil-app.io'),
-//       ),
-//     );
+class WebViewExampleState extends State<WebViewExample> {
+  final PlatformWebViewController _controller = PlatformWebViewController(
+    const PlatformWebViewControllerCreationParams(),
+  )..loadRequest(
+      LoadRequestParams(
+        uri: Uri.parse('https://app.khalil-app.io'),
+      ),
+    );
 
-//   @override
-//   Widget build(BuildContext context) {
-//     double screenWiedth = MediaQuery.sizeOf(context).width;
-//     double screenHeight = MediaQuery.sizeOf(context).height;
+  final Uri _githubUrl = Uri.parse('https://github.com/khalil-allam');
+  final Uri _documentUrl = Uri.parse(
+      'https://drive.google.com/file/d/15MkfUDRlJjlffhWWzoTfvMwTJlI5_fge/view?usp=sharing');
 
-//     return Directionality(
-//       textDirection: TextDirection.rtl,
-//       child: Scaffold(
-//         backgroundColor: mainGreenColor,
-//         appBar: AppBar(
-//           iconTheme: IconThemeData(color: whiteColor),
-//           title: Text(
-//             'خليل',
-//             style: TextStyle(
-//               color: whiteColor,
-//               fontFamily: "ReemKufi",
-//               fontWeight: FontWeight.w500,
-//               fontSize: 24,
-//             ),
-//           ),
-//           backgroundColor: Colors.transparent,
-//           actions: <Widget>[
-//             IconButton(
-//                 onPressed: () {},
-//                 tooltip: "Khalil Document",
-//                 icon: Icon(FontAwesomeIcons.download)),
-//             IconButton(
-//                 onPressed: () {},
-//                 tooltip: "Github Repo",
-//                 icon: Icon(FontAwesomeIcons.github)),
-//             // _SampleMenu(_controller),
-//           ],
-//         ),
-//         body: SingleChildScrollView(
-//           child: Container(
-//             height: 900,
-//             child: Stack(
-//               children: [
-//                 screenWiedth >= 950
-//                     ? Positioned(
-//                         bottom: 1,
-//                         right: 1,
-//                         left: 1,
-//                         child: Row(
-//                           mainAxisAlignment: MainAxisAlignment.center,
-//                           children: [
-//                             Container(
-//                               height: 500,
-//                               width: 900,
-//                               margin: EdgeInsets.only(right: 5, left: 5),
-//                               decoration: BoxDecoration(
-//                                   color: secondGreenColor,
-//                                   // borderRadius: BorderRadius.circular(800)
-//                                   borderRadius: BorderRadius.only(
-//                                       topRight: Radius.circular(2500),
-//                                       topLeft: Radius.circular(2500))),
-//                             ).animate().fade().scale(),
-//                           ],
-//                         ),
-//                       )
-//                     : Positioned(
-//                         left: 1,
-//                         child: Container(
-//                           height: 400,
-//                           width: 400,
-//                           margin: EdgeInsets.all(7),
-//                           decoration: BoxDecoration(
-//                               color: secondGreenColor,
-//                               borderRadius: BorderRadius.circular(800)
-//                               // borderRadius: BorderRadius.only(
-//                               //   topRight: Radius.circular(350),
-//                               //   topLeft: Radius.circular(350)
-//                               // )
-//                               ),
-//                         ),
-//                       ).animate().fade().scale(),
-//                 Column(
-//                   crossAxisAlignment: CrossAxisAlignment.end,
-//                   children: [
-//                     SizedBox(
-//                       height: 15,
-//                     ),
-//                     Container(
-//                       height: 700,
-//                       child: Stack(
-//                         children: [
-//                           Center(
-//                             child: Container(
-//                               width: 420,
-//                               height: 680,
-//                               child: ClipRRect(
-//                                 borderRadius: BorderRadius.circular(50),
-//                                 child: PlatformWebViewWidget(
-//                                   PlatformWebViewWidgetCreationParams(
-//                                       controller: _controller),
-//                                 ).build(context),
-//                               ),
-//                             ),
-//                           ),
-//                           Center(
-//                             child: Transform.scale(
-//                               scaleX: 1.3,
-//                               child: Container(
-//                                 width: 350,
-//                                 height: 700,
-//                                 decoration: BoxDecoration(
-//                                     image: DecorationImage(
-//                                         image: AssetImage(
-//                                             "assets/images/phone.png"),
-//                                         fit: BoxFit.contain)),
-//                               ),
-//                             ),
-//                           )
-//                         ],
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    double screenWiedth = MediaQuery.sizeOf(context).width;
+    double screenHeight = MediaQuery.sizeOf(context).height;
+
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Scaffold(
+        backgroundColor: mainGreenColor,
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: whiteColor),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'KHALIL',
+                style: TextStyle(
+                  color: whiteColor,
+                  fontFamily: "ReemKufi",
+                  fontWeight: FontWeight.w500,
+                  fontSize: 24,
+                ),
+              ),
+              Text(
+                'A SOLUTION FOR ALLAM CHALLENGE 2024',
+                style: TextStyle(
+                  color: whiteColor,
+                  fontFamily: "ReemKufi",
+                  fontWeight: FontWeight.w200,
+                  fontSize: 11,
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: Colors.transparent,
+          actions: <Widget>[
+            IconButton(
+                onPressed: () {
+                  launchUrl(_documentUrl);
+                },
+                tooltip: "Khalil Document",
+                icon: Icon(FontAwesomeIcons.download)),
+            IconButton(
+                onPressed: () {
+                  launchUrl(_githubUrl);
+                },
+                tooltip: "Github Repo",
+                icon: Icon(FontAwesomeIcons.github)),
+            // _SampleMenu(_controller),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: 770,
+                child: Stack(
+                  children: [
+                    screenWiedth >= 950
+                        ? Positioned(
+                            bottom: 1,
+                            right: 1,
+                            left: 1,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 500,
+                                  width: 900,
+                                  margin: EdgeInsets.only(right: 5, left: 5),
+                                  decoration: BoxDecoration(
+                                      color: secondGreenColor,
+                                      borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(2500),
+                                          topLeft: Radius.circular(2500))),
+                                ).animate().fade().scale(
+                                    duration: Duration(milliseconds: 500)),
+                              ],
+                            ),
+                          )
+                        : Positioned(
+                            left: 1,
+                            child: Container(
+                              height: 400,
+                              width: 400,
+                              margin: EdgeInsets.all(7),
+                              decoration: BoxDecoration(
+                                  color: secondGreenColor,
+                                  borderRadius: BorderRadius.circular(800)),
+                            ),
+                          )
+                            .animate()
+                            .fade()
+                            .scale(duration: Duration(milliseconds: 500)),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          height: 700,
+                          child: Stack(
+                            children: [
+                              Center(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(40),
+                                  child: Container(
+                                    width: 312,
+                                    height: 675,
+                                    padding: EdgeInsets.all(5),
+                                    color: mainGreenColor,
+                                    child: PlatformWebViewWidget(
+                                      PlatformWebViewWidgetCreationParams(
+                                          controller: _controller),
+                                    ).build(context),
+                                  ),
+                                ),
+                              ),
+                              Center(
+                                child: Container(
+                                  width: 400,
+                                  height: 700,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              "assets/images/phone.png"),
+                                          fit: BoxFit.contain)),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      "Sponsered By: ",
+                      style: TextStyle(
+                        color: whiteColor,
+                        fontFamily: "ReemKufi",
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  sponsors_logo('allam_logo'),
+                  sponsors_logo('sadaia_logo'),
+                  sponsors_logo('sfcpd_logo'),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget sponsors_logo(String imageAsset) {
+    return Expanded(
+      child: Center(
+        child: Container(
+          height: 60,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/$imageAsset.png"),
+                  fit: BoxFit.scaleDown)),
+        ),
+      ),
+    );
+  }
+}
 
 // enum _MenuOptions {
 //   doPostRequest,

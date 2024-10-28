@@ -299,7 +299,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
 
   List<PoetModel> poets = [
     PoetModel(
-        name: 'نواس',
+        name: 'نوّاس',
         description:
             'شاعر متجدد يتميز بأسلوبه الفريد في الشعر الحديث، يعشق استخدام اللغة الجريئة والتشبيهات العصرية.',
         width: 180),
@@ -311,10 +311,10 @@ class _CreatePoetryState extends State<CreatePoetry> {
     PoetModel(
         name: 'ليلى',
         description:
-            'مهتم نواس بالادب العربي ويستخدم في كتابة الاشعار اسلوب الشعر الحديث',
+            'شاعر حر يتقن فنون التعبير عن الأفكار العميقة والمشاعر المعقدة بأسلوب مميز، لا يلتزم بأي قيود شعرية عندما يكتب أشعاره',
         width: 150),
     PoetModel(
-        name: 'شداد',
+        name: 'قيس',
         description:
             'شاعر حر يتقن فنون التعبير عن الأفكار العميقة والمشاعر المعقدة بأسلوب مميز، لا يلتزم بأي قيود شعرية عندما يكتب أشعاره',
         width: 150),
