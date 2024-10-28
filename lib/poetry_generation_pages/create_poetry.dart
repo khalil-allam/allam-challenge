@@ -301,25 +301,31 @@ class _CreatePoetryState extends State<CreatePoetry> {
     PoetModel(
         name: 'نواس',
         description:
-            'مهتم نواس بالادب العربي ويستخدم في كتابة الاشعار اسلوب الشعر الحديث',
+            'شاعر متجدد يتميز بأسلوبه الفريد في الشعر الحديث، يعشق استخدام اللغة الجريئة والتشبيهات العصرية.',
         width: 180),
     PoetModel(
         name: 'حاتم',
         description:
-            'مهتم نواس بالادب العربي ويستخدم في كتابة الاشعار اسلوب الشعر الحديث',
+            'شاعر شعبي يُعرف بحكاياته الممتعة وقصائده القريبة من قلب الناس ، ينسج أشعاره بأسلوب سهل وبسيط يجعلها تصل إلى جميع فئات المجتمع. ',
         width: 150),
     PoetModel(
-        name: 'رقية',
+        name: 'ليلى',
         description:
             'مهتم نواس بالادب العربي ويستخدم في كتابة الاشعار اسلوب الشعر الحديث',
         width: 150),
     PoetModel(
         name: 'شداد',
         description:
-            'مهتم نواس بالادب العربي ويستخدم في كتابة الاشعار اسلوب الشعر الحديث',
+            'شاعر حر يتقن فنون التعبير عن الأفكار العميقة والمشاعر المعقدة بأسلوب مميز، لا يلتزم بأي قيود شعرية عندما يكتب أشعاره',
+        width: 150),
+    PoetModel(
+        name: 'قيس',
+        description:
+            'شاعر فلسفي يتأمل في معاني الحياة والوجود من خلال قصائده العميقة ، يتميز بلغة شاعرية متألقة وبأسلوب فلسفي',
         width: 150),
   ];
-  var pageController = PageController(keepPage: true, initialPage: 0);
+  var pageController =
+      PageController(keepPage: true, initialPage: 0, viewportFraction: 0.9);
   int selectedPoet = 0;
   Widget poetryStep() {
     return Column(

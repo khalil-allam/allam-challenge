@@ -1,5 +1,6 @@
 import 'package:allam_challenge/coding_files/color_pallete.dart';
 import 'package:allam_challenge/coding_files/shared_pref.dart';
+import 'package:allam_challenge/scroll_behavior.dart';
 import 'package:allam_challenge/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'خليل',
       debugShowCheckedModeBanner: false,
+      scrollBehavior: AppScrollBehavior(),
       theme: ThemeData(
         // This is the theme of your application.
         //
