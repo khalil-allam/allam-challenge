@@ -82,11 +82,11 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image(
+                      const Image(
                         image: AssetImage("assets/images/poetry_2.png"),
                         width: 83,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Text(
