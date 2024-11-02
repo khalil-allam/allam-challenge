@@ -39,11 +39,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: mainGreenColor),
         useMaterial3: true,
       ),
+      debugShowCheckedModeBanner: false,
       home:
 //       HomeScreen(
 //         inputText: """صحح لي النص الشعري ذهبت الى البيت ووجدت امي سعيدة
 // وابي وجدته بانتظاري وكذلك جميع العائلة
-
 // يالها من لحظة مشرقة
 // الحمد لله دائماً وابداً وكل يوم بمعايير التصحيح قـافية""",
 //       )

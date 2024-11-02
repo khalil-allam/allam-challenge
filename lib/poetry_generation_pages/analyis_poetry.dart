@@ -192,6 +192,7 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                         ),
                       ),
                       onPressed: () {
+                        FocusScope.of(context).unfocus();
                         if (_textController.text.isEmpty) {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(

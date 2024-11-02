@@ -114,7 +114,8 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                           linguisticallyBtn = false;
                           grammaticallyBtn = false;
                           rhymeBtn = false;
-                          catText = "الشعر كاملاُ";
+                          catText = "اللغوية والنحوية والقافية";
+                          // catText = "الشعر كاملاُ";
                         });
                       }),
                       tagsBtn(
@@ -150,7 +151,7 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                           linguisticallyBtn = false;
                           grammaticallyBtn = false;
                           rhymeBtn = true;
-                          catText = "قـافية";
+                          catText = "القافية";
                         });
                       }),
                     ],
@@ -188,7 +189,8 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                             MaterialPageRoute(
                               builder: (context) => GeneratePoetry(
                                 generatedText:
-                                    "اعد صياغة النص الشعري ${_textController.text} بمعايير التصحيح $catText",
+                                    "اعد صياغة النص الشعري التالي : ${_textController.text} , ليكون صحيحا بحسب معايير $catText",
+                                // "اعد صياغة النص الشعري ${_textController.text} بمعايير التصحيح $catText",
                               ),
                             ),
                           );
