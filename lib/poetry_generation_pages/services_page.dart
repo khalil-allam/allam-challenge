@@ -1,7 +1,11 @@
+import 'package:allam_challenge/coding_files/shared.dart';
+import 'package:allam_challenge/main.dart';
 import 'package:allam_challenge/poetry_generation_pages/analyis_poetry.dart';
 import 'package:allam_challenge/coding_files/color_pallete.dart';
 import 'package:allam_challenge/poetry_generation_pages/correct_poetry.dart';
+import 'package:allam_challenge/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'create_poetry.dart';
 
@@ -13,33 +17,175 @@ class ServicesPage extends StatefulWidget {
 }
 
 class _ServicesPageState extends State<ServicesPage> {
+  TextSize textSize = TextSize.medium;
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: mainGreenColor,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
+                  Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: context.watch<ThemeProvider>().isDarkMode
+                              ? Colors.white.withOpacity(0.2)
+                              : mainGreenColor.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: IconButton(
+                          onPressed: () {
+                            showModalBottomSheet(
+                              context: context,
+                              backgroundColor: whiteColor,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(25.0),
+                                ),
+                              ),
+                              builder: (context) => Container(
+                                padding: const EdgeInsets.all(20),
+                                height: MediaQuery.sizeOf(context).height * 0.7,
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional.topStart,
+                                        child: IconButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          icon: Icon(
+                                            Icons.cancel_outlined,
+                                            color: Colors.black,
+                                            size: 30 + extraFontSize,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 15),
+                                      Text(
+                                        "حول التطبيق",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: "Cairo",
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 24 + extraFontSize,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 15),
+                                      Text(
+                                        "تطبيق خليل هو مساعد ذكي يساعدك في كتابة وتحليل وتصحيح الشعر العربي",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: "Cairo",
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16 + extraFontSize,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 20),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          icon: Icon(
+                            Icons.info_outline_rounded,
+                            color: context.watch<ThemeProvider>().isDarkMode
+                                ? whiteColor
+                                : mainGreenColor,
+                            size: 30 + extraFontSize,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: context.watch<ThemeProvider>().isDarkMode
+                              ? Colors.white.withOpacity(0.2)
+                              : mainGreenColor.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: IconButton(
+                          onPressed: () {
+                            if (textSize == TextSize.small) {
+                              textSize = TextSize.medium;
+                              extraFontSize = 0;
+                            } else if (textSize == TextSize.medium) {
+                              textSize = TextSize.large;
+                              extraFontSize = 3;
+                            } else if (textSize == TextSize.large) {
+                              textSize = TextSize.small;
+                              extraFontSize = -3;
+                            }
+                            setState(() {});
+                          },
+                          icon: Text(
+                            'ض',
+                            style: TextStyle(
+                              color: context.watch<ThemeProvider>().isDarkMode
+                                  ? whiteColor
+                                  : mainGreenColor,
+                              fontWeight: fontWeightBasedOnTextSized(textSize),
+                              fontSize: 20 + extraFontSize,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: context.watch<ThemeProvider>().isDarkMode
+                              ? Colors.white.withOpacity(0.2)
+                              : mainGreenColor.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: IconButton(
+                          onPressed: () {
+                            context.read<ThemeProvider>().toggleTheme();
+                          },
+                          icon: Icon(
+                            context.watch<ThemeProvider>().isDarkMode
+                                ? Icons.dark_mode_outlined
+                                : Icons.wb_sunny_outlined,
+                            color: context.watch<ThemeProvider>().isDarkMode
+                                ? whiteColor
+                                : mainGreenColor,
+                            size: 30 + extraFontSize,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
                   const Image(
                     image: AssetImage(
                       "assets/images/khalil_logo.png",
                     ),
                     height: 129,
                   ),
-                  const Align(
+                  const SizedBox(height: 10),
+                  Align(
                     alignment: AlignmentDirectional.centerStart,
                     child: Text(
                       "خدمات التطبيق",
                       style: TextStyle(
-                        color: whiteColor,
+                        color: context.watch<ThemeProvider>().isDarkMode
+                            ? whiteColor
+                            : mainGreenColor,
                         fontFamily: "Cairo",
                         fontWeight: FontWeight.w800,
-                        fontSize: 26,
+                        fontSize: 26 + extraFontSize,
                       ),
                     ),
                   ),
@@ -99,20 +245,20 @@ class _ServicesPageState extends State<ServicesPage> {
                       children: [
                         Text(
                           title,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: mainGreenColor,
                             fontFamily: "Cairo",
                             fontWeight: FontWeight.w700,
-                            fontSize: 24,
+                            fontSize: 24 + extraFontSize,
                           ),
                         ),
                         Text(
                           subtitle,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: mainGreenColor,
                             fontFamily: "Cairo",
                             fontWeight: FontWeight.w400,
-                            fontSize: 16,
+                            fontSize: 16 + extraFontSize,
                           ),
                         ),
                       ],
@@ -140,4 +286,20 @@ class _ServicesPageState extends State<ServicesPage> {
       ],
     );
   }
+
+  FontWeight fontWeightBasedOnTextSized(TextSize textSize) {
+    if (textSize == TextSize.small) {
+      return FontWeight.w300;
+    } else if (textSize == TextSize.medium) {
+      return FontWeight.w600;
+    } else {
+      return FontWeight.w800;
+    }
+  }
+}
+
+enum TextSize {
+  small,
+  medium,
+  large,
 }

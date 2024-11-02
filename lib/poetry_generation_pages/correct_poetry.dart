@@ -1,9 +1,12 @@
 import 'package:allam_challenge/poetry_generation_pages/create_poetry.dart';
 import 'package:allam_challenge/poetry_generation_pages/generate_poetry.dart';
 import 'package:allam_challenge/prompts.dart';
+import 'package:allam_challenge/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../coding_files/color_pallete.dart';
+import '../coding_files/shared.dart';
 
 class CorrectPoetry extends StatefulWidget {
   const CorrectPoetry({super.key});
@@ -26,7 +29,6 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: mainGreenColor,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -34,7 +36,7 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image(
@@ -47,10 +49,12 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                       Text(
                         "تصحيح الشعر",
                         style: TextStyle(
-                          color: whiteColor,
+                          color: context.watch<ThemeProvider>().isDarkMode
+                              ? whiteColor
+                              : mainGreenColor,
                           fontFamily: "Cairo",
                           fontWeight: FontWeight.w700,
-                          fontSize: 24,
+                          fontSize: 24 + extraFontSize,
                         ),
                       ),
                     ],
@@ -58,14 +62,16 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                   const SizedBox(height: 20),
                   Column(
                     children: [
-                      const Text(
+                      Text(
                         "قم بوضع الشعر الذي تريد تصحيح وإعادة كتابته.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: whiteColor,
+                          color: context.watch<ThemeProvider>().isDarkMode
+                              ? whiteColor
+                              : mainGreenColor,
                           fontFamily: "Cairo",
                           fontWeight: FontWeight.w700,
-                          fontSize: 15,
+                          fontSize: 15 + extraFontSize,
                         ),
                       ),
                       Padding(
@@ -78,27 +84,34 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                                   borderRadius: BorderRadius.circular(34.0),
                                   borderSide: BorderSide.none),
                               filled: true,
-                              fillColor: whiteColor,
+                              fillColor:
+                                  context.watch<ThemeProvider>().isDarkMode
+                                      ? whiteColor
+                                      : mainBegiColor
+                                          .withOpacity(0.5)
+                                          .withOpacity(0.3),
                               hintText:
                                   "مثال : أحببتُ السماء لأنها عاليةٌ وفيها النجوم تبدو ساطعةٌ والقمر يجلس وحيدًا فيها ويفكر في الأرض وهو متعبٌ"),
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: blackColor,
                             fontFamily: "Cairo",
                             fontWeight: FontWeight.w700,
-                            fontSize: 15,
+                            fontSize: 15 + extraFontSize,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const Text(
+                  Text(
                     "تصحيح الأبيات",
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: whiteColor,
+                      color: context.watch<ThemeProvider>().isDarkMode
+                          ? whiteColor
+                          : mainGreenColor,
                       fontFamily: "Cairo",
                       fontWeight: FontWeight.w700,
-                      fontSize: 15,
+                      fontSize: 15 + extraFontSize,
                     ),
                   ),
                   const SizedBox(
@@ -115,6 +128,8 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                           linguisticallyBtn = false;
                           grammaticallyBtn = false;
                           rhymeBtn = false;
+                          // catText = "اللغوية والنحوية والقافية";
+                          // catText = "لغوياً ونحوياً وقافية";
                           catText = "الشعر كاملاُ";
                         });
                       }),
@@ -151,7 +166,8 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                           linguisticallyBtn = false;
                           grammaticallyBtn = false;
                           rhymeBtn = true;
-                          catText = "قـافية";
+                          // catText = "القافية";
+                          catText = "قافية";
                         });
                       }),
                     ],
@@ -171,16 +187,15 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                       ),
                       onPressed: () {
                         if (_textController.text.isEmpty) {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                                  content: Text(
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
                             "لا يمكن ترك حقل الادخال فارغاً",
                             textAlign: TextAlign.right,
                             style: TextStyle(
                               color: whiteColor,
                               fontFamily: "Cairo",
                               fontWeight: FontWeight.w600,
-                              fontSize: 15,
+                              fontSize: 15 + extraFontSize,
                             ),
                           )));
                         } else {
@@ -197,13 +212,13 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                           );
                         }
                       },
-                      child: const Text(
+                      child: Text(
                         "تصحيح",
                         style: TextStyle(
                           color: mainGreenColor,
                           fontFamily: "Cairo",
                           fontWeight: FontWeight.w700,
-                          fontSize: 26,
+                          fontSize: 26 + extraFontSize,
                         ),
                       ),
                     ),
@@ -214,14 +229,16 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: const Text(
+                      child: Text(
                         "إلغاء",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: whiteColor,
+                          color: context.watch<ThemeProvider>().isDarkMode
+                              ? whiteColor
+                              : mainGreenColor,
                           fontFamily: "Cairo",
                           fontWeight: FontWeight.w700,
-                          fontSize: 15,
+                          fontSize: 15 + extraFontSize,
                         ),
                       ),
                     ),
@@ -262,7 +279,7 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
             color: clr,
             fontFamily: "Cairo",
             fontWeight: FontWeight.w800,
-            fontSize: 15,
+            fontSize: 15 + extraFontSize,
           ),
         ),
       ),

@@ -2,8 +2,11 @@ import 'package:allam_challenge/coding_files/color_pallete.dart';
 import 'package:allam_challenge/model/poet_model.dart';
 import 'package:allam_challenge/prompts.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../coding_files/shared.dart';
 import '../coding_files/stepper.dart';
+import '../theme_provider.dart';
 import 'generate_poetry.dart';
 
 int activeStep = 0;
@@ -33,6 +36,7 @@ class CreatePoetry extends StatefulWidget {
 
 class _CreatePoetryState extends State<CreatePoetry> {
   TextEditingController _eventController = TextEditingController();
+  Color textColor = whiteColor;
 
   void plusNumber() {
     setState(() {
@@ -61,16 +65,19 @@ class _CreatePoetryState extends State<CreatePoetry> {
 
   @override
   Widget build(BuildContext context) {
+    textColor =
+        context.watch<ThemeProvider>().isDarkMode ? whiteColor : mainGreenColor;
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: mainGreenColor,
+        // backgroundColor: mainGreenColor,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                const SizedBox(
+                SizedBox(
                   height: 70,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -85,10 +92,10 @@ class _CreatePoetryState extends State<CreatePoetry> {
                       Text(
                         "تأليف الشعر",
                         style: TextStyle(
-                          color: whiteColor,
+                          color: textColor,
                           fontFamily: "Cairo",
                           fontWeight: FontWeight.w700,
-                          fontSize: 24,
+                          fontSize: 24 + extraFontSize,
                         ),
                       ),
                     ],
@@ -114,7 +121,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   isDashedLine: false,
                   lineThickness: 6,
                   circleWidth: 52,
-                  textColor: Colors.white,
+                  textColor: textColor,
                 ),
                 const SizedBox(
                   height: 20,
@@ -166,14 +173,14 @@ class _CreatePoetryState extends State<CreatePoetry> {
                                 }
                               });
                             },
-                            child: const Text(
+                            child: Text(
                               "السابق",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: mainGreenColor,
                                 fontFamily: "Cairo",
                                 fontWeight: FontWeight.w800,
-                                fontSize: 20,
+                                fontSize: 20 + extraFontSize,
                               ),
                             ),
                           ),
@@ -226,7 +233,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
                                         _selectedEmoji == "") {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
-                                        const SnackBar(
+                                        SnackBar(
                                           content: Text(
                                             "الرجاء تعبئة جميع الحقول السابقة",
                                             textAlign: TextAlign.start,
@@ -234,7 +241,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
                                               color: whiteColor,
                                               fontFamily: "Cairo",
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 15,
+                                              fontSize: 15 + extraFontSize,
                                             ),
                                           ),
                                         ),
@@ -261,11 +268,11 @@ class _CreatePoetryState extends State<CreatePoetry> {
                             child: Text(
                               activeStep == 3 ? "إنشاء" : "التالي",
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: mainGreenColor,
                                 fontFamily: "Cairo",
                                 fontWeight: FontWeight.w800,
-                                fontSize: 20,
+                                fontSize: 20 + extraFontSize,
                               ),
                             )),
                       ),
@@ -278,14 +285,16 @@ class _CreatePoetryState extends State<CreatePoetry> {
                     Navigator.pop(context);
                     activeStep = 0;
                   },
-                  child: const Text(
+                  child: Text(
                     "إلغاء",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: whiteColor,
+                      color: context.watch<ThemeProvider>().isDarkMode
+                          ? whiteColor
+                          : mainGreenColor,
                       fontFamily: "Cairo",
                       fontWeight: FontWeight.w700,
-                      fontSize: 15,
+                      fontSize: 15 + extraFontSize,
                     ),
                   ),
                 ),
@@ -328,122 +337,124 @@ class _CreatePoetryState extends State<CreatePoetry> {
       PageController(keepPage: true, initialPage: 0, viewportFraction: 0.9);
   int selectedPoet = 0;
   Widget poetryStep() {
-    return Column(
-      children: [
-        const SizedBox(
-          width: double.infinity,
-          //  height: 84,
-          child: Text(
-            "لدينا عدد من الشعراء الإفتراضيين ، لكل واحد منهم أسلوبه الخاص في كتابة الشعر ، أختر الشاعر الذي يتناسب مع الشعر الذي تريد أن يتم تأليفه ",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: whiteColor,
-              fontFamily: "Cairo",
-              fontWeight: FontWeight.w700,
-              fontSize: 15,
-            ),
-          ),
-        ),
-        const SizedBox(height: 10),
-        SizedBox(
-          height: 300,
-          child: PageView(
-            // backgroundColor: Colors.transparent,
-            // itemExtent: 350,
-            // shrinkExtent: 350,
-            // itemSnapping: true,
-            controller: pageController,
-
-            onPageChanged: (index) {
-              selectedPoet = index;
-            },
-
-            children: List.generate(
-              poets.length,
-              (index) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: SizedBox(
-                    height: 300,
-                    width: double.infinity,
-                    // width: MediaQuery.of(context).size.width,
-                    // margin: EdgeInsets.symmetric(horizontal: 5.0),
-                    child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            Container(
-                              // clipBehavior: Clip.antiAlias,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: poets[index].width.toDouble(),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      poets[index].name,
-                                      style: const TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Positioned.directional(
-                              bottom: 0,
-                              textDirection: TextDirection.rtl,
-                              // start: 20,
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(20),
-                                  ),
-                                ),
-                                clipBehavior: Clip.antiAlias,
-                                child: Image.asset(
-                                  'assets/images/poet${index + 1}.png',
-                                  // height: 180,
-                                  width: poets[index].width.toDouble(),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          poets[index].description,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: whiteColor,
-                            fontFamily: "Cairo",
-                            fontWeight: FontWeight.w700,
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
-                    )
-                    // Text('text $i', style: TextStyle(fontSize: 16.0)
-                    // ,)
-                    ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            //  height: 84,
+            child: Text(
+              "لدينا عدد من الشعراء الإفتراضيين ، لكل واحد منهم أسلوبه الخاص في كتابة الشعر ، أختر الشاعر الذي يتناسب مع الشعر الذي تريد أن يتم تأليفه ",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: textColor,
+                fontFamily: "Cairo",
+                fontWeight: FontWeight.w700,
+                fontSize: 15 + extraFontSize,
               ),
             ),
           ),
-        ),
-      ],
+          const SizedBox(height: 10),
+          SizedBox(
+            height: 350,
+            child: PageView(
+              // backgroundColor: Colors.transparent,
+              // itemExtent: 350,
+              // shrinkExtent: 350,
+              // itemSnapping: true,
+              controller: pageController,
+
+              onPageChanged: (index) {
+                selectedPoet = index;
+              },
+
+              children: List.generate(
+                poets.length,
+                (index) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: SizedBox(
+                      width: double.infinity,
+                      // width: MediaQuery.of(context).size.width,
+                      // margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Column(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            height: 50,
+                          ),
+                          Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              Container(
+                                // clipBehavior: Clip.antiAlias,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: poets[index].width.toDouble(),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        poets[index].name,
+                                        style: const TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Positioned.directional(
+                                bottom: 0,
+                                textDirection: TextDirection.rtl,
+                                // start: 20,
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(20),
+                                    ),
+                                  ),
+                                  clipBehavior: Clip.antiAlias,
+                                  child: Image.asset(
+                                    'assets/images/poet${index + 1}.png',
+                                    // height: 180,
+                                    width: poets[index].width.toDouble(),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            poets[index].description,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: textColor,
+                              fontFamily: "Cairo",
+                              fontWeight: FontWeight.w700,
+                              fontSize: 15 + extraFontSize,
+                            ),
+                          ),
+                        ],
+                      )
+                      // Text('text $i', style: TextStyle(fontSize: 16.0)
+                      // ,)
+                      ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -451,14 +462,14 @@ class _CreatePoetryState extends State<CreatePoetry> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const Text(
+          Text(
             "اكتب تفاصيل المناسبة التي تريد أن يتم تأليف الشعر لأجلها ",
             textAlign: TextAlign.center,
             style: TextStyle(
               color: whiteColor,
               fontFamily: "Cairo",
               fontWeight: FontWeight.w700,
-              fontSize: 15,
+              fontSize: 15 + extraFontSize,
             ),
           ),
           const SizedBox(height: 20),
@@ -474,11 +485,11 @@ class _CreatePoetryState extends State<CreatePoetry> {
               fillColor: whiteColor,
               hintText: "مثال: بمناسبة قدوم مولودتي الجديدة ..",
             ),
-            style: const TextStyle(
+            style: TextStyle(
               color: blackColor,
               fontFamily: "Cairo",
               fontWeight: FontWeight.w700,
-              fontSize: 15,
+              fontSize: 15 + extraFontSize,
             ),
           ),
         ],
@@ -500,14 +511,14 @@ class _CreatePoetryState extends State<CreatePoetry> {
   Widget emotionsStep() {
     return Column(
       children: [
-        const Text(
+        Text(
           "إختر مشاعرك تجاه المناسبة التي أخترتها",
           textAlign: TextAlign.center,
           style: TextStyle(
             color: whiteColor,
             fontFamily: "Cairo",
             fontWeight: FontWeight.w700,
-            fontSize: 15,
+            fontSize: 15 + extraFontSize,
           ),
         ),
         const SizedBox(
@@ -603,14 +614,14 @@ class _CreatePoetryState extends State<CreatePoetry> {
   Widget textNumberStep() {
     return Column(
       children: [
-        const Text(
+        Text(
           "حدد عدد الأبيات التي تريد تأليفها",
           textAlign: TextAlign.center,
           style: TextStyle(
             color: whiteColor,
             fontFamily: "Cairo",
             fontWeight: FontWeight.w700,
-            fontSize: 15,
+            fontSize: 15 + extraFontSize,
           ),
         ),
         const SizedBox(
@@ -637,7 +648,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
                     bottomRight: Radius.circular(22),
                   ),
                 ),
-                child: const Center(
+                child: Center(
                   child: Text(
                     "+",
                     textAlign: TextAlign.center,
@@ -645,7 +656,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
                       color: blackColor,
                       fontFamily: "Cairo",
                       fontWeight: FontWeight.w700,
-                      fontSize: 42,
+                      fontSize: 42 + extraFontSize,
                     ),
                   ),
                 ),
@@ -664,11 +675,11 @@ class _CreatePoetryState extends State<CreatePoetry> {
                 child: Text(
                   textNumber.toString(),
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: blackColor,
                     fontFamily: "Cairo",
                     fontWeight: FontWeight.w700,
-                    fontSize: 42,
+                    fontSize: 42 + extraFontSize,
                   ),
                 ),
               ),
@@ -690,7 +701,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
                     bottomLeft: Radius.circular(22),
                   ),
                 ),
-                child: const Center(
+                child: Center(
                   child: Text(
                     "-",
                     textAlign: TextAlign.center,
@@ -698,7 +709,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
                       color: blackColor,
                       fontFamily: "Cairo",
                       fontWeight: FontWeight.w700,
-                      fontSize: 42,
+                      fontSize: 42 + extraFontSize,
                     ),
                   ),
                 ),
@@ -736,11 +747,11 @@ class _CreatePoetryState extends State<CreatePoetry> {
             ),
             Text(
               txt,
-              style: const TextStyle(
+              style: TextStyle(
                 color: mainGreenColor,
                 fontFamily: "Cairo",
                 fontWeight: FontWeight.w700,
-                fontSize: 14,
+                fontSize: 14 + extraFontSize,
               ),
             )
           ],

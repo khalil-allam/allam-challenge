@@ -2,8 +2,11 @@ import 'package:allam_challenge/poetry_generation_pages/create_poetry.dart';
 import 'package:allam_challenge/poetry_generation_pages/generate_poetry.dart';
 import 'package:allam_challenge/prompts.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../coding_files/color_pallete.dart';
+import '../coding_files/shared.dart';
+import '../theme_provider.dart';
 
 class AnalyisPoetry extends StatefulWidget {
   const AnalyisPoetry({super.key});
@@ -27,7 +30,7 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: mainGreenColor,
+        // backgroundColor: mainGreenColor,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -35,24 +38,24 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image(
+                      const Image(
                         image: AssetImage("assets/images/poetry_1.png"),
                         width: 83,
                       ),
-                      SizedBox(
-                        width: 15,
-                      ),
+                      const SizedBox(width: 15),
                       Text(
                         "تحليل الشعر",
                         style: TextStyle(
-                          color: whiteColor,
+                          color: context.watch<ThemeProvider>().isDarkMode
+                              ? whiteColor
+                              : mainGreenColor,
                           fontFamily: "Cairo",
                           fontWeight: FontWeight.w700,
-                          fontSize: 24,
+                          fontSize: 24 + extraFontSize,
                         ),
                       ),
                     ],
@@ -62,14 +65,16 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                   ),
                   Column(
                     children: [
-                      const Text(
+                      Text(
                         "قم بوضع الشعر الذي تريد تحليله وفهمه.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: whiteColor,
+                          color: context.watch<ThemeProvider>().isDarkMode
+                              ? whiteColor
+                              : mainGreenColor,
                           fontFamily: "Cairo",
                           fontWeight: FontWeight.w700,
-                          fontSize: 15,
+                          fontSize: 15 + extraFontSize,
                         ),
                       ),
                       Padding(
@@ -82,27 +87,34 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                                   borderRadius: BorderRadius.circular(34.0),
                                   borderSide: BorderSide.none),
                               filled: true,
-                              fillColor: whiteColor,
+                              fillColor:
+                                  context.watch<ThemeProvider>().isDarkMode
+                                      ? whiteColor
+                                      : mainBegiColor
+                                          .withOpacity(0.5)
+                                          .withOpacity(0.3),
                               hintText:
                                   "مثال : قفا نبكِ من ذكرى حبيبٍ ومنزلِ بسقطِ اللوى بين الدخولِ فحوملِ"),
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: blackColor,
                             fontFamily: "Cairo",
                             fontWeight: FontWeight.w700,
-                            fontSize: 15,
+                            fontSize: 15 + extraFontSize,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const Text(
+                  Text(
                     "معايير التحليل",
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: whiteColor,
+                      color: context.watch<ThemeProvider>().isDarkMode
+                          ? whiteColor
+                          : mainGreenColor,
                       fontFamily: "Cairo",
                       fontWeight: FontWeight.w700,
-                      fontSize: 15,
+                      fontSize: 15 + extraFontSize,
                     ),
                   ),
                   const SizedBox(
@@ -194,16 +206,15 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                       ),
                       onPressed: () {
                         if (_textController.text.isEmpty) {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                                  content: Text(
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
                             "لا يمكن ترك حقل الادخال فارغاً",
                             textAlign: TextAlign.right,
                             style: TextStyle(
                               color: whiteColor,
                               fontFamily: "Cairo",
                               fontWeight: FontWeight.w600,
-                              fontSize: 15,
+                              fontSize: 15 + extraFontSize,
                             ),
                           )));
                         } else {
@@ -221,13 +232,13 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                           );
                         }
                       },
-                      child: const Text(
+                      child: Text(
                         "تحليل",
                         style: TextStyle(
                           color: mainGreenColor,
                           fontFamily: "Cairo",
                           fontWeight: FontWeight.w700,
-                          fontSize: 26,
+                          fontSize: 26 + extraFontSize,
                         ),
                       ),
                     ),
@@ -238,14 +249,16 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: const Text(
+                      child: Text(
                         "إلغاء",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: whiteColor,
+                          color: context.watch<ThemeProvider>().isDarkMode
+                              ? whiteColor
+                              : mainGreenColor,
                           fontFamily: "Cairo",
                           fontWeight: FontWeight.w700,
-                          fontSize: 15,
+                          fontSize: 15 + extraFontSize,
                         ),
                       ),
                     ),
@@ -289,7 +302,7 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
             color: clr,
             fontFamily: "Cairo",
             fontWeight: FontWeight.w800,
-            fontSize: 15,
+            fontSize: 15 + extraFontSize,
           ),
         ),
       ),

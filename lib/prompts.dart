@@ -13,6 +13,8 @@ abstract class Prompts {
     required String text,
     required String basedOn,
   }) {
+    // return "اعد صياغة النص الشعري التالي : $text , ليكون صحيحا بحسب معايير $basedOn";
+    // return "اعد صياغة النص الشعري $text , ليكون شعرا صحيحا $basedOn";
     return "اعد صياغة النص الشعري $text بمعايير التصحيح $basedOn";
   }
 

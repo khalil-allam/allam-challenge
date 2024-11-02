@@ -71,7 +71,6 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mainGreenColor,
       body: Center(
         child: Lottie.asset(lottie_petry, height: 250),
       ),
@@ -155,7 +154,7 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
       context,
       MaterialPageRoute(
           builder: (context) => OutputPage(
-                output_text: output,
+                outputText: output,
               )),
     );
     // } catch (e) {

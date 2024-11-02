@@ -7,13 +7,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
+import '../coding_files/shared.dart';
+import '../theme_provider.dart';
+
 class OutputPage extends StatefulWidget {
-  final String output_text;
-  const OutputPage({super.key, required this.output_text});
+  final String outputText;
+  const OutputPage({super.key, required this.outputText});
 
   @override
   State<OutputPage> createState() => _OutputPageState();
@@ -25,39 +29,45 @@ class _OutputPageState extends State<OutputPage> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: mainGreenColor,
+        // backgroundColor: mainGreenColor,
         appBar: AppBar(
-          backgroundColor: mainGreenColor,
+          // backgroundColor: mainGreenColor,
           leading: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);
               }),
-          iconTheme: IconThemeData(color: whiteColor),
+          iconTheme: IconThemeData(
+            color: context.watch<ThemeProvider>().isDarkMode
+                ? whiteColor
+                : mainGreenColor,
+          ),
         ),
         body: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Expanded(
                 flex: 9,
                 child: Container(
                     width: 319,
-                    margin: EdgeInsets.only(bottom: 15),
+                    margin: const EdgeInsets.only(bottom: 15),
                     child: ListView(
                       children: [
                         Text(
-                          widget.output_text,
+                          widget.outputText,
                           softWrap: true,
                           textAlign: TextAlign.justify,
                           style: TextStyle(
-                            color: whiteColor,
+                            color: context.watch<ThemeProvider>().isDarkMode
+                                ? whiteColor
+                                : mainGreenColor,
                             fontFamily: "Cairo",
                             fontWeight: FontWeight.w600,
-                            fontSize: 18,
+                            fontSize: 18 + extraFontSize,
                           ),
                         ),
                       ],
@@ -67,14 +77,15 @@ class _OutputPageState extends State<OutputPage> {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
-          color: mainGreenColor,
+          color: context.watch<ThemeProvider>().isDarkMode
+              ? mainGreenColor
+              : whiteColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
                 onPressed: () {
-                  Share.share(widget.output_text,
-                      subject: "مخرجات تطبيق علّام");
+                  Share.share(widget.outputText, subject: "مخرجات تطبيق علّام");
                 },
                 icon: Container(
                   decoration: BoxDecoration(
@@ -89,7 +100,7 @@ class _OutputPageState extends State<OutputPage> {
               ),
               IconButton(
                 onPressed: () {
-                  FlutterClipboard.copy(widget.output_text).then(
+                  FlutterClipboard.copy(widget.outputText).then(
                     (value) => ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text(
@@ -141,7 +152,7 @@ class _OutputPageState extends State<OutputPage> {
                       build: (pw.Context context) {
                         return [
                           pw.Paragraph(
-                            text: widget.output_text,
+                            text: widget.outputText,
                           ),
                         ];
                       },
