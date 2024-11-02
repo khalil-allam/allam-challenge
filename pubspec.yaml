@@ -48,6 +48,9 @@ dependencies:
   flutter_animate:
   url_launcher: ^6.3.1
   dartdoc: ^8.1.0
+  pdf: ^3.11.1
+  open_file: ^3.5.9
+  path_provider: ^2.1.4
   
 dev_dependencies:
   flutter_test:
