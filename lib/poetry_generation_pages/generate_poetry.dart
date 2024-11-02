@@ -24,21 +24,39 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
     {
       String inputText = inputData;
       var jwtToken = SharedPref.sharedPref.getString('jwt');
-      print(jwtToken);
-      if (jwtToken != null) {
-        if (JwtDecoder.isExpired(jwtToken)) {
+      // print(jwtToken);
+      try {
+        if (jwtToken != null) {
+          if (JwtDecoder.isExpired(jwtToken)) {
+            var jwtToken = await getAccessToken(apikey: API_TOKEN);
+            if (jwtToken != null) {
+              await sendInput(accessToken: jwtToken, input: inputText);
+            }
+          } else {
+            await sendInput(accessToken: jwtToken, input: inputText);
+          }
+        } else {
           var jwtToken = await getAccessToken(apikey: API_TOKEN);
           if (jwtToken != null) {
             await sendInput(accessToken: jwtToken, input: inputText);
           }
-        } else {
-          await sendInput(accessToken: jwtToken, input: inputText);
         }
-      } else {
-        var jwtToken = await getAccessToken(apikey: API_TOKEN);
-        if (jwtToken != null) {
-          await sendInput(accessToken: jwtToken, input: inputText);
-        }
+      } catch (e) {
+        Navigator.pop(context);
+        print(e);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'حدث خطأ، يرجى المحاولة مرة أخرى',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'Cairo',
+              ),
+            ),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     }
   }
@@ -71,27 +89,26 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
       'apikey': _apiKey
     };
 
-    try {
-      final response = await dio.post(
-        url,
-        options: Options(
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': '*/*',
-          },
-        ),
-        data: data,
-      );
+    // try {
+    final response = await dio.post(
+      url,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Accept': '*/*',
+        },
+      ),
+      data: data,
+    );
 
-      print(response.data);
-      // final json = jsonDecode(response.data);
-      await SharedPref.sharedPref
-          .setString('jwt', response.data['access_token']);
-      return response.data['access_token'];
-    } catch (e) {
-      print('Error: $e');
-      return null;
-    }
+    // print(response.data);
+    // final json = jsonDecode(response.data);
+    await SharedPref.sharedPref.setString('jwt', response.data['access_token']);
+    return response.data['access_token'];
+    // } catch (e) {
+    //   print('Error: $e');
+    //   return null;
+    // }
   }
 
   Future<void> sendInput(
@@ -117,32 +134,32 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
           "93c51780-827a-4c8b-9887-4ec683746ef9" //93c51780-827a-4c8b-9887-4ec683746ef9
     };
 
-    try {
-      final response = await dio.post(
-        url,
-        options: Options(
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': 'Bearer $token',
-          },
-        ),
-        data: data,
-      );
+    // try {
+    final response = await dio.post(
+      url,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      ),
+      data: data,
+    );
 
-      print(response.data);
-      setState(() {
-        output = response.data['results'][0]['generated_text'];
-      });
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => OutputPage(
-                  output_text: output,
-                )),
-      );
-    } catch (e) {
-      print('Error: $e');
-    }
+    // print(response.data);
+    setState(() {
+      output = response.data['results'][0]['generated_text'];
+    });
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => OutputPage(
+                output_text: output,
+              )),
+    );
+    // } catch (e) {
+    //   print('Error: $e');
+    // }
   }
 }

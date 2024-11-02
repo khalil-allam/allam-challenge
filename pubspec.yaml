@@ -47,6 +47,8 @@ dependencies:
   webview_flutter_web:
   flutter_animate:
   url_launcher: ^6.3.1
+  dartdoc: ^8.1.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -72,7 +74,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/emojis/
-    # - assets/.env
+    - assets/.env
     - assets/svg/
   #   - images/a_dot_ham.jpeg
 

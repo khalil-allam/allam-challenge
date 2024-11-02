@@ -10,7 +10,7 @@ import 'webview.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.initSharedPref();
-  // await dotenv.load(fileName: "assets/.env");
+  await dotenv.load(fileName: "assets/.env");
   runApp(const MyApp());
 }
 
