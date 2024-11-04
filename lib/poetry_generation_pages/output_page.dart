@@ -29,9 +29,13 @@ class _OutputPageState extends State<OutputPage> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        // backgroundColor: mainGreenColor,
+        backgroundColor: context.watch<ThemeProvider>().isDarkMode
+                ? mainGreenColor
+                : whiteColor,
         appBar: AppBar(
-          backgroundColor: mainGreenColor,
+          backgroundColor: context.watch<ThemeProvider>().isDarkMode
+                ? mainGreenColor
+                : whiteColor,
           leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
@@ -40,7 +44,7 @@ class _OutputPageState extends State<OutputPage> {
           iconTheme: IconThemeData(
             color: context.watch<ThemeProvider>().isDarkMode
                 ? whiteColor
-                : mainGreenColor,
+                : mainGreenColor
           ),
         ),
         body: Center(
