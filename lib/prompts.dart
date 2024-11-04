@@ -24,6 +24,8 @@ abstract class Prompts {
     required String feelings,
     required int length,
   }) {
-    return "اكتب لي شعر $poet بمناسبة $occasion فيه مشاعر $feelings ويتكون من أبيات عددها $length .";
+    return "أكتب لي قصيدة من $length أبيات $poet فيها مشاعر $feelings عن $occasion";
+    // return "اكتب لي قصيدة $poet تتكون من $length أبيات بمناسبة $occasion فيها مشاعر $feelings.";
+    // return "اكتب لي شعر $poet بمناسبة $occasion فيه مشاعر $feelings ويتكون من أبيات عددها $length .";
   }
 }

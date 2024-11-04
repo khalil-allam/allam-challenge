@@ -11,7 +11,8 @@ import '../coding_files/shared_pref.dart';
 
 class GeneratePoetry extends StatefulWidget {
   final String generatedText;
-  const GeneratePoetry({super.key, required this.generatedText});
+  final String poetry_service_type;
+  const GeneratePoetry({super.key, required this.generatedText, required this.poetry_service_type});
 
   @override
   State<GeneratePoetry> createState() => _GeneratePoetryState();
@@ -19,6 +20,7 @@ class GeneratePoetry extends StatefulWidget {
 
 class _GeneratePoetryState extends State<GeneratePoetry> {
   String output = "";
+  String system_prompt = "";
 
   void generateAllamText(String inputData) async {
     {
@@ -93,8 +95,16 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
       url,
       options: Options(
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'text/plain',
           'Accept': '*/*',
+          "Access-Control-Allow-Credentials": true,
+          'Access-Control-Allow-Origin': '*',
+          // "Access-Control-Allow-Headers": "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+          // "Access-Control-Allow-Methods": "POST, OPTIONS",
+          // 'Access-Control-Allow-Origin': '*',
+          // 'Access-Control-Allow-Methods': 'GET, POST',
+          // 'Access-Control-Allow-Headers': 'X-Requested-With'
         },
       ),
       data: data,
@@ -117,9 +127,12 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
     String url =
         'https://eu-de.ml.cloud.ibm.com/ml/v1/text/generation?version=2023-05-29';
     final token = accessToken;
-
+        widget.poetry_service_type == "انشاء" 
+    ? system_prompt =  "<<SYS>>\nعند طلب كتابة قصيدة، تقوم بتقسيمها إلى شطرين فقط لكل بيت وكتابة عنوان للقصيدة. مثال: البيت الاول، البيت الثاني\n<</SYS>> "
+    : system_prompt = "";
     final data = {
-      "input": "INST] $input [/INST]",
+      // "input": "INST]$input [/INST]",
+      "input": "INST]$system_prompt$input[/INST]",
       // "input": input,
       "parameters": {
         "decoding_method": "greedy",
@@ -139,8 +152,15 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
       options: Options(
         headers: {
           'Content-Type': 'application/json',
+          // 'Content-Type': 'text/plain',
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
+          "Access-Control-Allow-Credentials": true,
+          'Access-Control-Allow-Origin': '*',
+          // "Access-Control-Allow-Headers": "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+          // "Access-Control-Allow-Methods": "POST, OPTIONS",
+          // 'Access-Control-Allow-Methods': 'GET, POST',
+          // 'Access-Control-Allow-Headers': 'X-Requested-With'
         },
       ),
       data: data,

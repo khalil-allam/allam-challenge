@@ -132,12 +132,12 @@ class _OutputPageState extends State<OutputPage> {
                   final myTheme = pw.ThemeData.withFont(
                     base: pw.Font.ttf(
                       await rootBundle.load(
-                        "fonts/Cairo-Regular.ttf",
+                        "fonts/HacenTunisia.ttf",
                       ),
                     ),
                     bold: pw.Font.ttf(
                       await rootBundle.load(
-                        "fonts/Cairo-Bold.ttf",
+                        "fonts/HacenTunisia.ttf",
                       ),
                     ),
                   );
@@ -149,18 +149,34 @@ class _OutputPageState extends State<OutputPage> {
                     pw.MultiPage(
                       pageFormat: PdfPageFormat.a4,
                       textDirection: pw.TextDirection.rtl,
+                      header: (value){
+                        return  pw.Text(
+                                "صادر عن تطبيق خليل - باستخدام نموذج علّام AllaM للذكاء الاصطناعي"
+                              );
+                      },
+                      footer: (value){
+                        return 
+                              pw.Text(
+                                "برعاية:\nAllaM تحدّي علّام - SADAIA الهيئة السعودية للبيانات والذكاء الاصطناعي - الاتحاد السعودي للامن السيبراني، البرمجة والدرونز"
+                              );
+                      },
                       build: (pw.Context context) {
                         return [
-                          pw.Paragraph(
-                            text: widget.outputText,
-                          ),
+                          pw.Column(
+                            children:[
+                                pw.SizedBox(height: 35),
+                                pw.Paragraph(
+                                  text: widget.outputText,
+                                ),
+                            ]
+                          )
                         ];
                       },
                     ),
                   ); // Page
                   var dir = await getApplicationDocumentsDirectory();
                   final file = File(
-                      "${dir.path}/khalil_result_${DateTime.now().millisecondsSinceEpoch}.pdf");
+                      "${dir.path}/khalil_app_${DateTime.now().microsecondsSinceEpoch}.pdf");
                   await file.writeAsBytes(await pdf.save());
                   await OpenFile.open(file.path);
                 },

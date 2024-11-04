@@ -207,7 +207,8 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                                       // "اعد صياغة النص الشعري ${_textController.text} بمعايير التصحيح $catText",
                                       Prompts.correctPoem(
                                           text: _textController.text,
-                                          basedOn: catText)),
+                                          basedOn: catText),
+                                  poetry_service_type: "",),
                             ),
                           );
                         }

@@ -52,6 +52,7 @@ dependencies:
   open_file: ^3.5.9
   path_provider: ^2.1.4
   provider: ^6.1.2
+  flutter_cors: ^1.5.0
   flutter_localizations:
     sdk: flutter
 
@@ -112,6 +113,13 @@ flutter:
         - asset: fonts/ReemKufi-Medium.ttf
         - asset: fonts/ReemKufi-Regular.ttf
         - asset: fonts/ReemKufi-SemiBold.ttf
+
+
+    - family: HacenTunisia
+      fonts:
+        - asset: fonts/HacenTunisia.ttf
+
+  
   #         weight: 700
   #
   # For details regarding fonts from package dependencies,

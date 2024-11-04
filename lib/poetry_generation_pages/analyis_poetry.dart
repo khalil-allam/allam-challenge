@@ -227,6 +227,7 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                                     Prompts.analyzePoem(
                                         text: _textController.text,
                                         basedOn: catText),
+                                poetry_service_type: "",
                               ),
                             ),
                           );

@@ -255,8 +255,8 @@ class _CreatePoetryState extends State<CreatePoetry> {
                                                 poet: poetryText[0],
                                                 occasion: _eventController.text,
                                                 feelings: _selectedEmoji,
-                                                length: textNumber),
-                                            // poetryText.toString(),
+                                                length: textNumber,),
+                                            poetry_service_type: "انشاء",
                                           ),
                                         ),
                                       );
