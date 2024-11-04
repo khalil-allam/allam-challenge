@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: whiteColor,
-  colorScheme: ColorScheme.fromSeed(seedColor: mainGreenColor),
+  colorScheme: ColorScheme.fromSeed(seedColor: whiteColor),
   useMaterial3: true,
   fontFamily: 'Cairo',
+  appBarTheme: AppBarTheme(
+    backgroundColor: mainGreenColor,
+  ),
 );
 
 ThemeData darkTheme = ThemeData(
@@ -13,4 +16,7 @@ ThemeData darkTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: mainGreenColor),
   useMaterial3: true,
   fontFamily: 'Cairo',
+  appBarTheme: AppBarTheme(
+    backgroundColor: mainGreenColor,
+  ),
 );

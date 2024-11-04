@@ -1,0 +1,10 @@
+version: "Apple Swift version 6.0 (swiftlang-6.0.0.9.10 clang-1600.0.26.2)"
+options: "79b3f204aeb0cfa665e60480d998b816c42b5502fb6af180f6cebedc8556098a"
+build_start_time: [1730655844, 494484000]
+build_end_time: [1730655848, 922614000]
+inputs:
+  "/Users/mo/Desktop/flutter_projects/allam-challenge/macos/Flutter/GeneratedPluginRegistrant.swift": !dirty [1730654349, 487296593]
+  "/Users/mo/Desktop/flutter_projects/allam-challenge/macos/Runner/AppDelegate.swift": !dirty [1730561162, 264310140]
+  "/Users/mo/Desktop/flutter_projects/allam-challenge/macos/Runner/MainFlutterWindow.swift": !dirty [1730654970, 688596829]
+  ? "/Users/mo/Desktop/flutter_projects/allam-challenge/macos/build/Runner.build/Release/Runner.build/DerivedSources/GeneratedAssetSymbols.swift"
+  : !dirty [1730655844, 296636227]
