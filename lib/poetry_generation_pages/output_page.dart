@@ -31,7 +31,7 @@ class _OutputPageState extends State<OutputPage> {
       child: Scaffold(
         // backgroundColor: mainGreenColor,
         appBar: AppBar(
-          // backgroundColor: mainGreenColor,
+          backgroundColor: mainGreenColor,
           leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
@@ -155,10 +155,27 @@ class _OutputPageState extends State<OutputPage> {
                               );
                       },
                       footer: (value){
-                        return 
-                              pw.Text(
-                                "برعاية:\nAllaM تحدّي علّام - SADAIA الهيئة السعودية للبيانات والذكاء الاصطناعي - الاتحاد السعودي للامن السيبراني، البرمجة والدرونز"
-                              );
+                        return
+                        pw.Column(
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                          children: [
+                            pw.Text("برعاية:"),
+                            pw.Row(
+                            mainAxisAlignment: pw.MainAxisAlignment.spaceAround,
+                            children: [
+                                pw.Text(
+                                "تحدّي علّام AllaM"
+                              ),
+                               pw.Text(
+                                "الاتحاد السعودي للامن السيبراني"
+                              ),
+                               pw.Text(
+                                "الهيئة السعودية للبيانات والذكاء الاصطناعي SADAIA"
+                              ),
+                            ]
+                           )
+                          ]
+                          ); 
                       },
                       build: (pw.Context context) {
                         return [
