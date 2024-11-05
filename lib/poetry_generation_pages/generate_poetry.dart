@@ -96,13 +96,6 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Accept': '*/*',
-          // "Access-Control-Allow-Credentials": true,
-          // 'Access-Control-Allow-Origin': '*',
-          // "Access-Control-Allow-Headers": "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-          // "Access-Control-Allow-Methods": "POST, OPTIONS",
-          // 'Access-Control-Allow-Origin': '*',
-          // 'Access-Control-Allow-Methods': 'GET, POST',
-          // 'Access-Control-Allow-Headers': 'X-Requested-With'
         },
       ),
       data: data,
@@ -152,12 +145,6 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
-          // "Access-Control-Allow-Credentials": true,
-          // 'Access-Control-Allow-Origin': '*',
-          // "Access-Control-Allow-Headers": "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-          // "Access-Control-Allow-Methods": "POST, OPTIONS",
-          // 'Access-Control-Allow-Methods': 'GET, POST',
-          // 'Access-Control-Allow-Headers': 'X-Requested-With'
         },
       ),
       data: data,

@@ -46,8 +46,8 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
           ],
           theme: themeProvider.isDarkMode ? darkTheme : lightTheme,
-          home: const SplashPage(), //official starter application page
-          // home: const KhalilWebPage(), //webpage only for running in chrome and testing the khalil-app.io page
+          // home: const SplashPage(), //official starter application page
+          home: const KhalilWebPage(), //webpage only for running in chrome and testing the khalil-app.io page
         );
       },
     );
