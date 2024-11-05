@@ -42,7 +42,7 @@ class KhalilWebPageState extends State<KhalilWebPage> {
       'https://docs.google.com/presentation/d/1ejzUKNPAyOrcWy1YUHxdfoqXFexGyVcLf3UG_-6T6-U/edit?usp=sharing');
 
   final Uri _macosUrl = Uri.parse(
-      'https://docs.google.com/presentation/d/1ejzUKNPAyOrcWy1YUHxdfoqXFexGyVcLf3UG_-6T6-U/edit?usp=sharing');
+      'https://drive.google.com/drive/folders/12XXq8ScXdqK-TsuApqisgR9qYNnCaBoq?usp=sharing');
   final Uri _windowsUrl = Uri.parse(
       'https://drive.google.com/file/d/1tIuDi15OpYVixwhJX54VqHHZI1ahn2kk/view?usp=drive_link');
   final Uri _androidUrl = Uri.parse(

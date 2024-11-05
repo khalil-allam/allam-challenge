@@ -60,18 +60,21 @@ class _CreatePoetryState extends State<CreatePoetry> {
     mainContainer = poetryStep();
     poetryTest.clear();
     activeStep = 0;
-    super.initState();
+   super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      
     textColor =
         context.watch<ThemeProvider>().isDarkMode ? whiteColor : mainGreenColor;
 
+    });
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        // backgroundColor: mainGreenColor,
+        backgroundColor: context.watch<ThemeProvider>().isDarkMode ? mainGreenColor : secondBegiColor,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20),
@@ -107,7 +110,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   horizontalPadding: 20,
                   currentStep: activeStep + 1,
                   numOfSteps: 4,
-                  lineColor: secondBegiColor,
+                  lineColor: context.watch<ThemeProvider>().isDarkMode ? secondBegiColor : mainGreenColor,
                   texts: const ['الشاعر', 'المناسبة', 'المشاعر', 'الأبيات'],
                   selectedColor: secondGreenColor,
                   unSelectedColor: mainBegiColor,
@@ -466,7 +469,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
             "اكتب تفاصيل المناسبة التي تريد أن يتم تأليف الشعر لأجلها ",
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: whiteColor,
+              color: textColor,
               fontFamily: "Cairo",
               fontWeight: FontWeight.w700,
               fontSize: 15 + extraFontSize,
@@ -515,7 +518,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
           "إختر مشاعرك تجاه المناسبة التي أخترتها",
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: whiteColor,
+            color: textColor,
             fontFamily: "Cairo",
             fontWeight: FontWeight.w700,
             fontSize: 15 + extraFontSize,
@@ -618,7 +621,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
           "حدد عدد الأبيات التي تريد تأليفها",
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: whiteColor,
+            color: textColor,
             fontFamily: "Cairo",
             fontWeight: FontWeight.w700,
             fontSize: 15 + extraFontSize,
