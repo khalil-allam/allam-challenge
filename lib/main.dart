@@ -2,7 +2,6 @@ import 'package:allam_challenge/coding_files/color_pallete.dart';
 import 'package:allam_challenge/coding_files/shared_pref.dart';
 import 'package:allam_challenge/scroll_behavior.dart';
 import 'package:allam_challenge/theme_provider.dart';
-import 'package:allam_challenge/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -46,8 +45,8 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
           ],
           theme: themeProvider.isDarkMode ? darkTheme : lightTheme,
-          // home: const SplashPage(), //official starter application page
-          home: const KhalilWebPage(), //webpage only for running in chrome and testing the khalil-app.io page
+          home: const SplashPage(), //official starter application page
+          // home: const KhalilWebPage(), //webpage only for running in chrome and testing the khalil-app.io page
         );
       },
     );
