@@ -30,22 +30,21 @@ class _OutputPageState extends State<OutputPage> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: context.watch<ThemeProvider>().isDarkMode
-                ? mainGreenColor
-                : whiteColor,
+            ? mainGreenColor
+            : whiteColor,
         appBar: AppBar(
           backgroundColor: context.watch<ThemeProvider>().isDarkMode
-                ? mainGreenColor
-                : whiteColor,
+              ? mainGreenColor
+              : whiteColor,
           leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);
               }),
           iconTheme: IconThemeData(
-            color: context.watch<ThemeProvider>().isDarkMode
-                ? whiteColor
-                : mainGreenColor
-          ),
+              color: context.watch<ThemeProvider>().isDarkMode
+                  ? whiteColor
+                  : mainGreenColor),
         ),
         body: Center(
           child: Column(
@@ -150,50 +149,79 @@ class _OutputPageState extends State<OutputPage> {
                   );
 
                   pdf.addPage(
-                    pw.MultiPage(
-                      pageFormat: PdfPageFormat.a4,
+                    pw.Page(
+                      pageFormat: PdfPageFormat(
+                        MediaQuery.of(context).size.width + 100,
+                        double.infinity,
+                        marginAll: 25,
+                      ),
                       textDirection: pw.TextDirection.rtl,
-                      header: (value){
-                        return  pw.Text(
-                                "صادر عن تطبيق خليل - باستخدام نموذج علّام AllaM للذكاء الاصطناعي"
-                              );
-                      },
-                      footer: (value){
-                        return
-                        pw.Column(
-                            crossAxisAlignment: pw.CrossAxisAlignment.start,
-                          children: [
-                            pw.Text("برعاية:"),
-                            pw.Row(
-                            mainAxisAlignment: pw.MainAxisAlignment.spaceAround,
-                            children: [
-                                pw.Text(
-                                "تحدّي علّام AllaM"
-                              ),
-                               pw.Text(
-                                "الاتحاد السعودي للامن السيبراني"
-                              ),
-                               pw.Text(
-                                "الهيئة السعودية للبيانات والذكاء الاصطناعي SADAIA"
-                              ),
-                            ]
-                           )
-                          ]
-                          ); 
-                      },
                       build: (pw.Context context) {
-                        return [
-                          pw.Column(
-                            children:[
-                                pw.SizedBox(height: 35),
-                                pw.Paragraph(
-                                  text: widget.outputText,
-                                ),
-                            ]
-                          )
-                        ];
+                        return pw.Column(
+                            mainAxisSize: pw.MainAxisSize.min,
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            children: [
+                              pw.Text(
+                                  "صادر عن تطبيق خليل - باستخدام نموذج علّام AllaM للذكاء الاصطناعي"),
+                              pw.SizedBox(height: 35),
+                              pw.Paragraph(
+                                text: widget.outputText,
+                              ),
+                              pw.SizedBox(height: 35),
+                              pw.Text("برعاية:"),
+                              pw.Row(
+                                  mainAxisAlignment:
+                                      pw.MainAxisAlignment.spaceAround,
+                                  children: [
+                                    pw.Text("تحدّي علّام AllaM"),
+                                    pw.Text("الاتحاد السعودي للامن السيبراني"),
+                                    pw.Text(
+                                        "الهيئة السعودية للبيانات والذكاء الاصطناعي SADAIA"),
+                                  ])
+                            ]);
                       },
                     ),
+                    // pw.MultiPage(
+                    //   pageFormat: PdfPageFormat.a4,
+                    //   // pageFormat: PdfPageFormat(
+                    //   //   MediaQuery.of(context).size.width + 100,
+                    //   //   double.infinity,
+                    //   //   marginAll: 25,
+                    //   // ),
+                    //   textDirection: pw.TextDirection.rtl,
+                    //   header: (value) {
+                    //     return pw.Text(
+                    //         "صادر عن تطبيق خليل - باستخدام نموذج علّام AllaM للذكاء الاصطناعي");
+                    //   },
+                    //   footer: (value) {
+                    //     return pw.Column(
+                    //         crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    //         children: [
+                    //           pw.Text("برعاية:"),
+                    //           pw.Row(
+                    //               mainAxisAlignment:
+                    //                   pw.MainAxisAlignment.spaceAround,
+                    //               children: [
+                    //                 pw.Text("تحدّي علّام AllaM"),
+                    //                 pw.Text("الاتحاد السعودي للامن السيبراني"),
+                    //                 pw.Text(
+                    //                     "الهيئة السعودية للبيانات والذكاء الاصطناعي SADAIA"),
+                    //               ])
+                    //         ]);
+                    //   },
+                    //   build: (pw.Context context) {
+                    //     return [
+                    //       pw.Column(
+                    //           mainAxisSize: pw.MainAxisSize.min,
+                    //           children: [
+                    //             pw.SizedBox(height: 35),
+                    //             pw.Paragraph(
+                    //               text: widget.outputText,
+                    //             ),
+                    //           ])
+                    //     ];
+                    //   },
+                    // ),
                   ); // Page
                   var dir = await getApplicationDocumentsDirectory();
                   final file = File(

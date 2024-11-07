@@ -60,21 +60,24 @@ class _CreatePoetryState extends State<CreatePoetry> {
     mainContainer = poetryStep();
     poetryTest.clear();
     activeStep = 0;
-   super.initState();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      
-    textColor =
-        context.watch<ThemeProvider>().isDarkMode ? whiteColor : mainGreenColor;
+    textColor = Provider.of<ThemeProvider>(
+      context,
+    ).isDarkMode
+        ? whiteColor
+        : mainGreenColor;
+    // context.watch<ThemeProvider>().isDarkMode ? whiteColor : mainGreenColor;
 
-    });
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: context.watch<ThemeProvider>().isDarkMode ? mainGreenColor : secondBegiColor,
+        backgroundColor: context.watch<ThemeProvider>().isDarkMode
+            ? mainGreenColor
+            : secondBegiColor,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20),
@@ -110,7 +113,9 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   horizontalPadding: 20,
                   currentStep: activeStep + 1,
                   numOfSteps: 4,
-                  lineColor: context.watch<ThemeProvider>().isDarkMode ? secondBegiColor : mainGreenColor,
+                  lineColor: context.watch<ThemeProvider>().isDarkMode
+                      ? secondBegiColor
+                      : mainGreenColor,
                   texts: const ['الشاعر', 'المناسبة', 'المشاعر', 'الأبيات'],
                   selectedColor: secondGreenColor,
                   unSelectedColor: mainBegiColor,
@@ -255,10 +260,11 @@ class _CreatePoetryState extends State<CreatePoetry> {
                                         MaterialPageRoute(
                                           builder: (context) => GeneratePoetry(
                                             generatedText: Prompts.createPoem(
-                                                poet: poetryText[0],
-                                                occasion: _eventController.text,
-                                                feelings: _selectedEmoji,
-                                                length: textNumber,),
+                                              poet: poetryText[0],
+                                              occasion: _eventController.text,
+                                              feelings: _selectedEmoji,
+                                              length: textNumber,
+                                            ),
                                             poetry_service_type: "انشاء",
                                           ),
                                         ),
