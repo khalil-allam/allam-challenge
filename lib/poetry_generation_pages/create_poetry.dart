@@ -65,8 +65,12 @@ class _CreatePoetryState extends State<CreatePoetry> {
 
   @override
   Widget build(BuildContext context) {
-    textColor =
-        context.watch<ThemeProvider>().isDarkMode ? whiteColor : mainGreenColor;
+    textColor = Provider.of<ThemeProvider>(
+      context,
+    ).isDarkMode
+        ? whiteColor
+        : mainGreenColor;
+    // context.watch<ThemeProvider>().isDarkMode ? whiteColor : mainGreenColor;
 
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -252,10 +256,11 @@ class _CreatePoetryState extends State<CreatePoetry> {
                                         MaterialPageRoute(
                                           builder: (context) => GeneratePoetry(
                                             generatedText: Prompts.createPoem(
-                                                poet: poetryText[0],
-                                                occasion: _eventController.text,
-                                                feelings: _selectedEmoji,
-                                                length: textNumber,),
+                                              poet: poetryText[0],
+                                              occasion: _eventController.text,
+                                              feelings: _selectedEmoji,
+                                              length: textNumber,
+                                            ),
                                             poetry_service_type: "انشاء",
                                           ),
                                         ),
