@@ -1,5 +1,4 @@
 import 'package:allam_challenge/coding_files/color_pallete.dart';
-import 'package:allam_challenge/poetry_generation_pages/create_poetry.dart';
 import 'package:allam_challenge/poetry_generation_pages/output_page.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -97,13 +96,6 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Accept': '*/*',
-          // "Access-Control-Allow-Credentials": true,
-          // 'Access-Control-Allow-Origin': '*',
-          // "Access-Control-Allow-Headers": "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-          // "Access-Control-Allow-Methods": "POST, OPTIONS",
-          // 'Access-Control-Allow-Origin': '*',
-          // 'Access-Control-Allow-Methods': 'GET, POST',
-          // 'Access-Control-Allow-Headers': 'X-Requested-With'
         },
       ),
       data: data,
@@ -151,15 +143,8 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
       options: Options(
         headers: {
           'Content-Type': 'application/json',
-          // 'Content-Type': 'text/plain',
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
-          // "Access-Control-Allow-Credentials": true,
-          // 'Access-Control-Allow-Origin': '*',
-          // "Access-Control-Allow-Headers": "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-          // "Access-Control-Allow-Methods": "POST, OPTIONS",
-          // 'Access-Control-Allow-Methods': 'GET, POST',
-          // 'Access-Control-Allow-Headers': 'X-Requested-With'
         },
       ),
       data: data,
