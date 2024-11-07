@@ -119,7 +119,7 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
         'https://eu-de.ml.cloud.ibm.com/ml/v1/text/generation?version=2023-05-29';
     final token = accessToken;
         widget.poetry_service_type == "انشاء" 
-    ? system_prompt =  "<<SYS>>\nعند طلب كتابة قصيدة، تقوم بتقسيمها إلى شطرين فقط لكل بيت وكتابة عنوان للقصيدة. مثال: البيت الاول، البيت الثاني\n<</SYS>> "
+    ? system_prompt =  "<<SYS>>\nعند طلب كتابة قصيدة، تقوم بتقسيمها إلى شطرين فقط لكل بيت وكتابة عنوان للقصيدة. \n<</SYS>> "
     : system_prompt = "";
     final data = {
       // "input": "INST]$input [/INST]",

@@ -163,24 +163,23 @@ class _OutputPageState extends State<OutputPage> {
                             children: [
                               pw.Text(
                                   "صادر عن تطبيق خليل - باستخدام نموذج علّام AllaM للذكاء الاصطناعي"),
+                              pw.Text("برعاية: تحدّي علّام AllaM - الاتحاد السعودي للامن السيبراني - الهيئة السعودية للبيانات والذكاء الاصطناعي SADAIA"),
                               pw.SizedBox(height: 35),
                               pw.Paragraph(
                                 text: widget.outputText,
                               ),
-                              pw.SizedBox(height: 35),
-                              pw.Text("برعاية:"),
-                              pw.Row(
-                                  mainAxisAlignment:
-                                      pw.MainAxisAlignment.spaceAround,
-                                  children: [
-                                    pw.Text("تحدّي علّام AllaM"),
-                                    pw.Text("الاتحاد السعودي للامن السيبراني"),
-                                    pw.Text(
-                                        "الهيئة السعودية للبيانات والذكاء الاصطناعي SADAIA"),
-                                  ])
+                              // pw.Row(
+                              //     mainAxisAlignment:
+                              //         pw.MainAxisAlignment.spaceAround,
+                              //     children: [
+                              //       // pw.Text("تحدّي علّام AllaM - الاتحاد السعودي للامن السيبراني - الهيئة السعودية للبيانات والذكاء الاصطناعي SADAIA"),
+                              //       // pw.Text("الاتحاد السعودي للامن السيبراني"),
+                              //       // pw.Text(
+                              //       //     "الهيئة السعودية للبيانات والذكاء الاصطناعي SADAIA"),
+                              //     ])
                             ]);
                       },
-                    ),
+                    ),);
                     // pw.MultiPage(
                     //   pageFormat: PdfPageFormat.a4,
                     //   // pageFormat: PdfPageFormat(
@@ -222,7 +221,7 @@ class _OutputPageState extends State<OutputPage> {
                     //     ];
                     //   },
                     // ),
-                  ); // Page
+                  // ); // Page
                   var dir = await getApplicationDocumentsDirectory();
                   final file = File(
                       "${dir.path}/khalil_app_${DateTime.now().microsecondsSinceEpoch}.pdf");
