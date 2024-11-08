@@ -17,9 +17,12 @@ class GeneratePoetry extends StatefulWidget {
   State<GeneratePoetry> createState() => _GeneratePoetryState();
 }
 
+String poetryType = "";
+
 class _GeneratePoetryState extends State<GeneratePoetry> {
   String output = "";
   String system_prompt = "";
+  String system_prompt_2 = "";
 
   void generateAllamText(String inputData) async {
     {
@@ -66,6 +69,7 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    poetryType = "";
     generateAllamText(widget.generatedText);
   }
 
@@ -114,20 +118,28 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
   Future<void> sendInput(
       {required String accessToken, required String input}) async {
     final dio = Dio();
+    setState(() {
+    poetryType = widget.poetry_service_type;
+    });
 
     String url =
         'https://eu-de.ml.cloud.ibm.com/ml/v1/text/generation?version=2023-05-29';
     final token = accessToken;
         widget.poetry_service_type == "انشاء" 
-    ? system_prompt =  "<<SYS>>\nعند طلب كتابة قصيدة، تقوم بتقسيمها إلى شطرين فقط لكل بيت وكتابة عنوان للقصيدة مع الإلتزام بعدد الأبيات المطلوبة منك والتوقف عن الانتهاء من كتابة الأبيات الشعرية. أنت لا تقوم بتكرار أبيات القصيدة. \n<</SYS>> "
+    ? system_prompt =  "<<SYS>>\nعند طلب كتابة قصيدة، تقوم بتقسيمها إلى شطرين فقط لكل بيت وكتابة عنوان للقصيدة. أنت تكتب القصيدة بعدد الأبيات المطلوبة منك. أنت لا تقوم بتكرار أبيات القصيدة. \n<</SYS>> "
     : system_prompt = "";
 
-        widget.poetry_service_type == "تصحيح" 
-    ? system_prompt =  "<<SYS>>\nعند طلب تصحيح الشعر، أنت تقوم بكتابة النص المدخل تحت عنوان (النص المدخل) وتقوم بكتابة التص الصحيح أسفل منه بعنوان (النص المصحح) مع كتابة خطوط فاصلة مابين النص القديم والنص المصحح. واذا كان النص القديم يساوي النص المصحح تقوم بالاجابة بأنه لا يوجد شيء لتصحيحيه\n<</SYS>> "
-    : system_prompt = "";
+        poetryType == "تصحيح" 
+    ? system_prompt_2 =  "<<SYS>>\nعند طلب تصحيح الشعر، أنت تقوم بكتابة النص المدخل تحت عنوان (النص المدخل) وتقوم بكتابة التص الصحيح أسفل منه بعنوان (النص المصحح) مع كتابة خطوط فاصلة مابين النص القديم والنص المصحح. واذا كان النص القديم يساوي النص المصحح تقوم بالاجابة بأنه لا يوجد شيء لتصحيحه\n<</SYS>> "
+    : system_prompt_2 = "";
+
+    String temp_prompt = "";
+    widget.poetry_service_type == 'انشاء' ? temp_prompt = system_prompt : temp_prompt = system_prompt_2;
+
+    print(poetryType + "HERE" + temp_prompt);
     final data = {
       // "input": "INST]$input [/INST]",
-      "input": "INST]$system_prompt$input[/INST]",
+      "input": "INST]$temp_prompt$input[/INST]",
       // "input": input,
       "parameters": {
         "decoding_method": "greedy",
