@@ -119,7 +119,11 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
         'https://eu-de.ml.cloud.ibm.com/ml/v1/text/generation?version=2023-05-29';
     final token = accessToken;
         widget.poetry_service_type == "انشاء" 
-    ? system_prompt =  "<<SYS>>\nعند طلب كتابة قصيدة، تقوم بتقسيمها إلى شطرين فقط لكل بيت وكتابة عنوان للقصيدة. \n<</SYS>> "
+    ? system_prompt =  "<<SYS>>\nعند طلب كتابة قصيدة، تقوم بتقسيمها إلى شطرين فقط لكل بيت وكتابة عنوان للقصيدة مع الإلتزام بعدد الأبيات المطلوبة منك والتوقف عن الانتهاء من كتابة الأبيات الشعرية. أنت لا تقوم بتكرار أبيات القصيدة. \n<</SYS>> "
+    : system_prompt = "";
+
+        widget.poetry_service_type == "تصحيح" 
+    ? system_prompt =  "<<SYS>>\nعند طلب تصحيح الشعر، أنت تقوم بكتابة النص المدخل تحت عنوان (النص المدخل) وتقوم بكتابة التص الصحيح أسفل منه بعنوان (النص المصحح) مع كتابة خطوط فاصلة مابين النص القديم والنص المصحح. واذا كان النص القديم يساوي النص المصحح تقوم بالاجابة بأنه لا يوجد شيء لتصحيحيه\n<</SYS>> "
     : system_prompt = "";
     final data = {
       // "input": "INST]$input [/INST]",

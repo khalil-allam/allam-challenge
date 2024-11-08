@@ -14,10 +14,9 @@ Widget mainContainer = Container();
 int textNumber = 1;
 int index = 0;
 String _selectedEmoji = "";
-List<String> poetryTest = [];
 
 List<String> poetryText = [
-  "باسلوب الشعر الحديث والتشبيهات العصرية",
+  "باسلوب الشعر الحديث",
   "باسلوب الشعر الشعبي",
   "باسلوب الشعر الحر",
   "باسلوب الشعر الفلسفي",
@@ -58,7 +57,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
   void initState() {
     // TODO: implement initState
     mainContainer = poetryStep();
-    poetryTest.clear();
     activeStep = 0;
     super.initState();
   }
@@ -158,24 +156,13 @@ class _CreatePoetryState extends State<CreatePoetry> {
                             ),
                             onPressed: () {
                               setState(() {
-                                //  if(activeStep == 0){
-                                //   setState(() {
-                                //     poetryTest.add("أكتب لي شعر ${"يتميز بالاسلوب الحديث والأساليب الغزلية والوطنية"} ");
-                                //     mainContainer = EventStep();
-                                //     activeStep = 1;
-                                //   });
-
-                                //   }
                                 if (activeStep == 1) {
-                                  // poetryTest.removeAt(0);
                                   mainContainer = poetryStep();
                                   activeStep = 0;
                                 } else if (activeStep == 2) {
-                                  // poetryTest.removeAt(1);
                                   mainContainer = eventStep();
                                   activeStep = 1;
                                 } else if (activeStep == 3) {
-                                  // poetryTest.removeAt(2);
                                   mainContainer = emotionsStep();
                                   activeStep = 2;
                                 }
@@ -218,24 +205,16 @@ class _CreatePoetryState extends State<CreatePoetry> {
                                 () {
                                   if (activeStep == 0) {
                                     setState(() {
-                                      // poetryTest
-                                      //     .add("أكتب لي شعر ${poetryText[0]} ");
                                       mainContainer = eventStep();
                                       activeStep = 1;
                                     });
                                   } else if (activeStep == 1) {
-                                    // poetryTest.add(
-                                    //     "بمناسبة ${_eventController.text} ");
                                     mainContainer = emotionsStep();
                                     activeStep = 2;
                                   } else if (activeStep == 2) {
-                                    // poetryTest
-                                    //     .add("فيه مشاعر ${_selectedEmoji} ");
                                     mainContainer = textNumberStep();
                                     activeStep = 3;
                                   } else if (activeStep == 3) {
-                                    // poetryTest.add(
-                                    //     "ويتكون من أبيات عددها ${textNumber.toString()} .");
                                     if (_eventController.text.isEmpty ||
                                         _eventController.text.isEmpty ||
                                         _selectedEmoji == "") {
@@ -260,7 +239,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
                                         MaterialPageRoute(
                                           builder: (context) => GeneratePoetry(
                                             generatedText: Prompts.createPoem(
-                                              poet: poetryText[0],
+                                              poet: poetryText[selectedPoet],
                                               occasion: _eventController.text,
                                               feelings: _selectedEmoji,
                                               length: textNumber,
@@ -367,10 +346,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
           SizedBox(
             height: 350,
             child: PageView(
-              // backgroundColor: Colors.transparent,
-              // itemExtent: 350,
-              // shrinkExtent: 350,
-              // itemSnapping: true,
               controller: pageController,
 
               onPageChanged: (index) {
@@ -383,10 +358,7 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: SizedBox(
                       width: double.infinity,
-                      // width: MediaQuery.of(context).size.width,
-                      // margin: EdgeInsets.symmetric(horizontal: 5.0),
                       child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const SizedBox(
                             height: 50,
@@ -454,10 +426,8 @@ class _CreatePoetryState extends State<CreatePoetry> {
                             ),
                           ),
                         ],
-                      )
-                      // Text('text $i', style: TextStyle(fontSize: 16.0)
-                      // ,)
                       ),
+                   ),
                 ),
               ),
             ),
@@ -506,15 +476,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
     );
   }
 
-  // bool isSelectedEmo1 = false;
-  // bool isSelectedEmo2 = false;
-  // bool isSelectedEmo3 = false;
-  // bool isSelectedEmo4 = false;
-  // bool isSelectedEmo5 = false;
-  // bool isSelectedEmo6 = false;
-  // bool isSelectedEmo7 = false;
-  // bool isSelectedEmo8 = false;
-  // bool isSelectedEmo9 = false;
   int? selectedEmoji;
 
   Widget emotionsStep() {
@@ -543,7 +504,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   _selectedEmoji = "حب";
                   selectedEmoji = 0;
                   mainContainer = emotionsStep();
-                  // activeStep = 2;
                 });
               }),
               iconsWidget("_confused", "حيرة", selectedEmoji == 1, () {
@@ -551,7 +511,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   _selectedEmoji = "حيرة";
                   selectedEmoji = 1;
                   mainContainer = emotionsStep();
-                  // activeStep = 2;
                 });
               }),
               iconsWidget("_white_smiling", "تفاؤل", selectedEmoji == 2, () {
@@ -559,7 +518,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   _selectedEmoji = "تفاؤل";
                   selectedEmoji = 2;
                   mainContainer = emotionsStep();
-                  // activeStep = 2;
                 });
               }),
               iconsWidget("face_with_open_mouth", "إنبهار", selectedEmoji == 3,
@@ -568,7 +526,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   _selectedEmoji = "إنبهار";
                   selectedEmoji = 3;
                   mainContainer = emotionsStep();
-                  // activeStep = 2;
                 });
               }),
               iconsWidget("_disappointed", "إحباط", selectedEmoji == 4, () {
@@ -576,7 +533,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   _selectedEmoji = "إحباط";
                   selectedEmoji = 4;
                   mainContainer = emotionsStep();
-                  // activeStep = 2;
                 });
               }),
               iconsWidget("_loudly_crying", "حزن", selectedEmoji == 5, () {
@@ -584,7 +540,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   _selectedEmoji = "حزن";
                   selectedEmoji = 5;
                   mainContainer = emotionsStep();
-                  // activeStep = 2;
                 });
               }),
               iconsWidget(
@@ -594,7 +549,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   _selectedEmoji = "سعادة";
                   selectedEmoji = 6;
                   mainContainer = emotionsStep();
-                  // activeStep = 2;
                 });
               }),
               iconsWidget("_neutral", "تبلد", selectedEmoji == 7, () {
@@ -602,7 +556,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   _selectedEmoji = "تبلد";
                   selectedEmoji = 7;
                   mainContainer = emotionsStep();
-                  // activeStep = 2;
                 });
               }),
               iconsWidget("_pouting", "غضب", selectedEmoji == 8, () {
@@ -610,7 +563,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
                   _selectedEmoji = "غضب";
                   selectedEmoji = 8;
                   mainContainer = emotionsStep();
-                  // activeStep = 2;
                 });
               }),
             ],

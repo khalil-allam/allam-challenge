@@ -204,11 +204,10 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                             MaterialPageRoute(
                               builder: (context) => GeneratePoetry(
                                   generatedText:
-                                      // "اعد صياغة النص الشعري ${_textController.text} بمعايير التصحيح $catText",
                                       Prompts.correctPoem(
                                           text: _textController.text,
                                           basedOn: catText),
-                                  poetry_service_type: "",),
+                                          poetry_service_type: "تصحيح",),
                             ),
                           );
                         }
