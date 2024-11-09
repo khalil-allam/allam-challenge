@@ -1,6 +1,8 @@
 # Khalil_allam_challenge_2024
 
-Khalil is one of many projects created by participantes in ALLaM Challenge sponsored by SDAIA, Saudi Federation for Cybersecurity, programming and drones.
+Khalil is a project created by #نجمة_للتطوير team for ALLaM Challenge 2024 held in Riyadh - Saudi Arabia sponsored by:
+- SDAIA - Saudi Data & AI Authority.
+- SAUDI FEDERATION FOR CYBERSECURITY, PROGRAMMING & DRONES.
 
 ## Walkthrough to use this project
 
