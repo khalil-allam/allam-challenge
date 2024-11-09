@@ -126,7 +126,7 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
         'https://eu-de.ml.cloud.ibm.com/ml/v1/text/generation?version=2023-05-29';
     final token = accessToken;
         widget.poetry_service_type == "انشاء" 
-    ? system_prompt =  "<<SYS>>\nعند طلب كتابة قصيدة، تقوم بتقسيمها إلى شطرين فقط لكل بيت وكتابة عنوان للقصيدة. أنت تكتب القصيدة بعدد الأبيات المطلوبة منك. أنت لا تقوم بتكرار أبيات القصيدة. \n<</SYS>> "
+    ? system_prompt =  "<<SYS>>\nعند طلب كتابة قصيدة، تقوم بتقسيمها إلى شطرين فقط لكل بيت وكتابة عنوان للقصيدة.  أنت لا تقوم بتكرار أبيات القصيدة. \n<</SYS>> "
     : system_prompt = "";
 
         poetryType == "تصحيح" 
