@@ -8,7 +8,7 @@ Download your own version of Khalil in 3 different platforms: Android ,macOS and
 https://khalil-app.io
 
 Khalil walkthrough video:
-https://www.youtube.com/shorts/K00HGp9TQIA
+https://youtube.com/shorts/5gJmjrxzyH8?feature=share
 
 You will need to add .env file (located in the link below) to assets folder in this project,
 as .env file includes the API code inside it.
