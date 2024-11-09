@@ -1,16 +1,24 @@
-# allam_challenge
+# Khalil_allam_challenge_2024
 
-A new Flutter project.
+Khalil is a project created by #نجمة_للتطوير team for ALLaM Challenge 2024 held in Riyadh - Saudi Arabia sponsored by:
+- SDAIA - Saudi Data & AI Authority.
+- SAUDI FEDERATION FOR CYBERSECURITY, PROGRAMMING & DRONES.
 
-## Getting Started
+## Walkthrough to use this project
 
-This project is a starting point for a Flutter application.
+Download your own version of Khalil in 3 different platforms: Android ,macOS and Windows.
+https://khalil-app.io
 
-A few resources to get you started if this is your first Flutter project:
+Khalil walkthrough video:
+https://youtube.com/shorts/5gJmjrxzyH8?feature=share
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+You will need to add .env file (located in the link below) to assets folder in this project,
+as .env file includes the API code inside it.
+https://drive.google.com/file/d/1KNSwc40QJzy2zWq83FbOu9ZVwMVRym27/view?usp=drive_link
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- - - - -
+
+If any help needed, please do not hesitate contacting with us via https://starcodedev.com website,
+or by sending DMs using the Linkedin profiles attached in this account.
+
+Happy poeming!
