@@ -13,8 +13,6 @@ abstract class Prompts {
     required String text,
     required String basedOn,
   }) {
-    // return "اعد صياغة النص الشعري التالي : $text , ليكون صحيحا بحسب معايير $basedOn";
-    // return "اعد صياغة النص الشعري $text , ليكون شعرا صحيحا $basedOn";
     return "اعد صياغة النص الشعري $text بمعايير التصحيح $basedOn";
   }
 
@@ -25,7 +23,5 @@ abstract class Prompts {
     required int length,
   }) {
     return "أكتب لي قصيدة من $length أبيات $poet فيها مشاعر $feelings عن $occasion";
-    // return "اكتب لي قصيدة $poet تتكون من $length أبيات بمناسبة $occasion فيها مشاعر $feelings.";
-    // return "اكتب لي شعر $poet بمناسبة $occasion فيه مشاعر $feelings ويتكون من أبيات عددها $length .";
   }
 }

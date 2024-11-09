@@ -68,7 +68,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
     ).isDarkMode
         ? whiteColor
         : mainGreenColor;
-    // context.watch<ThemeProvider>().isDarkMode ? whiteColor : mainGreenColor;
 
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -330,7 +329,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
         children: [
           SizedBox(
             width: double.infinity,
-            //  height: 84,
             child: Text(
               "لدينا عدد من الشعراء الإفتراضيين ، لكل واحد منهم أسلوبه الخاص في كتابة الشعر ، أختر الشاعر الذي يتناسب مع الشعر الذي تريد أن يتم تأليفه ",
               textAlign: TextAlign.center,
@@ -367,7 +365,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
                             clipBehavior: Clip.none,
                             children: [
                               Container(
-                                // clipBehavior: Clip.antiAlias,
                                 height: 150,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
@@ -405,7 +402,6 @@ class _CreatePoetryState extends State<CreatePoetry> {
                                   clipBehavior: Clip.antiAlias,
                                   child: Image.asset(
                                     'assets/images/poet${index + 1}.png',
-                                    // height: 180,
                                     width: poets[index].width.toDouble(),
                                   ),
                                 ),

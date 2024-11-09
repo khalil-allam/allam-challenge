@@ -128,8 +128,6 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                           linguisticallyBtn = false;
                           grammaticallyBtn = false;
                           rhymeBtn = false;
-                          // catText = "اللغوية والنحوية والقافية";
-                          // catText = "لغوياً ونحوياً وقافية";
                           catText = "الشعر كاملاُ";
                         });
                       }),
@@ -166,7 +164,6 @@ class _CorrectPoetryState extends State<CorrectPoetry> {
                           linguisticallyBtn = false;
                           grammaticallyBtn = false;
                           rhymeBtn = true;
-                          // catText = "القافية";
                           catText = "قافية";
                         });
                       }),

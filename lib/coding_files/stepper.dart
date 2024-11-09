@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
 
 class MyStepperWidget extends StatefulWidget {
   const MyStepperWidget({
@@ -177,7 +176,7 @@ class _MyStepperWidgetState extends State<MyStepperWidget> {
   }
 }
 
-// default use 
+// How to use 
 // MyStepperWidget(
 //             horizontalPadding: 20,
 //             currentStep: 2,

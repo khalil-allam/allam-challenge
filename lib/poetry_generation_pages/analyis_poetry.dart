@@ -30,7 +30,6 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        // backgroundColor: mainGreenColor,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -177,7 +176,6 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                       tagsBtn(
                           "الأبعاد البلاغية",
                           furtherMeaningBtn ? mainGreenColor : whiteColor,
-                          // furtherMeaningBtn ? mainGreenColor : whiteColor,
                           furtherMeaningBtn ? mainBegiColor : mainGreenColor,
                           () {
                         setState(() {
@@ -223,11 +221,10 @@ class _AnalyisPoetryState extends State<AnalyisPoetry> {
                             MaterialPageRoute(
                               builder: (context) => GeneratePoetry(
                                 generatedText:
-                                    // "حلل لي النص الشعري ${_textController.text} بمعايير التحليل $catText",
                                     Prompts.analyzePoem(
                                         text: _textController.text,
                                         basedOn: catText),
-                                poetry_service_type: "",
+                                        poetry_service_type: "",
                               ),
                             ),
                           );

@@ -168,60 +168,10 @@ class _OutputPageState extends State<OutputPage> {
                               pw.Paragraph(
                                 text: widget.outputText,
                               ),
-                              // pw.Row(
-                              //     mainAxisAlignment:
-                              //         pw.MainAxisAlignment.spaceAround,
-                              //     children: [
-                              //       // pw.Text("تحدّي علّام AllaM - الاتحاد السعودي للامن السيبراني - الهيئة السعودية للبيانات والذكاء الاصطناعي SADAIA"),
-                              //       // pw.Text("الاتحاد السعودي للامن السيبراني"),
-                              //       // pw.Text(
-                              //       //     "الهيئة السعودية للبيانات والذكاء الاصطناعي SADAIA"),
-                              //     ])
                             ]);
                       },
                     ),);
-                    // pw.MultiPage(
-                    //   pageFormat: PdfPageFormat.a4,
-                    //   // pageFormat: PdfPageFormat(
-                    //   //   MediaQuery.of(context).size.width + 100,
-                    //   //   double.infinity,
-                    //   //   marginAll: 25,
-                    //   // ),
-                    //   textDirection: pw.TextDirection.rtl,
-                    //   header: (value) {
-                    //     return pw.Text(
-                    //         "صادر عن تطبيق خليل - باستخدام نموذج علّام AllaM للذكاء الاصطناعي");
-                    //   },
-                    //   footer: (value) {
-                    //     return pw.Column(
-                    //         crossAxisAlignment: pw.CrossAxisAlignment.start,
-                    //         children: [
-                    //           pw.Text("برعاية:"),
-                    //           pw.Row(
-                    //               mainAxisAlignment:
-                    //                   pw.MainAxisAlignment.spaceAround,
-                    //               children: [
-                    //                 pw.Text("تحدّي علّام AllaM"),
-                    //                 pw.Text("الاتحاد السعودي للامن السيبراني"),
-                    //                 pw.Text(
-                    //                     "الهيئة السعودية للبيانات والذكاء الاصطناعي SADAIA"),
-                    //               ])
-                    //         ]);
-                    //   },
-                    //   build: (pw.Context context) {
-                    //     return [
-                    //       pw.Column(
-                    //           mainAxisSize: pw.MainAxisSize.min,
-                    //           children: [
-                    //             pw.SizedBox(height: 35),
-                    //             pw.Paragraph(
-                    //               text: widget.outputText,
-                    //             ),
-                    //           ])
-                    //     ];
-                    //   },
-                    // ),
-                  // ); // Page
+                    
                   var dir = await getApplicationDocumentsDirectory();
                   final file = File(
                       "${dir.path}/khalil_app_${DateTime.now().microsecondsSinceEpoch}.pdf");

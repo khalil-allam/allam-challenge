@@ -1,5 +1,4 @@
 import 'package:allam_challenge/coding_files/shared.dart';
-import 'package:allam_challenge/main.dart';
 import 'package:allam_challenge/poetry_generation_pages/analyis_poetry.dart';
 import 'package:allam_challenge/coding_files/color_pallete.dart';
 import 'package:allam_challenge/poetry_generation_pages/correct_poetry.dart';

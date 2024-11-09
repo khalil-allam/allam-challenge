@@ -138,9 +138,7 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
 
     print(poetryType + "HERE" + temp_prompt);
     final data = {
-      // "input": "INST]$input [/INST]",
       "input": "INST]$temp_prompt$input[/INST]",
-      // "input": input,
       "parameters": {
         "decoding_method": "greedy",
         "max_new_tokens": 900,
@@ -150,7 +148,7 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
       },
       "model_id": "sdaia/allam-1-13b-instruct",
       "project_id":
-          "93c51780-827a-4c8b-9887-4ec683746ef9" //93c51780-827a-4c8b-9887-4ec683746ef9
+          "93c51780-827a-4c8b-9887-4ec683746ef9"
     };
 
     // try {
@@ -177,8 +175,5 @@ class _GeneratePoetryState extends State<GeneratePoetry> {
                 outputText: output,
               )),
     );
-    // } catch (e) {
-    //   print('Error: $e');
-    // }
   }
 }

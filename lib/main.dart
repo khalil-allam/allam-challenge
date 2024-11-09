@@ -26,7 +26,6 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
@@ -46,7 +45,6 @@ class MyApp extends StatelessWidget {
           ],
           theme: themeProvider.isDarkMode ? darkTheme : lightTheme,
           home: const SplashPage(), //official starter application page
-          // home: const KhalilWebPage(), //webpage only for running in chrome and testing the khalil-app.io page
         );
       },
     );
